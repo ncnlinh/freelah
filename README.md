@@ -1,6 +1,6 @@
 ####Setup Instructions:
 
-This is built on nodejs and the express web framework. 
+This is built on nodejs and the express web framework.
 
  - Clone the repo
  - Install `node`, `nodemon`, `npm` and `express`. See instructions from their respective web sites since they vary by platform.
@@ -15,11 +15,18 @@ To install a new node module (these are like Python libs):
 
 - `npm install module_name --save`  (This installs it in node_modules and also adds it into package.json - which is like requirements.txt). **Do not use `sudo`**
 
+####Setting up the database:
+- Make sure you have mysql running on your machine
+- sudo npm install -g sequelize-cli
+- Copy `config.json.example` to `config.json` inside `config/`and set the appropriate attributes.
+- sequelize db:migrate
+- More docs at http://docs.sequelizejs.com/en/latest/docs/migrations/
+
 ####Development Info:
 
  - Add any routes in `app.js` (after line 28 as of time of writing this)
  - WRITE ALL LOGIC IN A FILE INSIDE `routes`. Do not write any business logic in app.js
- - html is written in jade, a templating language. Put it inside views. 
+ - html is written in jade, a templating language. Put it inside views.
  - Styles/JS go inside `public/stylesheets` or `public/javascripts`
  - Hide all new features in a feature flag, so that we can turn it off if it breaks production
 

@@ -2,3 +2,5 @@
 config.yml
 node_modules/
 views/layout.ejs
+config.json
+config.yml

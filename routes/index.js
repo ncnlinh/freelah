@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'This is index page' });
+    res.render('layout');
+});
+
+/* GET partials */
+router.get('/partials/:name', function(req, res, next) {
+    console.log(req.params.name);
+    res.render('partials/' + req.params.name);
 });
 
 module.exports = router;

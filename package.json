@@ -12,6 +12,8 @@
     "ejs": "^2.3.4",
     "express": "~4.12.2",
     "morgan": "~1.5.1",
+    "mysql": "^2.9.0",
+    "sequelize": "^3.7.1",
     "serve-favicon": "~2.2.0",
     "yamljs": "^0.2.3"
   },
