@@ -26,6 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', routes);
+app.use('/api/users', users);
+
+app.get('*', function(req, res) {
+  res.redirect('/');
+})
 
 
 // catch 404 and forward to error handler
@@ -58,7 +63,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
 

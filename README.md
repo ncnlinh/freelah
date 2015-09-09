@@ -17,7 +17,7 @@ To install a new node module (these are like Python libs):
 
 ####Setting up the database:
 - Make sure you have mysql running on your machine
-- sudo npm install -g sequelize-cli
+- sudo npm install sequelize-cli -g
 - Copy `config.json.example` to `config.json` inside `config/`and set the appropriate attributes.
 - sequelize db:migrate
 - More docs at http://docs.sequelizejs.com/en/latest/docs/migrations/
