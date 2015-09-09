@@ -3,41 +3,43 @@
 var Sequelize = require('sequelize');
 var helper = require('../helper');
 
-var userDb = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    fullName: {
-      type: DataTypes.STRING,
-    },
-    point: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    },
-    phoneNumber: {
-      type: DataTypes.INTEGER,
+var User = helper.getDatabase().define('User', {
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
+  },
+  fullName: {
+    type: Sequelize.STRING,
+  },
+  point: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  phoneNumber: {
+    type: Sequelize.INTEGER,
+  }
+}, {
+  classMethods: {
+    associate: function(models) {
+      // associations can be defined here
     }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
-  return User;
-};
+  }
+});
 
 
 // All access to Users described here.
+exports.createUser = function(data, callback) {
+  User.create(data)
+    .then(callback)
+    .catch(callback);
+}
