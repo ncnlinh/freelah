@@ -1,0 +1,32 @@
+### Users
+
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| username    | varchar(255) | NO   | UNI | NULL    |                |
+| password    | varchar(255) | NO   |     | NULL    |                |
+| email       | varchar(255) | NO   | UNI | NULL    |                |
+| fullName    | varchar(255) | YES  |     | NULL    |                |
+| point       | int(11)      | YES  |     | 0       |                |
+| phoneNumber | int(11)      | YES  |     | NULL    |                |
+| createdAt   | datetime     | NO   |     | NULL    |                |
+| updatedAt   | datetime     | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+
+
+### Products
+
++-------------+-----------------------------------------------+------+-----+-----------+----------------+
+| Field       | Type                                          | Null | Key | Default   | Extra          |
++-------------+-----------------------------------------------+------+-----+-----------+----------------+
+| id          | int(11)                                       | NO   | PRI | NULL      | auto_increment |
+| name        | varchar(255)                                  | NO   |     | NULL      |                |
+| description | text                                          | NO   |     | NULL      |                |
+| status      | enum('available','bidding','expired','given') | YES  |     | available |                |
+| location    | varchar(255)                                  | NO   |     | NULL      |                |
+| expiryDate  | datetime                                      | YES  |     | NULL      |                |
+| userId      | int(11)                                       | NO   |     | NULL      |                |
+| createdAt   | datetime                                      | NO   |     | NULL      |                |
+| updatedAt   | datetime                                      | NO   |     | NULL      |                |
++-------------+-----------------------------------------------+------+-----+-----------+----------------+
