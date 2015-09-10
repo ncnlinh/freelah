@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Product = require('../models/product');
+
 
 /* GET users listing. */
 
@@ -17,15 +19,27 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  User.getUserById(res.params.id, function(user) {
+  User.getUserById(req.params.id, function(user) {
     res.json(user);
   });
 });
 
 router.put('/:id', function(req, res) {
-  User.updateUser(res.params.id, res.body, function(user) {
+  User.updateUser(req.params.id, req.body, function(user) {
     res.json(user);
   });
-})
+});
+
+router.post('/:id/products', function(req, res) {
+  Product.createProduct(req.params.id, req.body, function(product) {
+    res.json(product);
+  });
+});
+
+router.put('/:id/products/:productId', function(req, res) {
+  Product.updateProduct(req.params.productId, req.body, function(product) {
+    res.json(product);
+  });
+});
 
 module.exports = router;

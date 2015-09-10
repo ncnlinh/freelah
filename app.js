@@ -8,6 +8,7 @@ var YAML = require('yamljs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var products = require('./routes/products');
 
 var config = YAML.load('config.yml');
 var app = express();
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', routes);
 app.use('/api/users', users);
+app.use('/api/products', products);
 
 app.get('*', function(req, res) {
   res.redirect('/');
