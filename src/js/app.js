@@ -1,3 +1,7 @@
 import React from 'react/addons';
+import Views from './views';
 
-React.render(<div>Hello. </div>, document.body);
+(function () {
+  console.log(Views);
+  React.render(<Views.Auth/>, document.body);
+})();

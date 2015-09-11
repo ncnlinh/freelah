@@ -13,6 +13,7 @@ gutil = require('gulp-util');
 browserSync = require('browser-sync').create();
 YAML = require('yamljs');
 config = YAML.load('config.yml');
+sass = require('gulp-sass');
 
 gulp.task('clean', function() {
   return gulp.src(['public/*'], {read: false})
@@ -38,7 +39,7 @@ gulp.task('scripts', function(callback) {
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css!sass'
       }
       ]
     }
@@ -51,7 +52,9 @@ gulp.task('scripts', function(callback) {
 })});
 
 gulp.task('css', function() {
-  return gulp.src('src/css/**/*.css')
+  return gulp.src('src/css/**/*')
+  .pipe(sass().on('error',sass.logError))
+  .pipe(concat('app.css'))
   .pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
   .pipe(gulp.dest('public/css/'))
@@ -76,5 +79,5 @@ gulp.task('watch', function () {
     proxy: "localhost:" + (port)
   });
   gulp.watch('src/js/**/*.js', ['js-watch']);
-  gulp.watch('src/css/**/*.css', ['css']);
+  gulp.watch('src/css/**/*', ['css']);
 });
