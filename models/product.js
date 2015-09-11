@@ -44,25 +44,26 @@ var Product = helper.getDatabase().define('Product', {
 
 
 // All access to Users described here.
-exports.createProduct = function(userId, data, callback) {
+exports.createProduct = function(userId, data, callback, callError) {
   data['userId'] = userId
   Product.create(data)
     .then(callback)
-    .catch(callback);
+    .catch(callError);
 }
 
-exports.getAllProducts = function(callback) {
+exports.getAllProducts = function(callback, callError) {
   Product.all()
     .then(callback)
-    .catch(callback);
+    .catch(callError);
 }
 
-exports.getProductById = function(id, callback) {
+exports.getProductById = function(id, callback, callError) {
   Product.findById(id)
-    .then(callback);
+    .then(callback)
+    .catch(callError);
 }
 
-exports.updateProduct = function(id, data, callback) {
+exports.updateProduct = function(id, data, callback, callError) {
   Product.findById(id)
     .then(function(product) {
       if (product == null) {
@@ -71,5 +72,6 @@ exports.updateProduct = function(id, data, callback) {
         product.updateAttributes(data, {fields: ['name', 'description', 'location', 'status', 'expiryDate']})
           .then(callback);
       }
-    });
+    })
+    .catch(callError);
 }

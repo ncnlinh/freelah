@@ -39,24 +39,25 @@ var User = helper.getDatabase().define('User', {
 
 
 // All access to Users described here.
-exports.createUser = function(data, callback) {
+exports.createUser = function(data, callback, callError) {
   User.create(data)
     .then(callback)
-    .catch(callback);
+    .catch(callError);
 }
 
-exports.getAllUser = function(callback) {
+exports.getAllUser = function(callback, callError) {
   User.all({attributes: ['id', 'username']})
     .then(callback)
-    .catch(callback);
+    .catch(callError);
 }
 
-exports.getUserById = function(userId, callback) {
+exports.getUserById = function(userId, callback, callError) {
   User.findById(userId)
-    .then(callback);
+    .then(callback)
+    .catch(callError);
 }
 
-exports.updateUser = function(userId, data, callback) {
+exports.updateUser = function(userId, data, callback, callError) {
   User.findById(userId)
     .then(function(user) {
       if (user == null) {
@@ -65,5 +66,6 @@ exports.updateUser = function(userId, data, callback) {
         user.updateAttributes(data, {fields: ['email', 'fullName', 'point', 'phoneNumber']})
           .then(callback);
       }
-    });
+    })
+    .catch(callError);
 }
