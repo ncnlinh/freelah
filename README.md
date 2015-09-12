@@ -32,6 +32,25 @@ To install a new node module (these are like Python libs):
  - Styles/JS go inside `src/css` or `src/js`
  - Hide all new features in a feature flag, so that we can turn it off if it breaks production
 
+####Deploy to Production:
+
+Set up your ~/.ssh/config to something like this:
+
+    Host peer-review
+      HostName http://ec2-54-255-214-102.ap-southeast-1.compute.amazonaws.com
+      User ubuntu
+      IdentityFile /path/to/pem
+
+    pem file: https://www.dropbox.com/s/e0r85vl1os35cad/freela.pem?dl=0
+    
+In the repo:
+
+    git add remote production ubuntu@peer-review:repo/
+
+Deploying:
+
+    git push production master
+
 ####Git Workflow:
 
  - NO FORCE PUSH
