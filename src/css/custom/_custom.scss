@@ -19,3 +19,10 @@
 .center {
   text-align: center;
 }
+@media (max-width: 768px) {
+  .navbar-right {
+    position: relative;
+    float: right;
+    margin-top: -45px;
+  }
+}

@@ -8,7 +8,7 @@ module.exports = {
     filename: 'all.js'
   },
   module: {
-    loaders: [
+    loaders:[
       {
         test: /\.js$/,
         loaders: getLoaders(['jsx', 'babel']),
@@ -16,7 +16,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style!css!sass?sourceMap'
+        loader: 'style!css!sass'
       }
     ]
   }

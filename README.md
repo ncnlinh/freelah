@@ -7,6 +7,7 @@ This is built on nodejs and the express web framework.
  - `cd 2015-assg3-group10`
  - `npm install`
  - Copy `config.yml.example` to `config.yml`. **NOTE: DO NOT COMMIT THIS FILE SINCE IT CONTAINS SENSITIVE INFO** (It should be ignored by default even if you do `git add .`, just don't add it on purpose)
+ - Do the same for `config.js.example` in `src/` folder for frontend development 
  - `npm run build` - Build JS/CSS
  - `npm run start` - Start node server using `node app.js`. If you are doing backend and need the node server to restart on change, use `nodemon app.js` instead
  - `npm run dev` - Build and watch JS/CSS files and do browsersync, use while doing frontend. Do not use `nodemon` while running this because `nodemon` and `browsersync` are not setup to work together.

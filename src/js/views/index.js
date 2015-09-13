@@ -1,7 +1,13 @@
 import App from './App';
-import Auth from './Auth';
+import Header from './Header';
+import Landing from './Landing';
+import ProductCard from './ProductCard';
+import ProductSection from './ProductSection';
 
 export default {
   App,
-  Auth
+  Header,
+  Landing,
+  ProductCard,
+  ProductSection
 };
