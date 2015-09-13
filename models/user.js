@@ -13,6 +13,9 @@ var User = helper.getDatabase().define('User', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  basicAuth: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -40,6 +43,10 @@ var User = helper.getDatabase().define('User', {
 
 // All access to Users described here.
 exports.createUser = function(data, callback, callError) {
+  if (data.password && data.password != '') {
+    data.basicAuth = helper.getBasicAuth(data.username, data.password);
+    data.password = helper.hashPassword(data.password);
+  }
   User.create(data)
     .then(callback)
     .catch(callError);
