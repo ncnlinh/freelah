@@ -1,7 +1,9 @@
 import React from 'react/addons';
 import Views from './views';
+import api from './api';
 
 (function () {
   console.log(Views);
-  React.render(<Views.Auth/>, document.body);
+  console.log(api);
+  React.render(<Views.App/>, document.body);
 })();

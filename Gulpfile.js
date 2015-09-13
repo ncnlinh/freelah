@@ -44,7 +44,7 @@ gulp.task('scripts', function(callback) {
       ]
     }
   }, function(err, stats) {
-    if(err) throw new gutil.PluginError("webpack", err);
+    if(err) throw new gutil.PluginError('webpack', err);
     // gutil.log("[webpack]", stats.toString({
     //         // output options
     //       }));
@@ -53,7 +53,7 @@ gulp.task('scripts', function(callback) {
 
 gulp.task('css', function() {
   return gulp.src('src/css/**/*')
-  .pipe(sass().on('error',sass.logError))
+  .pipe(sass().on('error', sass.logError))
   .pipe(concat('app.css'))
   .pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
@@ -72,11 +72,11 @@ gulp.task('dev', ['clean'], function() {
 gulp.task('js-watch', ['scripts'], function() {browserSync.reload()});
 gulp.task('watch', function () {
   var port = config['server']['port']||3000;
-  console.log("Watching file changes...");
+  console.log('Watching file changes...');
   browserSync.init({
     port: (port+1),
     ui: {port: port+2},
-    proxy: "localhost:" + (port)
+    proxy: 'localhost:' + (port)
   });
   gulp.watch('src/js/**/*.js', ['js-watch']);
   gulp.watch('src/css/**/*', ['css']);
