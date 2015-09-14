@@ -19,6 +19,7 @@
     "morgan": "~1.5.1",
     "mysql": "^2.9.0",
     "react": "^0.13.3",
+    "react-bootstrap": "^0.25.2",
     "react-tap-event-plugin": "^0.1.7",
     "sequelize": "^3.7.1",
     "serve-favicon": "~2.2.0",
