@@ -1,6 +1,5 @@
 import React from 'react';
 import {AppStore} from '../stores';
-import {AppConstants} from '../constants';
 import Landing from './Landing';
 import Home from './Home';
 

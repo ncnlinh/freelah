@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Grid, Row, Col} from 'react-bootstrap';
-class App extends React.Component {
+class Login extends React.Component {
   
   render() {
     return (
@@ -29,4 +29,4 @@ class App extends React.Component {
 
 }
 
-export default App;
+export default Login;

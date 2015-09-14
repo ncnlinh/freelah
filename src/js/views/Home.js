@@ -1,8 +1,8 @@
 import React from 'react';
 import {ProductStore} from '../stores';
-import {ProductActions} from '../actions'
 import Header from './Header';
 import ProductSection from './ProductSection';
+import {Link} from 'react-router';
 import mui from 'material-ui';
 
 let ThemeManager = new mui.Styles.ThemeManager();
