@@ -65,7 +65,7 @@ class UserStore {
   handleGetAllUsersSuccess(users) {
     this.retrievedUsers = users;
   }
-  handleGetUserFailed(err) {
+  handleGetAllUsersFailed(err) {
     this.errors = err
   }
 }

@@ -1,7 +1,9 @@
 import React from 'react';
-import ProductStore from '../stores/ProductStore';
-import Header from './Header';
-import ProductSection from './ProductSection';
+import {AppStore} from '../stores';
+import {AppConstants} from '../constants';
+import Landing from './Landing';
+import Home from './Home';
+
 import mui from 'material-ui';
 
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -15,46 +17,43 @@ class App extends React.Component {
   }
   constructor(props) {
     super(props);
-    this.state = ProductStore.getState();
+    this.state = AppStore.getState()
   }
 
   componentDidMount() {
-    ProductStore.listen(this.onChange);
+    AppStore.listen(this.onChange);
   }
 
   componentWillUnmount() {
-    ProductStore.unlisten(this.onChange);
+    AppStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
   }
 
+  handlePost(e) {
+
+  }
+
   render() {
-    let products = [
-      {
-        name: 'kitty',
-        description: 'cute cute',
-        status: 'available',
-        location: 'nus',
-        expiryDate: new Date(),
-        userId: 1
-      },
-      {
-        name: 'kitty',
-        description: 'cute cute',
-        status: 'available',
-        location: 'nus',
-        expiryDate: new Date(),
-        userId: 1
+    switch (this.state.app) {
+      case AppConstants.SCREEN_LANDING: {
+        return (
+          <div className='app'>
+            <Landing/>
+          </div>
+        );
       }
-    ]
-    return (
-      <div className='app'>
-        <Header/>
-        <ProductSection products={products}/>
-      </div>
-    );
+      case AppConstants.SCREEN_HOME: {
+        return (
+          <div className='app'>
+            <Home/>
+          </div>
+        );
+      }
+    }
+    
   }
 }
 
