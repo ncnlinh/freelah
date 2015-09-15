@@ -72,4 +72,15 @@ router.put('/:id/products/:productId', function(req, res) {
   );
 });
 
+router.get('/:id/products/:productId', function(req, res) {
+  Product.getProductById(req.params.productId, 
+    function(product) {
+      res.json(product);
+    },
+    function(error) {
+      res.status(400).json(error);
+    }
+  );
+});
+
 module.exports = router;
