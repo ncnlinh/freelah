@@ -1,10 +1,11 @@
 import React from 'react';
 import {ProductStore} from '../stores';
-import {ProductActions} from '../actions';
+import {ProductActions, ProductCreatingActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';
 import mui from 'material-ui';
+import {PropTypes} from 'react-router';
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
@@ -15,10 +16,11 @@ class Home extends React.Component {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   }
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
+    this.handlePost = this.handlePost.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +39,8 @@ class Home extends React.Component {
   }
 
   handlePost(e) {
-
+    ProductCreatingActions.uploadImage(e.target.value);
+    this.context.history.pushState(null, 'products/new');
   }
 
   handleProductCardOnClick(userId, id) {
@@ -60,6 +63,8 @@ class Home extends React.Component {
 Home.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
-
+Home.contextTypes = {
+  history: PropTypes.history
+}
 export default Home;
 

@@ -9,7 +9,8 @@ class Product extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = ProductStore.getState()
+    this.state = ProductStore.getState();
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
