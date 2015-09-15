@@ -6,8 +6,18 @@ class AppStore {
     this.isLoggedIn = false;
     this.user = null;
     this.bindListeners({
-    
+      handleLoginSuccess: AppActions.LOGIN_SUCCESS,
+      handleLoginFailed: AppActions.LOGIN_FAILED,
     })
+  }
+
+  handleLoginSuccess(user) {
+    this.isLoggedIn = true;
+    this.user = user;
+  }
+
+  handleLoginFailed(err) {
+
   }
 }
 

@@ -48,4 +48,10 @@ FreeLahApi.updateProduct = (userId, productId, data) => {
     .promise();;
 }
 
+FreeLahApi.login = (data) => {
+  return superagent.get(SERVER_URL + '/api/auth/')
+    .query(data)
+    .promise();;
+}
+
 export default FreeLahApi;
