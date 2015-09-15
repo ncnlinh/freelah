@@ -13,6 +13,9 @@ var User = helper.getDatabase().define('User', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  imgUrl: {
+    type: Sequelize.STRING
+  },
   basicAuth: {
     type: Sequelize.STRING
   },
@@ -53,7 +56,7 @@ exports.createUser = function(data, callback, callError) {
 }
 
 exports.getAllUser = function(callback, callError) {
-  User.all({attributes: ['id', 'username']})
+  User.all({attributes: ['id', 'username', 'fullName']})
     .then(callback)
     .catch(callError);
 }
@@ -70,7 +73,10 @@ exports.updateUser = function(userId, data, callback, callError) {
       if (user == null) {
         callback;
       } else {
-        user.updateAttributes(data, {fields: ['email', 'fullName', 'point', 'phoneNumber']})
+        if (data.image != null) {
+          data.imgUrl = 'images/' + helper.saveImage('user-' + user.id, data.image);
+        }
+        user.updateAttributes(data, {fields: ['email', 'fullName', 'point', 'phoneNumber', 'imgUrl']})
           .then(callback);
       }
     })

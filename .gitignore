@@ -6,4 +6,5 @@ config.json
 config.yml
 /public/css/app.min.css
 /public/js/all.js
+/public/images/*
 /src/js/npm-debug.log

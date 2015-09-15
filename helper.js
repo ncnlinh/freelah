@@ -25,3 +25,10 @@ exports.hashPassword = function(password) {
 exports.getBasicAuth = function(username, password) {
   return "Basic " + Base64.encode(username+':'+password);
 }
+
+exports.saveImage = function(name, data) {
+  require("fs").writeFile(config['server']['image_dir'] + name + ".png", data, 'base64', function(err) {
+    console.log(err);
+  });
+  return name + ".png";
+}

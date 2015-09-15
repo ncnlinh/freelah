@@ -14,6 +14,9 @@ var Product = helper.getDatabase().define('Product', {
     allowNull: false,
     type: Sequelize.STRING
   },
+  imgUrls: {
+    type: Sequelize.TEXT
+  },
   description: {
     allowNull: false,
     type: Sequelize.TEXT
@@ -45,7 +48,15 @@ var Product = helper.getDatabase().define('Product', {
 
 // All access to Users described here.
 exports.createProduct = function(userId, data, callback, callError) {
-  data['userId'] = userId
+  data['userId'] = userId;
+
+  if (data['images'] != null) {
+    data['imgUrls'] = "";
+    data['images'].map(function(image) {
+      data['imgUrls'] += ' images/' + helper.saveImage('product-' + user.id + '-' + Math.round(Math.random() * 10000000), image);
+    });
+  }
+
   Product.create(data)
     .then(callback)
     .catch(callError);
@@ -69,7 +80,18 @@ exports.updateProduct = function(id, data, callback, callError) {
       if (product == null) {
         callback;
       } else {
-        product.updateAttributes(data, {fields: ['name', 'description', 'location', 'status', 'expiryDate']})
+        if (data.images != null) {
+          data.imgUrls = "";
+
+          data.images.split(" ").map(function(image) {
+            if (image.length > 0) {
+              var rando = Math.round(Math.random() * 10000000);
+              data.imgUrls += ' images/' + helper.saveImage('product-' + product.userId + '-' + rando, image);
+            }
+          });
+        }
+
+        product.updateAttributes(data, {fields: ['name', 'description', 'location', 'status', 'expiryDate', 'imgUrls']})
           .then(callback);
       }
     })

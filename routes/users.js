@@ -7,7 +7,7 @@ var Product = require('../models/product');
 /* GET users listing. */
 
 router.post('/', function(req, res) {
-  User.createUser(req.body, 
+  User.createUser(req.body,
     function(user) {
       res.json(user);
     },
@@ -29,9 +29,18 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
+  var token = req.headers.authorization;
   User.getUserById(req.params.id, 
     function(user) {
-      res.json(user);
+      if (user.basicAuth == token) {
+        res.json(user);
+      } else {
+        res.json({
+          id: user.id,
+          username: user.username,
+          fullName: user.fullName
+        });
+      }
     },
     function(error) {
       res.status(400).json(error);
@@ -40,21 +49,48 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-  User.updateUser(req.params.id, req.body, 
+  var token = req.headers.authorization;
+  User.getUserById(req.params.id, 
     function(user) {
-      res.json(user);
+      if (user == null) {
+        res.status(400).json({message: 'User not found!'});
+      } else if (user.basicAuth != token) {
+        res.status(401).json({message: 'Bad authorization!'});
+      } else {
+        User.updateUser(req.params.id, req.body, 
+          function(user) {
+            res.json(user);
+          },
+          function(error) {
+            res.status(400).json(error);
+          }
+        );
+      }
     },
     function(error) {
       res.status(400).json(error);
-    }
-  );
+    })
 });
 
 router.post('/:id/products', function(req, res) {
-  Product.createProduct(req.params.id, req.body, 
-    function(product) {
-      res.json(product);
-    },
+  var token = req.headers.authorization;
+  User.getUserById(req.params.id, 
+    function(user) {
+      if (user == null) {
+        res.status(400).json({message: 'User not found!'});
+      } else if (user.basicAuth != token) {
+        res.status(401).json({message: 'Bad authorization!'});
+      } else {
+        Product.createProduct(req.params.id, req.body, 
+          function(product) {
+            res.json(product);
+          },
+          function(error) {
+            res.status(400).json(error);
+          }
+        );        
+      }
+    }, 
     function(error) {
       res.status(400).json(error);
     }
@@ -62,10 +98,24 @@ router.post('/:id/products', function(req, res) {
 });
 
 router.put('/:id/products/:productId', function(req, res) {
-  Product.updateProduct(req.params.productId, req.body, 
-    function(product) {
-      res.json(product);
-    },
+    var token = req.headers.authorization;
+  User.getUserById(req.params.id, 
+    function(user) {
+      if (user == null) {
+        res.status(400).json({message: 'User not found!'});
+      } else if (user.basicAuth != token) {
+        res.status(401).json({message: 'Bad authorization!'});
+      } else {
+        Product.updateProduct(req.params.productId, req.body, 
+          function(product) {
+            res.json(product);
+          },
+          function(error) {
+            res.status(400).json(error);
+          }
+        );    
+      }
+    }, 
     function(error) {
       res.status(400).json(error);
     }
