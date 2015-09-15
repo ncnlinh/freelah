@@ -6,10 +6,11 @@ class AppActions {
     //this.dispatch();
     api.login({'username': username, 'password': password})
       .then((res) => {
+        console.log(res);
         this.actions.loginSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.loginFailed(JSON.parse(err.errors));
+        this.actions.loginFailed(err.body);
       });
   }
   loginSuccess(token) {

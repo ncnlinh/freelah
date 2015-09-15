@@ -5,19 +5,23 @@ class AppStore {
   constructor() {
     this.isLoggedIn = false;
     this.user = null;
+    this.error = null;
     this.bindListeners({
-      handleLoginSuccess: AppActions.LOGIN_SUCCESS,
-      handleLoginFailed: AppActions.LOGIN_FAILED,
+      handleLoginSuccess: AppActions.loginSuccess,
+      handleLoginFailed: AppActions.loginFailed,
     })
   }
 
   handleLoginSuccess(user) {
     this.isLoggedIn = true;
     this.user = user;
+    this.error = null;
   }
 
   handleLoginFailed(err) {
-
+    this.isLoggedIn = false;
+    this.user = null;
+    this.error = err;
   }
 }
 

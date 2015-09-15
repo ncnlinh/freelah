@@ -84,7 +84,6 @@ exports.updateUser = function(userId, data, callback, callError) {
 }
 
 exports.getToken = function(username, password, callback, callError) {
-  console.log(username);
   User.findOne({where: {username: username}})
     .then(callback)
     .catch(callError);

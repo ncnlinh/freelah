@@ -25,9 +25,12 @@ class Login extends React.Component {
     this.setState(state);
     if (this.state.isLoggedIn) {
       // AppStore.unlisten(this.onChange);   
+      console.log(state);
       this.context.history.pushState(null, '/');
-    } else {
+    } else if (this.state.error) {
       // error handler
+      console.log(state);
+      this.refs.username.getInputDOMNode();
     }
   }
 
@@ -41,6 +44,7 @@ class Login extends React.Component {
   }
 
   render() {
+    var style = this.state.error ? 'error' : '';
     return (
       <Grid>
         <div className="fl-auth lead">
@@ -55,8 +59,8 @@ class Login extends React.Component {
             <Col xs={3} md={4}/>
             <Col xs={6} md={4}>
               <form bsStyle="inline" onSubmit={this.handleLogin}>
-                <Input ref="username" name="username" type="username" placeholder="Username" required={true}/>
-                <Input ref="password" name="password" type="password" placeholder="Password" required={true} minLength={5}/>
+                <Input bsStyle = {style} ref="username" name="username" type="username" placeholder="Username" required={true}/>
+                <Input bsStyle = {style} ref="password" name="password" type="password" placeholder="Password" required={true} minLength={5}/>
                 <Button type="submit" bsStyle="success" onClick={this.handleLogin}>
                   Log in
                 </Button>

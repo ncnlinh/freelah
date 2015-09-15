@@ -26,6 +26,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.disable('etag');
+
 // Routes
 app.use('/', routes);
 app.use('/api/auth', auth)
