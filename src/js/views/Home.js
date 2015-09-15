@@ -1,8 +1,9 @@
 import React from 'react';
 import {ProductStore} from '../stores';
+import {ProductActions} from '../actions';
+import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';
-import {Link} from 'react-router';
 import mui from 'material-ui';
 
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -16,11 +17,13 @@ class Home extends React.Component {
   }
   constructor(props) {
     super(props);
-    this.state = ProductStore.getState()
+    this.state = ProductStore.getState();
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
     ProductStore.listen(this.onChange);
+    ProductActions.getAllProducts();
   }
 
   componentWillUnmount() {
@@ -28,36 +31,26 @@ class Home extends React.Component {
   }
 
   onChange(state) {
-    this.setState(state);
+    if (!!React.findDOMNode(this)) {
+      this.setState(state);
+    }
   }
 
   handlePost(e) {
 
   }
 
+  handleProductCardOnClick(userId, id) {
+    ProductActions.getProduct(userId, id);
+  }
+
   render() {
-    let products = [
-      {
-        name: 'kitty',
-        description: 'cute cute',
-        status: 'available',
-        location: 'nus',
-        expiryDate: new Date(),
-        userId: 1
-      },
-      {
-        name: 'kitty',
-        description: 'cute cute',
-        status: 'available',
-        location: 'nus',
-        expiryDate: new Date(),
-        userId: 1
-      }
-    ]
+    const products = this.state.retrievedProducts;
     return (
       <div className='home'>
-        <Header handlePost={this.handlePost} />
-        <ProductSection products={products}/>
+        <Header mode={HeaderConstants.HOME} handlePost={this.handlePost} />
+        <ProductSection products={products}
+        itemOnClick={this.handleProductCardOnClick}/>
       </div>
     );
 

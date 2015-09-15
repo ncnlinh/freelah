@@ -11,6 +11,8 @@ import {Router, Route} from 'react-router';
     <Router>
       <Route path='/' component={Views.Home}/>
       <Route path='login' component={Views.Login}/>
+      <Route path='products' component={Views.Home}/>
+      <Route path='products/:id' component={Views.Product}/>
     </Router>
   ), document.body);
 })();
