@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var YAML = require('yamljs');
+var c = require('appcache-node');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -27,6 +28,37 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.disable('etag');
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+// Cache
+
+var cacheManifest = require('connect-cache-manifest');
+app.use(cacheManifest({
+  manifestPath: '/app.cache',
+  cdn: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+    'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'],
+  files: [{
+    file: __dirname + '/public/js',
+    path: '/js/all.js'
+  }, {
+    file: __dirname + '/public/css',
+    path: '/css/app.min.css'
+  }],
+  networks: ['*'],
+  fallbacks: []
+}));
+
+// var cf = c.newCache(['/js/all.js', '/css/app.min.css',
+//   'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+//   'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js']);
+// app.all('/app.cache', function(req, res){ 
+//     res.writeHead(200, {'Content-Type': 'text/cache-manifest'});
+//     res.end(cf);
+// })
 
 // Routes
 app.use('/', routes);
