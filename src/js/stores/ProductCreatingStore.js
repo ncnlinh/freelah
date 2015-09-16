@@ -17,4 +17,3 @@ class ProductCreatingStore {
 }
 
 export default alt.createStore(ProductCreatingStore, 'ProductCreatingStore');
-

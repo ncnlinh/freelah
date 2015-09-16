@@ -8,16 +8,20 @@ class ProductCard extends React.Component {
   }
   render() {
     return (
-      <Card style={{marginTop: '15px', marginLeft: '15px'}}>
+      <Card style={{paddingBottom:'0px', marginTop:'15px', marginLeft:'1%', 
+        marginRight:'1%', width:'48%', float:'left'}}>
       {
         this.props.mode === 'full' ? (
           <CardMedia overlay={<CardTitle title={this.props.name} subtitle={String(this.props.userId)}/>}>
             <img src="http://lorempixel.com/600/337/cats/"/>
           </CardMedia>) : 
-        (<CardMedia><img src="http://lorempixel.com/600/337/cats/"/></CardMedia>)
+        (<CardMedia style={{height:'150px',overflow:'hidden'}}>
+          <img style={{minHeight:'150px'}} src="http://lorempixel.com/600/337/cats/"/>
+        </CardMedia>)
       }
-        <CardText>
-          <div><strong>Location: {this.props.location}</strong></div>
+        <CardText >
+          <div style={{fontSize: '12px'}}><strong>{this.props.name}</strong></div>
+          <div style={{fontSize: '12px', marginBottom: '-8px'}}>Location: {this.props.location}</div>
           {!!this.props.expiryDate ? (<div><em>Available until: {moment().to(this.props.expiryDate)}</em></div>) : null}
           {this.props.mode === 'full' ? (<div>{this.props.description}</div>) : null}
         </CardText>

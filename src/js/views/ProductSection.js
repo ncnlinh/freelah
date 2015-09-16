@@ -29,9 +29,10 @@ class ProductSection extends React.Component {
         );
       });
     }
+
     return (
-      <Paper style={{paddingBottom: '15px', paddingRight:'15px', display: 'flex'}}>
-      {productList}
+      <Paper style={{ marginBottom: '10px'}}>
+        {productList}
       </Paper>
     );
   }
