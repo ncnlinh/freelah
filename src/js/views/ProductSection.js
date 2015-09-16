@@ -13,7 +13,7 @@ class ProductSection extends React.Component {
       this.props.products.forEach((product, i) => {
         productList.push(
           <Link key={i}
-          onClick={this.props.itemOnClick.bind(null, product.userId, product.id)}
+          onClick={this.props.itemOnClick.bind(null, product.id)}
           to={`products/${product.id}`}>
             <ProductCard key={i}
                 onClick={this.props.itemOnClick}

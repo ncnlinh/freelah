@@ -9,7 +9,7 @@ class UserActions {
         this.actions.createUserSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.createUserFailed(JSON.parse(err.errors));
+        this.actions.createUserFailed(err.message);
       });
   }
   createUserSuccess(user) {
@@ -26,7 +26,7 @@ class UserActions {
         this.actions.getUserSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.getUserFailed(JSON.parse(err.errors));
+        this.actions.getUserFailed(err.message);
       });
   }
 
@@ -44,7 +44,7 @@ class UserActions {
         this.actions.getAllUsersSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.getAllUsersFailed(JSON.parse(err.errors));
+        this.actions.getAllUsersFailed(err.message);
       });
   }
 
@@ -62,7 +62,7 @@ class UserActions {
         this.actions.updateUserSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.updateUserFailed(JSON.parse(err.errors));
+        this.actions.updateUserFailed(err.message);
       });
   }
 

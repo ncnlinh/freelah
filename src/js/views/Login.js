@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'react-router'
+import {PropTypes} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
 import {Button, Grid, Row, Col, Input} from 'react-bootstrap';
@@ -37,8 +37,8 @@ class Login extends React.Component {
   handleLogin(e) {
     e.preventDefault();
 
-    var username = this.refs.username.getInputDOMNode().value;
-    var password = this.refs.password.getInputDOMNode().value
+    let username = this.refs.username.getInputDOMNode().value;
+    let password = this.refs.password.getInputDOMNode().value
 
     AppActions.login(username, password);
   }
@@ -78,7 +78,7 @@ class Login extends React.Component {
 
 Login.contextTypes = {
   history: PropTypes.history
-};
+}
 
 export default Login;
 

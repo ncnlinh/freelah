@@ -9,7 +9,7 @@ class ProductActions {
         this.actions.createProductSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.createProductFailed(JSON.parse(err.errors));
+        this.actions.createProductFailed(err.message);
       });
   }
   createProductSuccess(product) {
@@ -19,14 +19,16 @@ class ProductActions {
     this.dispatch(err);
   }
 
-  getProduct(userId, productId) {
+  getProduct(productId) {
     this.dispatch();
-    api.getProduct(userId, productId)
+    api.getProduct(productId)
       .then((res) => {
+        console.log(res);
         this.actions.getProductSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.getProductFailed(JSON.parse(err.errors));
+        console.log(err);
+        this.actions.getProductFailed(err.message);
       });
   }
 
@@ -38,13 +40,19 @@ class ProductActions {
   }
 
   getAllProducts() {
-    this.dispatch();
+    if (this.alt.dispatcher.isDispatching()){
+      window.setTimeout(() => {
+        this.dispatch();
+      })
+    } else {
+      this.dispatch();
+    }
     api.getAllProducts()
       .then((res) => {
         this.actions.getAllProductsSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.getAllProductsFailed(JSON.parse(err.errors));
+        this.actions.getAllProductsFailed(err.message);
       });
   }
   getAllProductsSuccess(product) {
@@ -62,7 +70,7 @@ class ProductActions {
         this.actions.updateProductSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.updateProductFailed(JSON.parse(err.errors));
+        this.actions.updateProductFailed(err.message);
       });
   }
 

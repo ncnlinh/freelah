@@ -1,10 +1,11 @@
 import React from 'react';
-import {AppBar, IconButton, FlatButton} from 'material-ui';
+import {AppBar, IconButton, FlatButton, IconMenu, MenuItem} from 'material-ui';
 import {HeaderConstants} from '../constants';
 import mui from 'material-ui';
 
 
 class Header extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -46,6 +47,16 @@ class Header extends React.Component {
             </div>}
           />
         );
+      case (HeaderConstants.PRODUCT):
+        return (
+          <AppBar title='FreeLah'
+            iconElementLeft={<IconButton iconClassName='fa fa-arrow-left'/>}
+            iconElementRight={
+              <IconMenu iconButtonElement={(<IconButton iconClassName='fa fa-bars' iconStyle={styles.buttonText}/>)}>
+                <MenuItem primaryText='Report listing'/>
+              </IconMenu>}
+          />
+        );
     };
     
   }
@@ -59,7 +70,5 @@ Header.propTypes = {
 Header.defaultProps = {
   mode: HeaderConstants.HOME
 }
-
-
 
 export default Header;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ProductStore} from '../stores';
+import {ProductStore, AppStore} from '../stores';
 import {ProductActions, ProductCreatingActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
@@ -23,6 +23,12 @@ class Home extends React.Component {
     this.handlePost = this.handlePost.bind(this);
   }
 
+  componentWillMount() {
+    if (!AppStore.getState().isLoggedIn) {
+      this.context.history.pushState(null, '/login');
+    }
+  }
+
   componentDidMount() {
     ProductStore.listen(this.onChange);
     ProductActions.getAllProducts();
@@ -40,11 +46,11 @@ class Home extends React.Component {
 
   handlePost(e) {
     ProductCreatingActions.uploadImage(e.target.value);
-    this.context.history.pushState(null, 'products/new');
+    this.context.history.pushState(null, '/products/new');
   }
 
-  handleProductCardOnClick(userId, id) {
-    ProductActions.getProduct(userId, id);
+  handleProductCardOnClick(id) {
+    ProductActions.getProduct(id);
   }
 
   render() {

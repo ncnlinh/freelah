@@ -7,9 +7,14 @@ class AppStore {
     this.user = null;
     this.error = null;
     this.bindListeners({
-      handleLoginSuccess: AppActions.loginSuccess,
-      handleLoginFailed: AppActions.loginFailed,
+      handleLogin: AppActions.LOGIN,
+      handleLoginSuccess: AppActions.LOGIN_SUCCESS,
+      handleLoginFailed: AppActions.LOGIN_FAILED
     })
+  }
+
+  handleLogin() {
+
   }
 
   handleLoginSuccess(user) {

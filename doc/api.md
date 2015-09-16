@@ -13,6 +13,9 @@
 ##### GET /api/products
 - return a list of all products.
 
+##### GET /api/products/$productId
+- get product $productId 
+
 ##### POST /api/users/$userId/products
 - add new product to user $userId. attach data in body with json format.
 

@@ -4,8 +4,17 @@ import {ProductActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import ProductCard from './ProductCard';
 import Header from './Header';
+import mui, {Paper} from 'material-ui';
+
+let ThemeManager = new mui.Styles.ThemeManager();
 
 class Product extends React.Component {
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -17,7 +26,7 @@ class Product extends React.Component {
     ProductStore.listen(this.onChange);
     if (!this.state.product) {
       const id = this.props.params.id;
-      ProductActions.getProduct(userId, id);
+      ProductActions.getProduct(id);
     }
   }
 
@@ -39,6 +48,7 @@ class Product extends React.Component {
       return (
         <div className='product'>
           <Header mode={HeaderConstants.PRODUCT}/>
+          <Paper style={{paddingBottom: '15px', paddingRight:'15px', display: 'flex'}}>
           <ProductCard
               mode='full'
               id={product.id}
@@ -48,6 +58,7 @@ class Product extends React.Component {
               location={product.location}
               expiryDate={product.expiryDate}
               userId={product.userId}/>
+          </Paper>
         </div>
       );
     } else {
@@ -56,6 +67,10 @@ class Product extends React.Component {
 
   }
 }
+
+Product.childContextTypes = {
+  muiTheme: React.PropTypes.object
+};
 
 Product.propTypes = {
   params: React.PropTypes.object //from react-router

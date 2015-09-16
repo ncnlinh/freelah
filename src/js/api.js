@@ -31,8 +31,8 @@ FreeLahApi.getAllProducts = () => {
     .promise();;
 }
 
-FreeLahApi.getProduct = (userId, productId) => {
-  return superagent.get(SERVER_URL + '/api/users/' + userId + '/products/' + productId)
+FreeLahApi.getProduct = (productId) => {
+  return superagent.get(SERVER_URL + '/api/products/' + productId)
     .promise();;
 }
 
