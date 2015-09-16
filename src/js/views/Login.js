@@ -12,11 +12,12 @@ class Login extends React.Component {
     this.state = AppStore.getState();
     this.onChange = this.onChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
-
-    console.log(this.state);
   }
 
   componentDidMount() {
+    if (this.state.user) {
+      this.context.history.pushState(null, '/');
+    }
     AppStore.listen(this.onChange);
   }
 
@@ -29,7 +30,7 @@ class Login extends React.Component {
     if (this.state.isLoggedIn) {
       // AppStore.unlisten(this.onChange);   
       console.log(state);
-      //this.context.history.pushState(null, '/');
+      this.context.history.pushState(null, '/');
     } else if (this.state.error) {
       // error handler
       console.log(state);

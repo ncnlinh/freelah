@@ -2,7 +2,7 @@ let LocalStore = {};
 
 LocalStore.write = (key, data) => {
   if(typeof(Storage) !== "undefined") {
-    localStorage.setItem(key, data);
+    localStorage.setItem(key, JSON.stringify(data));
   } else {
     console.log('Sorry! No Web Storage support..');
   }
@@ -10,7 +10,7 @@ LocalStore.write = (key, data) => {
 
 LocalStore.read = (key) => {
   if(typeof(Storage) !== "undefined") {
-    return localStorage.getItem(key);
+    return JSON.parse(localStorage.getItem(key));
   } else {
     console.log('Sorry! No Web Storage support..');
     return null

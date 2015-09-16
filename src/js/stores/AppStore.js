@@ -5,7 +5,6 @@ import LocalStore from '../util/helper.js'
 class AppStore {
   constructor() {
     this.user = LocalStore.read('user');
-    console.log(this.user.username);
     this.isLoggedIn = this.user ? true : false;
     this.error = null;
     this.bindListeners({
