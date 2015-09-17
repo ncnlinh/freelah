@@ -8,11 +8,17 @@ class ProductSection extends React.Component {
     super(props);
   }
   render() {
+    let style = {
+      wrapper : {
+        width:'50%'
+        // float:'left'
+      }
+    }
     let productList = [];
     if (!!this.props.products) {
       this.props.products.forEach((product, i) => {
         productList.push(
-          <Link key={i}
+          <Link style={style.wrapper} key={i}
           onClick={this.props.itemOnClick.bind(null, product.id)}
           to={`products/${product.id}`}>
             <ProductCard key={i}
@@ -31,7 +37,7 @@ class ProductSection extends React.Component {
     }
 
     return (
-      <Paper style={{ marginBottom: '10px'}}>
+      <Paper style={{display: 'flex', flexWrap: 'wrap', paddingRight: '10px', paddingBottom: '10px'}}>
         {productList}
       </Paper>
     );

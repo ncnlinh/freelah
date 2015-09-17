@@ -6,7 +6,7 @@ import Header from './Header';
 import ProductSection from './ProductSection';
 import mui from 'material-ui';
 import {PropTypes} from 'react-router';
-
+import {LeftNav, MenuItem} from 'material-ui'
 let ThemeManager = new mui.Styles.ThemeManager();
 
 class Home extends React.Component {
@@ -21,6 +21,7 @@ class Home extends React.Component {
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.toggleLeftNav = this.toggleLeftNav.bind(this);
   }
 
   componentWillMount() {
@@ -52,12 +53,48 @@ class Home extends React.Component {
   handleProductCardOnClick(id) {
     ProductActions.getProduct(id);
   }
+  toggleLeftNav(){
+    this.refs.leftNav.toggle();
+  }
 
   render() {
     const products = this.state.retrievedProducts;
+    const menuItems = [
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Home',
+        payload: '/#/'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'About',
+        payload: '/#/about'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Profile',
+        payload: '/#/me'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Activity',
+        payload: '/#/activity'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Logout',
+        payload: '/#/logout'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Login',
+        payload: '/#/login'
+      }
+    ];
     return (
       <div className='home'>
-        <Header mode={HeaderConstants.HOME} handlePost={this.handlePost} />
+        <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
+        <Header leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
         <ProductSection products={products}
         itemOnClick={this.handleProductCardOnClick}/>
       </div>

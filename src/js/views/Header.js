@@ -2,7 +2,7 @@ import React from 'react';
 import {AppBar, IconButton, FlatButton, IconMenu, MenuItem} from 'material-ui';
 import {HeaderConstants} from '../constants';
 import mui from 'material-ui';
-
+import {Link} from 'react-router'
 
 class Header extends React.Component {
 
@@ -37,13 +37,20 @@ class Header extends React.Component {
       case (HeaderConstants.HOME):
         return (
           <AppBar title='FreeLah'
-            iconElementLeft={<div></div>}
+            onLeftIconButtonTouchTap={this.props.leftItemTouchTap}
             iconElementRight={<div>
               <IconButton iconClassName='fa fa-lg fa-search' iconStyle={styles.buttonText}/>
-              <FlatButton label='Post' style={styles.buttonRoot} labelStyle={styles.buttonText}>
-                <input type="file" accept="image/*;capture=camera" style={styles.imageInput}
-                onChange={this.props.handlePost}/>
-              </FlatButton>
+              {
+                this.props.showLoginButton ? 
+                (<Link to={`/login`}>
+                  <FlatButton label='Login' style={styles.buttonRoot} labelStyle={styles.buttonText}/>
+                </Link>)
+                :
+                (<FlatButton label='Post' style={styles.buttonRoot} labelStyle={styles.buttonText}>
+                  <input type="file" accept="image/*;capture=camera" style={styles.imageInput}
+                  onChange={this.props.handlePost}/>
+                </FlatButton>)
+              }
             </div>}
           />
         );
@@ -64,7 +71,10 @@ class Header extends React.Component {
 
 Header.propTypes = {
   mode: React.PropTypes.string,
-  handlePost: React.PropTypes.func
+  handlePost: React.PropTypes.func,
+  leftItemTouchTap: React.PropTypes.func,
+  rightItemTouchTap: React.PropTypes.func,
+  showLoginButton: React.PropTypes.bool
 }
 
 Header.defaultProps = {

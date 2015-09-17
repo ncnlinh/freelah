@@ -47,7 +47,7 @@ class Login extends React.Component {
   }
 
   render() {
-    var style = this.state.error ? 'error' : '';
+    let style = this.state.error ? 'error' : null;
     return (
       <Grid>
         <div className="fl-auth lead">

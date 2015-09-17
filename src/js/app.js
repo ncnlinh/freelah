@@ -2,9 +2,10 @@ import React from 'react/addons';
 import Views from './views';
 import api from './api';
 import {Router, Route} from 'react-router';
-
+let injectTapEventPlugin = require('react-tap-event-plugin');
 
 (function () {
+  injectTapEventPlugin();
   console.log(Views);
   console.log(api);
   React.render((

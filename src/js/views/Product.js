@@ -48,7 +48,7 @@ class Product extends React.Component {
       return (
         <div className='product'>
           <Header mode={HeaderConstants.PRODUCT}/>
-          <Paper style={{paddingBottom: '15px', paddingRight:'15px', display: 'flex'}}>
+          <Paper style={{paddingRight: '10px', paddingBottom:'10px', display: 'flex'}}>
           <ProductCard
               mode='full'
               id={product.id}
