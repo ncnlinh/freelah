@@ -25,9 +25,6 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    if (!AppStore.getState().isLoggedIn) {
-      this.context.history.pushState(null, '/login');
-    }
   }
 
   componentDidMount() {

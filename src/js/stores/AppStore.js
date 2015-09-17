@@ -10,8 +10,16 @@ class AppStore {
     this.bindListeners({
       handleLogin: AppActions.LOGIN,
       handleLoginSuccess: AppActions.LOGIN_SUCCESS,
-      handleLoginFailed: AppActions.LOGIN_FAILED
+      handleLoginFailed: AppActions.LOGIN_FAILED,
+      handleLogout: AppActions.LOGOUT
     })
+  }
+
+  handleLogout() {
+    this.isLoggedIn = false;
+    this.user = null;
+    this.error = null;
+    LocalStore.remove('user');
   }
 
   handleLogin() {
@@ -29,7 +37,7 @@ class AppStore {
     this.isLoggedIn = false;
     this.user = null;
     this.error = err;
-    LocalStore.remove('user', this.user);
+    LocalStore.remove('user');
   }
 }
 

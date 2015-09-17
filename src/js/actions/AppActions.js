@@ -20,6 +20,10 @@ class AppActions {
   loginFailed(err) {
     this.dispatch(err);
   }
+
+  logout() {
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(AppActions);
