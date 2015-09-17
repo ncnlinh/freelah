@@ -24,6 +24,36 @@ class AppActions {
   logout() {
     this.dispatch();
   }
+
+  signup(username, email, password) {
+    this.dispatch();
+    api.createUser({username, email, password})
+      .then((res) => {
+        console.log(res);
+        this.actions.signupSuccess(JSON.parse(res.text));
+      })
+      .catch((err) => {
+        console.log(err);
+        this.actions.signupFailed(err.body);
+      });
+  }
+  signupSuccess(user) {
+    this.dispatch(user);
+  }
+  signupFailed(err) {
+    this.dispatch(err);
+  }
+
+  startSignup() {
+    if (this.alt.dispatcher.isDispatching()){
+      window.setTimeout(() => {
+        this.dispatch();
+      })
+    } else {
+      this.dispatch();
+    }
+  }
+
 }
 
 export default alt.createActions(AppActions);

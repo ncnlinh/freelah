@@ -7,6 +7,7 @@ import Product from './Product';
 import ProductCard from './ProductCard';
 import ProductNew from './ProductNew';
 import ProductSection from './ProductSection';
+import Signup from './Signup';
 
 export default {
   Header,
@@ -16,5 +17,6 @@ export default {
   Product,
   ProductCard,
   ProductNew,
-  ProductSection
+  ProductSection,
+  Signup
 };
