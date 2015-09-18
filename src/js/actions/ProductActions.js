@@ -20,7 +20,13 @@ class ProductActions {
   }
 
   getProduct(productId) {
-    this.dispatch();
+    if (this.alt.dispatcher.isDispatching()){
+      window.setTimeout(() => {
+        this.dispatch();
+      })
+    } else {
+      this.dispatch();
+    }
     api.getProduct(productId)
       .then((res) => {
         console.log(res);
