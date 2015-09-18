@@ -38,12 +38,12 @@ exports.saveImage = function(name, data, callback) {
     if (!err) {
       if (!!value) {
         var bigger = value.width > value.height ? value.width : value.height;
-        var response = "./"+editedFilePath;
+        var response = editedFilePath;
         if (bigger!== -1) {
           gm("./"+filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).write(response, function(err) {
             if (err) {
-              console.log("err=", err);
-              console.log("res=", response);
+              console.err("err=", err);
+              console.err("res=", response);
             } else {
               console.log("hi");
               console.log("res=", response);
@@ -52,9 +52,10 @@ exports.saveImage = function(name, data, callback) {
           });
           
         }
-      } else {
-        callback(null, err);
       }
+    } else {
+      console.err(err);
+      callback(null, err);
     }
   });
 }
