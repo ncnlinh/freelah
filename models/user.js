@@ -38,7 +38,8 @@ var User = helper.getDatabase().define('User', {
   classMethods: {
     associate: function(models) {
       // associations can be defined here
-      User.hasMany(models.Product)
+      User.hasMany(models.Product);
+      User.hasMany(models.Activity);
     }
   }
 });

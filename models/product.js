@@ -36,6 +36,10 @@ var Product = helper.getDatabase().define('Product', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  buyerId: {
+    type: Sequelize.INTEGER,
+    defaultValue: null
+  }
 }, {
   classMethods: {
     associate: function(models) {
