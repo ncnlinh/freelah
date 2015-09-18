@@ -60,15 +60,23 @@ exports.createProduct = function(userId, data, callback, callError) {
     var arr = data['images'].split(' ');
     arr.forEach(function(image) {
       if (image.length > 0) {
-        data['imgUrls'] += ' images/' + helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image);
+        helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image, function(response, err){
+          if (err) {
+            callError;
+          } else {
+            data['imgUrls'] += ' images/' + response;
+            Product.create(data)
+            .then(callback)
+            .catch(callError);
+          }
+        });
+        
       }
     });
     console.log("ZZ");
   }
 
-  Product.create(data)
-    .then(callback)
-    .catch(callError);
+  
 }
 
 exports.getAllProducts = function(callback, callError) {
@@ -91,7 +99,6 @@ exports.updateProduct = function(id, data, callback, callError) {
       } else {
         if (data.images != null) {
           data.imgUrls = "";
-
           data.images.split(" ").map(function(image) {
             if (image.length > 0) {
               var rando = Math.round(Math.random() * 10000000);
@@ -99,7 +106,6 @@ exports.updateProduct = function(id, data, callback, callError) {
             }
           });
         }
-
         product.updateAttributes(data, {fields: ['name', 'description', 'location', 'status', 'expiryDate', 'imgUrls']})
           .then(callback);
       }
