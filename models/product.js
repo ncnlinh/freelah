@@ -61,7 +61,7 @@ exports.createProduct = function(userId, data, callback, callError) {
     arr.forEach(function(image) {
       if (image.length > 0) {
         helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image, function(response, err){
-          if (err) {
+          if (response === null || err) {
             callError;
           } else {
             data['imgUrls'] += ' images/' + response;

@@ -52,6 +52,8 @@ exports.saveImage = function(name, data, callback) {
           });
           
         }
+      } else {
+        callback(null, err);
       }
     }
   });
