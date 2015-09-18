@@ -80,7 +80,7 @@ class Login extends React.Component {
               Log in
             </RaisedButton >
             <Link to={`/signup`} style={{textAlign: 'center', fontSize:'14px'}}>
-                <p style={{paddingTop:'5px', color:'blue'}}>Already have an account</p>
+                <p style={{paddingTop:'5px', color:'blue'}}>Don't have an account?</p>
             </Link>
           </Col>
         </Row>

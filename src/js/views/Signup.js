@@ -90,7 +90,7 @@ class Signup extends React.Component {
               Sign up
             </RaisedButton >
             <Link to={`/login`} style={{textAlign: 'center', fontSize:'14px'}}>
-                <p style={{paddingTop:'5px', color:'blue'}}>Don't have an account</p>
+                <p style={{paddingTop:'5px', color:'blue'}}>Already have an account?</p>
             </Link>
           </Col>
         </Row>
