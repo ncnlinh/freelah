@@ -105,10 +105,13 @@ class Home extends React.Component {
       <div className='home'>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
         <Header leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
-        <div style={{paddingLeft:'20px', paddingRight:'20px'}}>
-          <h5>FreeLah, give away no-nolonger-used belongings, receive credits and get more needed things! <a href='#/about'><u>More details here</u></a>.
-          </h5>
-        </div>
+        { !this.hasUser
+          ?(<div style={{paddingLeft:'20px', paddingRight:'20px'}}>
+            <h5>FreeLah, give away no-nolonger-used belongings, receive credits and get more needed things! <a href='#/about'><u>More details here</u></a>.
+            </h5>
+          </div>)
+          :(<div></div>)
+        }
         <ProductSection products={products}
         itemOnClick={this.handleProductCardOnClick}/>
       </div>
