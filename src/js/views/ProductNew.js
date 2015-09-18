@@ -29,18 +29,18 @@ class ProductNew extends React.Component {
   }
 
   componentDidMount() {
-    ProductCreatingStore.listen(this.onChange);
     ProductCreatingActions.startPost();
+    ProductCreatingStore.listen(this.onChange);
   }
 
-  ComponentWillUnmount() {
+  componentWillUnmount() {
     ProductCreatingStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
     console.log(state);
-    if (this.state.product) {
+    if (this.state.product !== null) {
       this.context.history.pushState(null, '/products/'+this.state.product.id);
     }
   }
