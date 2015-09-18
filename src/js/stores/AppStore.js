@@ -45,24 +45,24 @@ class AppStore {
     LocalStore.remove('user');
   }
 
-  handleSignup(){
+  handleSignup() {
 
   }
 
   handleSignupSuccess(user) {
     this.signupSuccessful = true;
-    // this.isLoggedIn = true;
-    // this.user = user;
-    // this.error = null;
-    // LocalStore.write('user', this.user);
+    this.isLoggedIn = true;
+    this.user = user;
+    this.error = null;
+    LocalStore.write('user', this.user);
   }
 
   handleSignupFailed(err) {
     this.signupSuccessful = false;
-    // this.isLoggedIn = false;
-    // this.user = null;
+    this.isLoggedIn = false;
+    this.user = null;
     this.error = err;
-    // LocalStore.remove('user', this.user);
+    LocalStore.remove('user');
   }
 
   handleStartSignup() {

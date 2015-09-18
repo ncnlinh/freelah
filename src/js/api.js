@@ -36,9 +36,11 @@ FreeLahApi.getProduct = (productId) => {
     .promise();;
 }
 
-FreeLahApi.createProduct = (userId, productData) => {
-  return superagent.post(SERVER_URL + '/api/users/' + userId + '/products')
-    .send(data)
+FreeLahApi.createProduct = (user, productData) => {
+  console.log(productData);
+  return superagent.post(SERVER_URL + '/api/users/' + user.id + '/products')
+    .set('Authorization', user.basicAuth)
+    .send(productData)
     .promise();;
 }
 

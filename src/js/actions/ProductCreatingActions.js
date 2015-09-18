@@ -2,9 +2,29 @@ import alt from '../alt';
 import api from '../api';
 
 class ProductCreatingActions {
-  uploadImage(image) {
-    this.dispatch(image);
+  uploadImages(images) {
+    this.dispatch(images);
   }
+
+  create(user, name, location, description, images) {
+    this.dispatch();
+    api.createProduct(user, {name, location, description, images})
+      .then((res) => {
+        console.log(res);
+        this.actions.createProductSuccess(JSON.parse(res.text));
+      })
+      .catch((err) => {
+        console.log(err);
+        this.actions.createProductFailed(err.body);
+      });
+  }
+  createProductSuccess(data) {
+    this.dispatch(data);
+  }
+  createProductFailed(err) {
+    this.dispatch(err);
+  }
+
 }
 
 export default alt.createActions(ProductCreatingActions);

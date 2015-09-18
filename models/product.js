@@ -52,9 +52,14 @@ exports.createProduct = function(userId, data, callback, callError) {
 
   if (data['images'] != null) {
     data['imgUrls'] = "";
-    data['images'].map(function(image) {
-      data['imgUrls'] += ' images/' + helper.saveImage('product-' + user.id + '-' + Math.round(Math.random() * 10000000), image);
+
+    var arr = data['images'].split(' ');
+    arr.forEach(function(image) {
+      if (image.length > 0) {
+        data['imgUrls'] += ' images/' + helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image);
+      }
     });
+    console.log("ZZ");
   }
 
   Product.create(data)

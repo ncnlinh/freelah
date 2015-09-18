@@ -3,15 +3,27 @@ import ProductCreatingActions from '../actions/ProductCreatingActions';
 
 class ProductCreatingStore {
   constructor() {
-    this.image = null;
+    this.product = null;
     this.errors = null;
+    this.images = null;
     this.bindListeners({
-      handleUploadImage: ProductCreatingActions.UPLOAD_IMAGE
+      handleUploadImages: ProductCreatingActions.UPLOAD_IMAGES,
+      handleCreateProductSuccess: ProductCreatingActions.CREATE_PRODUCT_SUCCESS,
+      handleCreateProductFailed: ProductCreatingActions.CREATE_PRODUCT_FAILED
     });
   }
 
-  handleUploadImage(image) {
-    this.image = image;
+  handleUploadImages(images) {
+    console.log(images);
+    this.images = images;
+  }
+
+  handleCreateProductSuccess(data) {
+    this.product = data;
+  }
+
+  handleCreateProductFailed(err) {
+    this.errors = err;
   }
 
 }

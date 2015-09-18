@@ -1,5 +1,5 @@
 import React from 'react';
-import {PropTypes} from 'react-router'
+import {PropTypes, Link} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
 import {Grid, Row, Col} from 'react-bootstrap';
@@ -24,22 +24,13 @@ class Signup extends React.Component {
   }
 
   componentDidMount() {
-    // if (this.state.user) {
-    //   this.context.history.pushState(null, '/');
-    // }
-    AppActions.startSignup();
+    if (this.state.user) {
+      this.context.history.pushState(null, '/');
+    }
     AppStore.listen(this.onChange);
   }
 
-  componentDidUpdate(prevState) {
-    console.log(this.state.signupSuccessful);
-    if (this.state.signupSuccessful) {
-      
-      this.context.history.pushState(null, '/');
-    }
-  }
-
-  componentWillUnMount() {
+  ComponentWillUnMount() {
     AppStore.unlisten(this.onChange);
   }
 
@@ -61,11 +52,13 @@ class Signup extends React.Component {
     let username = this.refs.username.refs.input.getDOMNode().value;
     let password = this.refs.password.refs.input.getDOMNode().value;
     let email = this.refs.email.refs.input.getDOMNode().value;
+    let phone = this.refs.phone.refs.input.getDOMNode().value;
     let confirmPassword = this.refs.confirmPassword.refs.input.getDOMNode().value;
     if (password === confirmPassword) {
-      AppActions.signup(username, email, password);  
+      AppActions.signup(username, email, phone, password);  
+    } else {
+      console.log("Sign Up failed!");
     }
-    
   }
 
   render() {
@@ -76,25 +69,29 @@ class Signup extends React.Component {
         <div className="fl-auth lead">
         <Row>
             <Col xs={3} md={4}/>
-            <Col xs={6} md={4}>
-              <h1>Freelah</h1>
+            <Col xs={6} md={4} style={{textAlign: 'center', paddingTop: '40px'}}>
+              <h3>FreeLah</h3>
             </Col>
             <Col xs={3} md={4}/>
         </Row>
         <form bsStyle="inline" onSubmit={this.handleSignUp}>
         <Row>
-          <Col style={{'padding': '15px'}}>
+          <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
             <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error} fullWidth/>
             <TextField ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error} fullWidth/>
+            <TextField ref="phone" hintText="Phone Number" floatingLabelText="Phone Number" required={true} errorText={error} fullWidth/>
             <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error} minLength={5} fullWidth/>
             <TextField ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>
-          <Col style={{'padding': '10px'}}>
+          <Col style={{'padding': '20px'}}>
             <RaisedButton type="submit" bsStyle="success" onClick={this.handleSignUp} fullWidth>
               Sign up
             </RaisedButton >
+            <Link to={`/login`} style={{textAlign: 'center', fontSize:'14px'}}>
+                <p style={{paddingTop:'5px', color:'blue'}}>Don't have an account</p>
+            </Link>
           </Col>
         </Row>
         </form>

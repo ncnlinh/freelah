@@ -1,11 +1,20 @@
 import React from 'react';
-import {PropTypes} from 'react-router'
+import {PropTypes, Link} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
-import {Button, Grid, Row, Col, Input} from 'react-bootstrap';
-import LocalStore from '../util/helper.js'
+import {Grid, Row, Col} from 'react-bootstrap';
+import {TextField, RaisedButton} from 'material-ui';
+import mui from 'material-ui';
+
+let ThemeManager = new mui.Styles.ThemeManager();
 
 class Login extends React.Component {
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -40,45 +49,51 @@ class Login extends React.Component {
   handleLogin(e) {
     e.preventDefault();
 
-    let username = this.refs.username.getInputDOMNode().value;
-    let password = this.refs.password.getInputDOMNode().value
-
-    AppActions.login(username, password);
+    let username = this.refs.username.refs.input.getDOMNode().value;
+    let password = this.refs.password.refs.input.getDOMNode().value;
+    AppActions.login(username, password);  
   }
 
   render() {
-    let style = this.state.error ? 'error' : null;
+    let error = this.state.error ? ' ' : null;
+    console.log(error)
     return (
       <Grid>
         <div className="fl-auth lead">
         <Row>
             <Col xs={3} md={4}/>
-            <Col xs={6} md={4}>
-              <h1>Freelah</h1>
+            <Col xs={6} md={4} style={{textAlign: 'center', paddingTop: '40px'}}>
+              <h3>FreeLah</h3>
             </Col>
             <Col xs={3} md={4}/>
+        </Row>
+        <form bsStyle="inline" onSubmit={this.handleLogin}>
+        <Row>
+          <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
+            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error} fullWidth/>
+            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error} minLength={5} fullWidth/>
+          </Col>
         </Row>
         <Row>
-            <Col xs={3} md={4}/>
-            <Col xs={6} md={4}>
-              <form bsStyle="inline" onSubmit={this.handleLogin}>
-                <Input bsStyle={style} ref="username" name="username" type="username" placeholder="Username" required={true}/>
-                <Input bsStyle={style} ref="password" name="password" type="password" placeholder="Password" required={true} minLength={5}/>
-                <Button type="submit" bsStyle="success" onClick={this.handleLogin}>
-                  Log in
-                </Button>
-              </form>
-
-            </Col>
-            <Col xs={3} md={4}/>
+          <Col style={{'padding': '20px'}}>
+            <RaisedButton type="submit" bsStyle="success" onClick={this.handleLogin} fullWidth>
+              Log in
+            </RaisedButton >
+            <Link to={`/signup`} style={{textAlign: 'center', fontSize:'14px'}}>
+                <p style={{paddingTop:'5px', color:'blue'}}>Already have an account</p>
+            </Link>
+          </Col>
         </Row>
+        </form>
         </div>
       </Grid>
     );
   }
 
 }
-
+Login.childContextTypes = {
+  muiTheme: React.PropTypes.object
+};
 Login.contextTypes = {
   history: PropTypes.history
 }

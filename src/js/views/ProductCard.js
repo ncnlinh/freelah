@@ -21,10 +21,11 @@ class ProductCard extends React.Component {
         fontSize: '14px'
       }
     }
+    var imgUrl = this.props.imgUrls ? '/' + this.props.imgUrls.replace(' ', '') : "http://lorempixel.com/600/337/cats/";
     return (
       <Card style={style.card}>
         <CardMedia >
-          <img src="http://lorempixel.com/600/337/cats/"/>
+          <img src={imgUrl}/>
         </CardMedia>
         <CardText >
           {this.props.mode === 'full' ? (<div style={{fontSize: '20px'}}><strong>{this.props.name}</strong></div>): (<div style={{fontSize: '12px'}}><strong>{this.props.name}</strong></div>)}
@@ -43,6 +44,7 @@ ProductCard.propTypes = {
   mode: React.PropTypes.oneOf(['overview', 'full']),
   name: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
+  imgUrls: React.PropTypes.string,
   status: React.PropTypes.oneOf(['available', 'bidding', 'expired', 'given']),
   location: React.PropTypes.string.isRequired,
   expiryDate: React.PropTypes.object,

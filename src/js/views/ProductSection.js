@@ -30,6 +30,7 @@ class ProductSection extends React.Component {
                 status={product.status}
                 location={product.location}
                 expiryDate={product.expiryDate}
+                imgUrls={product.imgUrls}
                 userId={product.userId}/>
           </Link>
         );

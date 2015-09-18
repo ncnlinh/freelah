@@ -1,4 +1,5 @@
 export default {
   HOME: 'HOME',
-  PRODUCT: 'PRODUCT'
+  PRODUCT: 'PRODUCT',
+  NEWPRODUCT: 'NEWPRODUCT'
 }

@@ -16,7 +16,7 @@ config = YAML.load('config.yml');
 sass = require('gulp-sass');
 
 gulp.task('clean', function() {
-  return gulp.src(['public/*'], {read: false})
+  return gulp.src(['public/js', 'public/css'], {read: false})
   .pipe(clean());
 });
 

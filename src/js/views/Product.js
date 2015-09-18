@@ -57,6 +57,7 @@ class Product extends React.Component {
               status={product.status}
               location={product.location}
               expiryDate={product.expiryDate}
+              imgUrls={product.imgUrls}
               userId={product.userId}/>
           </Paper>
         </div>

@@ -74,6 +74,9 @@ router.put('/:id', function(req, res) {
 
 router.post('/:id/products', function(req, res) {
   var token = req.headers.authorization;
+
+  console.log(req.body);
+
   User.getUserById(req.params.id, 
     function(user) {
       if (user == null) {
