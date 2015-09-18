@@ -9,8 +9,15 @@ class ProductCreatingStore {
     this.bindListeners({
       handleUploadImages: ProductCreatingActions.UPLOAD_IMAGES,
       handleCreateProductSuccess: ProductCreatingActions.CREATE_PRODUCT_SUCCESS,
-      handleCreateProductFailed: ProductCreatingActions.CREATE_PRODUCT_FAILED
+      handleCreateProductFailed: ProductCreatingActions.CREATE_PRODUCT_FAILED,
+      handleStartPost: ProductCreatingActions.START_POST
     });
+  }
+
+  handleStartPost() {
+    this.product = null;
+    this.errors = null;
+    this.images = null;
   }
 
   handleUploadImages(images) {

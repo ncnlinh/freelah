@@ -24,7 +24,9 @@ class ProductCreatingActions {
   createProductFailed(err) {
     this.dispatch(err);
   }
-
+  startPost() {
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(ProductCreatingActions);

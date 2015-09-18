@@ -30,9 +30,10 @@ class ProductNew extends React.Component {
 
   componentDidMount() {
     ProductCreatingStore.listen(this.onChange);
+    ProductCreatingActions.startPost();
   }
 
-  ComponentWillUnMount() {
+  ComponentWillUnmount() {
     ProductCreatingStore.unlisten(this.onChange);
   }
 
@@ -40,7 +41,7 @@ class ProductNew extends React.Component {
     this.setState(state);
     console.log(state);
     if (this.state.product) {
-      this.context.history.pushState(null, '/');
+      this.context.history.pushState(null, '/products/'+this.state.product.id);
     }
   }
 
@@ -67,54 +68,12 @@ class ProductNew extends React.Component {
   }
 
   handleGoBack() {
-    this.context.history.goBack();
+    this.context.history.pushState('/');
   }
 
   render() {
     let error = null;
-    const pageMenuItems = [
-      {
-        type: MenuItem.Types.LINK,
-        text: 'Home',
-        payload: '/#/'
-      },
-      {
-        type: MenuItem.Types.LINK,
-        text: 'About',
-        payload: '/#/about'
-      }
-    ];
-
-    let menuItems;
-    if (this.hasUser) {
-      menuItems = pageMenuItems.concat([{
-        type: MenuItem.Types.LINK,
-        text: 'Profile',
-        payload: '/#/me'
-      },
-      {
-        type: MenuItem.Types.LINK,
-        text: 'Activity',
-        payload: '/#/activity'
-      },
-      {
-        type: MenuItem.Types.LINK,
-        text: 'Log out',
-        payload: '/#/logout'
-      }]);
-    } else {
-      menuItems = pageMenuItems.concat([{
-        type: MenuItem.Types.LINK,
-        text: 'Log in',
-        payload: '/#/login'
-      },
-      {
-        type: MenuItem.Types.LINK,
-        text: 'Sign up',
-        payload: '/#/signup'
-      }]);
-    }
-
+    
     console.log(this.state.imageFileName);
     return (
       <div className='newproduct'>

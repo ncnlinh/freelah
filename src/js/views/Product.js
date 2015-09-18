@@ -26,10 +26,8 @@ class Product extends React.Component {
 
   componentDidMount() {
     ProductStore.listen(this.onChange);
-    if (!this.state.product) {
-      const id = this.props.params.id;
-      ProductActions.getProduct(id);
-    }
+    const id = this.props.params.id;
+    ProductActions.getProduct(id);
   }
 
   componentWillUnmount() {
@@ -44,7 +42,7 @@ class Product extends React.Component {
 
   }
   handleGoBack() {
-    this.context.history.goBack();
+    this.context.history.pushState('/')
   }
 
   render() {
