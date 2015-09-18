@@ -54,7 +54,7 @@ exports.saveImage = function(name, data, callback) {
         }
       }
     } else {
-      console.err(err);
+      console.error(err);
       callback(null, err);
     }
   });
