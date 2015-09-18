@@ -1,12 +1,11 @@
 import React from 'react';
-import {ProductStore, AppStore, ProductCreatingStore} from '../stores';
-import {ProductActions, ProductCreatingActions} from '../actions';
+import {AppStore, ProductCreatingStore} from '../stores';
+import {ProductCreatingActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
-import ProductSection from './ProductSection';
 import mui from 'material-ui';
-import {PropTypes, Link} from 'react-router';
-import {LeftNav, MenuItem, TextField, RaisedButton} from 'material-ui'
+import {PropTypes} from 'react-router';
+import {MenuItem, TextField, RaisedButton} from 'material-ui'
 import {Grid, Row, Col} from 'react-bootstrap';
 
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -26,6 +25,7 @@ class ProductNew extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.handleGoBack = this.handleGoBack.bind(this);
   }
 
   componentDidMount() {
@@ -57,17 +57,21 @@ class ProductNew extends React.Component {
   }
 
   handleFileChange(e) {
-    this.setState({imageFileName: e.target.value.replace("C:\\fakepath\\", "")});
+    this.setState({imageFileName: e.target.value.split(/[/\\]+/)[(e.target.value.split(/[/\\]+/).length-1 )]});
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function(upload) {
-      ProductCreatingActions.uploadImages(upload.target.result.split(",")[1]);
+      ProductCreatingActions.uploadImages(upload.target.result.split(',')[1]);
     }
     reader.readAsDataURL(e.target.files[0]);
   }
 
+  handleGoBack() {
+    this.context.history.goBack();
+  }
+
   render() {
-    var error = null;
+    let error = null;
     const pageMenuItems = [
       {
         type: MenuItem.Types.LINK,
@@ -81,7 +85,7 @@ class ProductNew extends React.Component {
       }
     ];
 
-    var menuItems;
+    let menuItems;
     if (this.hasUser) {
       menuItems = pageMenuItems.concat([{
         type: MenuItem.Types.LINK,
@@ -114,7 +118,7 @@ class ProductNew extends React.Component {
     console.log(this.state.imageFileName);
     return (
       <div className='newproduct'>
-        <Header mode={HeaderConstants.NEWPRODUCT} />
+        <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.NEWPRODUCT} />
 
         <Grid>
           <div className="fl-auth lead">
@@ -150,7 +154,7 @@ ProductNew.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
 ProductNew.contextTypes = {
-  history: PropTypes.history
+  history: PropTypes.history //from react-router
 }
 ProductNew.propTypes = {
   params: React.PropTypes.object //from react-router

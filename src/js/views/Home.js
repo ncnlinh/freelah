@@ -1,6 +1,6 @@
 import React from 'react';
 import {ProductStore, AppStore} from '../stores';
-import {ProductActions, ProductCreatingActions} from '../actions';
+import {ProductActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';

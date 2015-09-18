@@ -59,7 +59,7 @@ class Header extends React.Component {
       case (HeaderConstants.PRODUCT):
         return (
           <AppBar title='FreeLah'
-            iconElementLeft={<IconButton iconClassName='fa fa-arrow-left'/>}
+            iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
               <IconMenu iconButtonElement={(<IconButton iconClassName='fa fa-bars' iconStyle={styles.buttonText}/>)}>
                 <MenuItem primaryText='Report listing'/>
@@ -69,7 +69,7 @@ class Header extends React.Component {
       case (HeaderConstants.NEWPRODUCT):
         return (
           <AppBar title='FreeLah'
-            iconElementLeft={<IconButton iconClassName='fa fa-arrow-left'/>}
+            iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
               <FlatButton label='New product' style={styles.buttonRoot} labelStyle={styles.buttonText}/>
             }

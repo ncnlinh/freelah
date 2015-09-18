@@ -107,6 +107,9 @@ Signup.childContextTypes = {
 Signup.contextTypes = {
   history: PropTypes.history
 }
+Signup.contextTypes = {
+  history: PropTypes.history
+}
 
 export default Signup;
 

@@ -11,6 +11,7 @@ let injectTapEventPlugin = require('react-tap-event-plugin');
   React.render((
     <Router>
       <Route path='/' component={Views.Home}/>
+      <Route path='about' component={Views.About}/>
       <Route path='login' component={Views.Login}/>
       <Route path='logout' component={Views.Logout}/>
       <Route path='signup' component={Views.Signup}/>

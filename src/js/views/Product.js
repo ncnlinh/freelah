@@ -5,6 +5,7 @@ import {HeaderConstants} from '../constants';
 import ProductCard from './ProductCard';
 import Header from './Header';
 import mui, {Paper} from 'material-ui';
+import {PropTypes} from 'react-router';
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
@@ -20,6 +21,7 @@ class Product extends React.Component {
     super(props);
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
+    this.handleGoBack = this.handleGoBack.bind(this);
   }
 
   componentDidMount() {
@@ -41,13 +43,16 @@ class Product extends React.Component {
   handlePost(e) {
 
   }
+  handleGoBack() {
+    this.context.history.goBack();
+  }
 
   render() {
     const product = this.state.product;
     if (!!product) {
       return (
         <div className='product'>
-          <Header mode={HeaderConstants.PRODUCT}/>
+          <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.PRODUCT}/>
           <Paper style={{paddingRight: '10px', paddingBottom:'10px', display: 'flex'}}>
           <ProductCard
               mode='full'
@@ -76,6 +81,8 @@ Product.childContextTypes = {
 Product.propTypes = {
   params: React.PropTypes.object //from react-router
 }
-
+Product.contextTypes = {
+  history: PropTypes.history
+}
 export default Product;
 

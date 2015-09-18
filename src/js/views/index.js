@@ -1,4 +1,4 @@
-
+import About from './About';
 import Header from './Header';
 import Home from './Home';
 import Login from './Login';
@@ -10,6 +10,7 @@ import ProductSection from './ProductSection';
 import Signup from './Signup';
 
 export default {
+  About,
   Header,
   Home,
   Login,
