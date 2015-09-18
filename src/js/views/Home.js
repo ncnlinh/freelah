@@ -4,7 +4,7 @@ import {ProductActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';
-import mui from 'material-ui';
+import mui, {Card, CardText} from 'material-ui';
 import {PropTypes} from 'react-router';
 import {LeftNav, MenuItem} from 'material-ui'
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -106,10 +106,10 @@ class Home extends React.Component {
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
         <Header leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
         { !this.hasUser
-          ?(<div style={{paddingLeft:'20px', paddingRight:'20px'}}>
-            <h5>FreeLah, give away no-longer-used belongings, receive credits and get more needed things! <a href='#/about'><u>More details here</u></a>.
-            </h5>
-          </div>)
+          ?(<Card>
+            <CardText>FreeLah, give away no-longer-used belongings, receive credits and get more needed things! <a href='#/about'><u>More details here</u></a>.
+            </CardText>
+          </Card>)
           :(<div></div>)
         }
         <ProductSection products={products}
