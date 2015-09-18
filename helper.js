@@ -34,13 +34,13 @@ exports.saveImage = function(name, data, callback) {
     console.log(err);
   });
   console.log('gm');
-  gm("./"+filePath).size(function(err, value){
+  gm(filePath).size(function(err, value){
     if (!err) {
       if (!!value) {
         var bigger = value.width > value.height ? value.width : value.height;
         var response = editedFilePath;
         if (bigger!== -1) {
-          gm("./"+filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).write(response, function(err) {
+          gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).write(response, function(err) {
             if (err) {
               console.err("err=", err);
               console.err("res=", response);
