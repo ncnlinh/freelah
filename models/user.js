@@ -51,6 +51,11 @@ exports.createUser = function(data, callback, callError) {
     data.basicAuth = helper.getBasicAuth(data.username, data.password);
     data.password = helper.hashPassword(data.password);
   }
+  if (data.usrename == "") data.username = null;
+  if (data.password == "") data.password = null;
+  if (data.email == "") data.email = null;
+  if (data.phoneNumber == "") data.phoneNumber = null;  
+
   User.create(data)
     .then(callback)
     .catch(callError);
@@ -89,3 +94,4 @@ exports.getToken = function(username, password, callback, callError) {
     .then(callback)
     .catch(callError);
 }
+

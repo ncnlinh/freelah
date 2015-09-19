@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var products = require('./routes/products');
+var bid = require('./routes/bid');
 
 var config = YAML.load('config.yml');
 var app = express();
@@ -65,6 +66,7 @@ app.use('/', routes);
 app.use('/api/auth', auth)
 app.use('/api/users', users);
 app.use('/api/products', products);
+app.use('/bid', bid);
 
 app.get('*', function(req, res) {
   res.redirect('/');

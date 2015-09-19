@@ -7,6 +7,7 @@ import Product from './Product';
 import ProductCard from './ProductCard';
 import ProductNew from './ProductNew';
 import ProductSection from './ProductSection';
+import CountdownTimer from './CountdownTimer';
 import Signup from './Signup';
 
 export default {
@@ -19,5 +20,6 @@ export default {
   ProductCard,
   ProductNew,
   ProductSection,
+  CountdownTimer,
   Signup
 };

@@ -30,7 +30,8 @@ var Product = helper.getDatabase().define('Product', {
     type: Sequelize.STRING
   },
   expiryDate: {
-    type: Sequelize.DATE
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
   userId: {
     type: Sequelize.INTEGER,
@@ -39,6 +40,16 @@ var Product = helper.getDatabase().define('Product', {
   buyerId: {
     type: Sequelize.INTEGER,
     defaultValue: null
+  },
+  highestBid: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  createdAt: {
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    type: Sequelize.DATE
   }
 }, {
   classMethods: {
@@ -53,6 +64,10 @@ var Product = helper.getDatabase().define('Product', {
 // All access to Users described here.
 exports.createProduct = function(userId, data, callback, callError) {
   data['userId'] = userId;
+
+  if (data.name == "") data.name = null;
+  if (data.description == "") data.description = null;
+  if (data.location == "") data.location = null;
 
   if (data['images'] != null) {
     data['imgUrls'] = "";
@@ -70,13 +85,9 @@ exports.createProduct = function(userId, data, callback, callError) {
             .catch(callError);
           }
         });
-        
       }
     });
-    console.log("ZZ");
   }
-
-  
 }
 
 exports.getAllProducts = function(callback, callError) {

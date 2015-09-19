@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var helper = require('../helper');
 
-var Activity = helper.getDatabase().define('Product', {
+var Activity = helper.getDatabase().define('Activity', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -10,6 +10,9 @@ var Activity = helper.getDatabase().define('Product', {
   },
   message: {
     allowNull: false,
+    type: Sequelize.STRING
+  },
+  title: {
     type: Sequelize.STRING
   },
   productId: {
@@ -21,16 +24,10 @@ var Activity = helper.getDatabase().define('Product', {
     type: Sequelize.INTEGER
   },
   createdAt: {
-    allowNull: false,
     type: Sequelize.DATE
   },
   updatedAt: {
-    allowNull: false,
     type: Sequelize.DATE
-  },
-  highestBid: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
   }
 }, {
   classMethods: {
@@ -44,4 +41,23 @@ var Activity = helper.getDatabase().define('Product', {
 
 // All access to Activities described here.
 
+exports.getAllActivitiesFromUser = function(userId) {
+  Activity.findAll({where: {userId: userId}})
+    .then(callback)
+    .catch(callError);
 }
+
+exports.create = function(title, message, userId, prodId) {
+  var bod = {title: title, message: message, userId: userId, productId: prodId};
+  Activity.create(bod)
+    .then(function(activity) {console.log('New activity created ' + bod);})
+    .catch(function(err) {console.log(err);});
+}
+
+exports.create = function(title, message, userId, prodId, callback) {
+  var bod = {title: title, message: message, userId: userId, productId: prodId};
+  Activity.create(bod)
+    .then(function(activity) {console.log('New activity created ' + bod); callback();})
+    .catch(function(err) {console.log(err);});
+}
+

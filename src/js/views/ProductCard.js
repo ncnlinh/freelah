@@ -1,11 +1,17 @@
 import React from 'react';
 import {Card, CardMedia, CardTitle, CardText} from 'material-ui';
 import moment from 'moment';
+import CountdownTimer from './CountdownTimer';
 
 class ProductCard extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    
+  }
+
   render() {
     let style = {
       card : {
@@ -15,23 +21,35 @@ class ProductCard extends React.Component {
       },
       cardTextSummary: {
         fontSize: '12px',
-        marginBottom: '-8px'
       },
       cardTextFull: {
         fontSize: '14px'
       }
     }
     var imgUrl = this.props.imgUrls ? '/' + this.props.imgUrls.replace(' ', '') : "http://lorempixel.com/600/337/cats/";
+    var biddingText = "Highest bid: " + this.props.highestBid;
+    var timeLeft = 0;
+
+    if (this.props.status == 'bidding') {
+      timeText = 'Expired in: '
+      var currentTime = new Date();
+      var createdTime = new Date(this.props.createdAt);
+      var timePassed = Math.round((currentTime - createdTime) / 1000);
+      timeLeft = Math.max(0, - timePassed + this.props.expiryDate*3600);
+      var timeText = 'Status: ' + this.props.status;
+    }
+
     return (
       <Card style={style.card}>
         <CardMedia >
           <img src={imgUrl}/>
         </CardMedia>
-        <CardText >
+        <CardText style={{marginBottom:'-8px'}}>
           {this.props.mode === 'full' ? (<div style={{fontSize: '20px'}}><strong>{this.props.name}</strong></div>): (<div style={{fontSize: '12px'}}><strong>{this.props.name}</strong></div>)}
           {this.props.mode === 'full' ? (<div style={style.cardTextFull}>Location: {this.props.location}</div>) : (<div style={style.cardTextSummary}>Location: {this.props.location}</div>)}
-          {!!this.props.expiryDate ? (<div><em>Available until: {moment().to(this.props.expiryDate)}</em></div>) : null}
           {this.props.mode === 'full' ? (<div>{this.props.description}</div>) : null}
+          {this.props.mode === 'full' ? (<div style={style.cardTextFull}>{biddingText}</div>) : (<div style={style.cardTextSummary}>{biddingText}</div>)}
+          <CountdownTimer seconds={timeLeft} highestBid={this.props.highestBid}/>
         </CardText>
       </Card>
     );
@@ -48,7 +66,9 @@ ProductCard.propTypes = {
   status: React.PropTypes.oneOf(['available', 'bidding', 'expired', 'given']),
   location: React.PropTypes.string.isRequired,
   expiryDate: React.PropTypes.object,
-  userId: React.PropTypes.number.isRequired
+  userId: React.PropTypes.number.isRequired,
+  highestBid: React.PropTypes.number,
+  createdAt: React.PropTypes.string
 };
 
 
