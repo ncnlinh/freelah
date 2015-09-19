@@ -71,7 +71,6 @@ exports.createProduct = function(userId, data, callback, callError) {
 
   if (data['images'] != null) {
     data['imgUrls'] = "";
-
     var arr = data['images'].split(' ');
     arr.forEach(function(image) {
       if (image.length > 0) {

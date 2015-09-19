@@ -6,10 +6,11 @@ class ProductCreatingActions {
     this.dispatch(images);
   }
 
-  create(user, name, location, description, images) {
+  create(user, name, location, description, expiryDate, images) {
     this.dispatch();
-    api.createProduct(user, {name, location, description, images})
+    api.createProduct(user, {name, location, description, expiryDate, images})
       .then((res) => {
+        console.log(res);
         console.log(res);
         this.actions.createProductSuccess(JSON.parse(res.text));
       })

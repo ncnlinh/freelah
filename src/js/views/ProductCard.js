@@ -31,13 +31,12 @@ class ProductCard extends React.Component {
     var timeLeft = 0;
 
     if (this.props.status == 'bidding') {
-      timeText = 'Expired in: '
       var currentTime = new Date();
       var createdTime = new Date(this.props.createdAt);
       var timePassed = Math.round((currentTime - createdTime) / 1000);
       timeLeft = Math.max(0, - timePassed + this.props.expiryDate*3600);
-      var timeText = 'Status: ' + this.props.status;
     }
+
 
     return (
       <Card style={style.card}>
@@ -47,7 +46,7 @@ class ProductCard extends React.Component {
         <CardText style={{marginBottom:'-8px'}}>
           {this.props.mode === 'full' ? (<div style={{fontSize: '20px'}}><strong>{this.props.name}</strong></div>): (<div style={{fontSize: '12px'}}><strong>{this.props.name}</strong></div>)}
           {this.props.mode === 'full' ? (<div style={style.cardTextFull}>Location: {this.props.location}</div>) : (<div style={style.cardTextSummary}>Location: {this.props.location}</div>)}
-          {this.props.mode === 'full' ? (<div>{this.props.description}</div>) : null}
+          {this.props.mode === 'full' ? (<div>Description: {this.props.description}</div>) : null}
           {this.props.mode === 'full' ? (<div style={style.cardTextFull}>{biddingText}</div>) : (<div style={style.cardTextSummary}>{biddingText}</div>)}
           <CountdownTimer seconds={timeLeft} highestBid={this.props.highestBid}/>
         </CardText>

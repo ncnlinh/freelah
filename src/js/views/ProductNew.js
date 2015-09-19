@@ -51,10 +51,11 @@ class ProductNew extends React.Component {
     let name = this.refs.productname.refs.input.getDOMNode().value;
     let location = this.refs.location.refs.input.getDOMNode().value;
     let discription = this.refs.description.refs.input.getDOMNode().value;
+    let expiryDate = this.refs.expiryDate.refs.input.getDOMNode().value;
     let images = this.state.images;
 
     console.log(images);
-    ProductCreatingActions.create(this.user, name, location, discription, images);
+    ProductCreatingActions.create(this.user, name, location, discription, expiryDate, images);
   }
 
   handleFileChange(e) {
@@ -87,6 +88,7 @@ class ProductNew extends React.Component {
               <TextField ref="productname" hintText="Product Name" floatingLabelText="Product Name" required={true} errorText={error} fullWidth/>
               <TextField ref="location" hintText="Location" floatingLabelText="Location" required={true} errorText={error} fullWidth/>
               <TextField ref="description" hintText="Description" floatingLabelText="Description" required={true} errorText={error} fullWidth/>
+              <TextField ref="expiryDate" hintText="In hours. Enter 0 for 'First come first serve'" floatingLabelText="Bidding Time" required={true} errorText={error} fullWidth/>
               <TextField ref="image" value={this.state.imageFileName} hintText="Upload Image" floatingLabelText="Upload Image" required={true} errorText={error} fullWidth/>
               <input ref="imageSource" type="file" name="image" accept="image/*;capture=camera" 
                   style={{ height:'100px', marginTop:'-35px', opacity:'0.0', position:'absolute'}} 

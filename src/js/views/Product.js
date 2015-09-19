@@ -53,15 +53,18 @@ class Product extends React.Component {
           <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.PRODUCT}/>
           <Paper style={{paddingRight: '10px', paddingBottom:'10px', display: 'flex'}}>
           <ProductCard
-              mode='full'
-              id={product.id}
-              name={product.name}
-              description={product.description}
-              status={product.status}
-              location={product.location}
-              expiryDate={product.expiryDate}
-              imgUrls={product.imgUrls}
-              userId={product.userId}/>
+            mode='full'
+            id={product.id}
+            name={product.name}
+            description={product.description}
+            status={product.status}
+            location={product.location}
+            expiryDate={product.expiryDate}
+            imgUrls={product.imgUrls}
+            userId={product.userId}
+            highestBid={product.highestBid}
+            createdAt={product.createdAt}
+          />
           </Paper>
         </div>
       );
