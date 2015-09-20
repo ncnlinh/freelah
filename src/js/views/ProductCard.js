@@ -2,10 +2,14 @@ import React from 'react';
 import {Card, CardMedia, CardTitle, CardText} from 'material-ui';
 import moment from 'moment';
 import CountdownTimer from './CountdownTimer';
+import {ProductStore, AppStore} from '../stores';
+import {TextField, RaisedButton} from 'material-ui';
+import {Link, PropTypes} from 'react-router';
 
 class ProductCard extends React.Component {
   constructor(props) {
     super(props);
+    this.user = AppStore.getState().user;
   }
 
   componentDidMount() {
@@ -28,8 +32,11 @@ class ProductCard extends React.Component {
     }
     var imgUrl = this.props.imgUrls ? '/' + this.props.imgUrls.replace(' ', '') : "http://lorempixel.com/600/337/cats/";
     var biddingText = "Highest bid: " + this.props.highestBid;
-    var timeLeft = 0;
+    if (this.user != null && this.props.buyerId == this.user.id) {
+      biddingText += ' (your bidding)'
+    }
 
+    var timeLeft = 0;
     if (this.props.status == 'bidding') {
       var currentTime = new Date();
       var createdTime = new Date(this.props.createdAt);
@@ -37,7 +44,20 @@ class ProductCard extends React.Component {
       timeLeft = Math.max(0, - timePassed + this.props.expiryDate*3600);
     }
 
+    var button = null, input = null;
+    var error = null
+    if (!this.user) {
+      button = <Link to={`/login`}><RaisedButton type="submit" bsStyle="success" fullWidth>
+        Log in to bid
+      </RaisedButton></Link>
+    } else if (this.props.status == 'bidding') {
+      input = <TextField ref="biddingPoint" hintText="0" floatingLabelText="Bidding Point" required={true} errorText={error} fullWidth/>
+      button = <RaisedButton type="submit" bsStyle="success" fullWidth>
+        Bid Now
+      </RaisedButton>
+    }
 
+    console.log(this.user);
     return (
       <Card style={style.card}>
         <CardMedia >
@@ -49,6 +69,10 @@ class ProductCard extends React.Component {
           {this.props.mode === 'full' ? (<div>Description: {this.props.description}</div>) : null}
           {this.props.mode === 'full' ? (<div style={style.cardTextFull}>{biddingText}</div>) : (<div style={style.cardTextSummary}>{biddingText}</div>)}
           <CountdownTimer seconds={timeLeft} highestBid={this.props.highestBid}/>
+          {this.props.mode === 'full' ? 
+            {input,button}
+            : (<div></div>)
+          }
         </CardText>
       </Card>
     );
@@ -67,8 +91,14 @@ ProductCard.propTypes = {
   expiryDate: React.PropTypes.object,
   userId: React.PropTypes.number.isRequired,
   highestBid: React.PropTypes.number,
-  createdAt: React.PropTypes.string
+  createdAt: React.PropTypes.string,
+  buyerId: React.PropTypes.number
 };
+
+ProductCard.contextTypes = {
+  history: PropTypes.history
+}
+
 
 
 export default ProductCard;

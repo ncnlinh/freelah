@@ -64,6 +64,7 @@ class Product extends React.Component {
             userId={product.userId}
             highestBid={product.highestBid}
             createdAt={product.createdAt}
+            buyerId={product.buyerId}
           />
           </Paper>
         </div>
