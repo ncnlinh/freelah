@@ -76,11 +76,6 @@ class Home extends React.Component {
     if (this.hasUser) {
       menuItems = pageMenuItems.concat([{
         type: MenuItem.Types.LINK,
-        text: 'Profile',
-        payload: '/me'
-      },
-      {
-        type: MenuItem.Types.LINK,
         text: 'Activity',
         payload: '/activity'
       },
