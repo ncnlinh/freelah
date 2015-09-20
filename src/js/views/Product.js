@@ -1,6 +1,6 @@
 import React from 'react';
 import {ProductStore, AppStore} from '../stores';
-import {ProductActions} from '../actions';
+import {AppActions, ProductActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import ProductCard from './ProductCard';
 import Header from './Header';
@@ -21,22 +21,36 @@ class Product extends React.Component {
     super(props);
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
+    this.onAppStoreChange = this.onAppStoreChange.bind(this);
     this.handleGoBack = this.handleGoBack.bind(this);
-    this.user = AppStore.getState().user;
+    this.state.user = AppStore.getState().user;
   }
 
   componentDidMount() {
     ProductStore.listen(this.onChange);
     const id = this.props.params.id;
     ProductActions.getProduct(id);
+    AppStore.listen(this.onAppStoreChange);
+    if (this.state.user) {
+      AppActions.retrieveNewUserInfo(this.state.user, this.state.user.id);
+    } 
   }
 
   componentWillUnmount() {
     ProductStore.unlisten(this.onChange);
+    AppStore.unlisten(this.onAppStoreChange);
   }
 
   onChange(state) {
     this.setState(state);
+  }
+
+  onAppStoreChange(state) {
+    console.log(state);
+    this.setState({
+      hasUser: state.isLoggedIn,
+      user: state.user
+    });
   }
 
   handlePost(e) {
@@ -51,7 +65,7 @@ class Product extends React.Component {
     if (!!product) {
       return (
         <div className='product'>
-          <Header point={this.user?this.user.point:0} leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.PRODUCT}/>
+          <Header point={this.state.user?this.state.user.point:0} leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.PRODUCT}/>
           <Paper style={{paddingRight: '10px', paddingBottom:'10px', display: 'flex'}}>
           <ProductCard
             mode='full'

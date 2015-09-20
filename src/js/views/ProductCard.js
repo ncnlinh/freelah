@@ -1,9 +1,8 @@
 import React from 'react';
-import {Card, CardMedia, CardTitle, CardText} from 'material-ui';
-import moment from 'moment';
+import {Card, CardMedia, CardText} from 'material-ui';
 import CountdownTimer from './CountdownTimer';
-import {ProductStore, BidStore, AppStore} from '../stores';
-import BidActions from '../actions/BidActions';
+import {BidStore, AppStore} from '../stores';
+import {AppActions, ProductActions, BidActions} from '../actions/';
 import {TextField, RaisedButton} from 'material-ui';
 import {Link, PropTypes} from 'react-router';
 
@@ -28,9 +27,15 @@ class ProductCard extends React.Component {
   onChange(state) {
     this.setState(state);
     if (this.state.isDone) {
-      //this.context.history.pushState(null, '/products/'+this.props.id+'#');
+      BidActions.clearStore();
+      ProductActions.getProduct(this.props.id);
+      if (this.user) {
+        AppActions.retrieveNewUserInfo(this.user, this.user.id);
+      }
     }
+
   }
+
 
   handleBidding(e) {
     e.preventDefault();

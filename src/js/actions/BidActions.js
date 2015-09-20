@@ -24,7 +24,13 @@ class BidActions {
   }
 
   clearStore() {
-    this.dispatch();
+    if (this.alt.dispatcher.isDispatching()){
+      window.setTimeout(() => {
+        this.dispatch();
+      })
+    } else {
+      this.dispatch();
+    }
   }
 }
 
