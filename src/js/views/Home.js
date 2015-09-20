@@ -49,10 +49,6 @@ class Home extends React.Component {
     this.context.history.pushState(null, '/products/new');
   }
 
-  handleProductCardOnClick(id) {
-    ProductActions.getProduct(id);
-  }
-  
   toggleLeftNav(){
     this.refs.leftNav.toggle();
   }
@@ -107,8 +103,7 @@ class Home extends React.Component {
           </Card>)
           :(<div></div>)
         }
-        <ProductSection products={products}
-        itemOnClick={this.handleProductCardOnClick}/>
+        <ProductSection products={products}/>
       </div>
     );
 
