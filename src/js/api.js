@@ -62,4 +62,10 @@ FreeLahApi.bid = (data) => {
     .promise();;
 }
 
+FreeLahApi.getActivities = (userId, auth) => {
+  return superagent.get(SERVER_URL + '/api/users/' + userId + '/activities')
+    .set('Authorization', auth)
+    .promise();;
+}
+
 export default FreeLahApi;

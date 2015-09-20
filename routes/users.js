@@ -149,11 +149,14 @@ router.get('/:id/activities', function(req, res) {
       } else if (user.basicAuth != token) {
         res.status(401).json({message: 'Bad authorization!'});
       } else {
-        Activity.getAllActivitiesFromUser(req.params.productId, 
+        console.log("hahaha");
+        Activity.getAllActivitiesFromUser(req.params.id, 
           function(activities) {
+            console.log("heheh");
             res.json(activities);
           },
           function(error) {
+            console.log("xx");
             res.status(400).json(error);
           }
         );    

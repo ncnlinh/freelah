@@ -18,6 +18,7 @@ let injectTapEventPlugin = require('react-tap-event-plugin');
       <Route path='products/new' component={Views.ProductNew}/>
       <Route path='products' component={Views.Home}/>
       <Route path='products/:id' component={Views.Product}/>
+      <Route path='activity' component={Views.Activity}/>
     </Router>
   ), document.body);
 })();

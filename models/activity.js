@@ -41,7 +41,8 @@ var Activity = helper.getDatabase().define('Activity', {
 
 // All access to Activities described here.
 
-exports.getAllActivitiesFromUser = function(userId) {
+exports.getAllActivitiesFromUser = function(userId, callback, callError) {
+  console.log(userId);
   Activity.findAll({where: {userId: userId}})
     .then(callback)
     .catch(callError);

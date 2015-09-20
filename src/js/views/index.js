@@ -9,6 +9,7 @@ import ProductNew from './ProductNew';
 import ProductSection from './ProductSection';
 import CountdownTimer from './CountdownTimer';
 import Signup from './Signup';
+import Activity from './Activity';
 
 export default {
   About,
@@ -21,5 +22,6 @@ export default {
   ProductNew,
   ProductSection,
   CountdownTimer,
-  Signup
+  Signup,
+  Activity
 };
