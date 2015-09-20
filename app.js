@@ -62,14 +62,13 @@ app.use(cacheManifest({
 // })
 
 // Routes
-app.use('/', routes);
 app.use('/api/auth', auth)
 app.use('/api/users', users);
 app.use('/api/products', products);
 app.use('/api/bid', bid);
 
 app.get('*', function(req, res) {
-  res.redirect('/');
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 
 

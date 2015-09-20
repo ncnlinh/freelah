@@ -1,4 +1,5 @@
 import React from 'react/addons';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import Views from './views';
 import api from './api';
 import {Router, Route} from 'react-router';
@@ -9,7 +10,7 @@ let injectTapEventPlugin = require('react-tap-event-plugin');
   console.log(Views);
   console.log(api);
   React.render((
-    <Router>
+    <Router history={createBrowserHistory()}>
       <Route path='/' component={Views.Home}/>
       <Route path='about' component={Views.About}/>
       <Route path='login' component={Views.Login}/>
