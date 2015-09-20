@@ -1,15 +1,16 @@
+import ActivityStore from './ActivityStore';
+import BidStore from './BidStore';
 import AppStore from './AppStore';
-import UserStore from './UserStore';
 import ProductCreatingStore from './ProductCreatingStore';
 import ProductStore from './ProductStore';
-import BidStore from './BidStore';
-import ActivityStore from './ActivityStore';
+import UserStore from './UserStore';
+
 
 export default {
+  ActivityStore,
+  BidStore,
   AppStore,
-  UserStore,
   ProductCreatingStore,
   ProductStore,
-  BidStore,
-  ActivityStore
+  UserStore
 }

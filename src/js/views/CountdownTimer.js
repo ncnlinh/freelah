@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'react-router'
 import {AppStore} from '../stores';
-import AppActions from '../actions/AppActions';
+import {AppActions} from '../actions';
 import {Grid} from 'react-bootstrap';
 
 class CountdownTimer extends React.Component {
@@ -26,7 +26,7 @@ class CountdownTimer extends React.Component {
     this.interval = setInterval(this.tick, 1000);
   }
 
-  ComponentWillUnMount() {
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 

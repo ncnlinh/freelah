@@ -54,6 +54,37 @@ class AppActions {
     }
   }
 
+  retrieveNewUserInfo(user, id) {
+    if (this.alt.dispatcher.isDispatching()){
+      window.setTimeout(() => {
+        this.dispatch();
+      })
+    } else {
+      this.dispatch();
+    }
+    api.getUser(user, id)
+      .then((res)=> {
+        this.actions.retrieveNewUserInfoSuccess(JSON.parse(res.text));
+      })
+      .catch((err)=> {
+        this.actions.retrieveNewUserInfoFailed(err.body);
+      });
+  }
+
+  retrieveNewUserInfoSuccess(data) {
+    this.dispatch(data);
+  }
+
+  retrieveNewUserInfoFailed(err){
+    this.dispatch(err);
+  }
+
+  showOnboardingAbout() {
+    this.dispatch();
+  }
+  showOnboardingDialog() {
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(AppActions);

@@ -9,8 +9,9 @@ FreeLahApi.getAllUsers = () => {
     .promise();;
 }
 
-FreeLahApi.getUser = (id) => {
+FreeLahApi.getUser = (user, id) => {
   return superagent.get(SERVER_URL + '/api/users/'+id)
+    .set('Authorization', user.basicAuth)
     .promise();;
 }
 

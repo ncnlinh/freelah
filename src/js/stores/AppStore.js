@@ -8,6 +8,8 @@ class AppStore {
     this.isLoggedIn = this.user ? true : false;
     this.error = null;
     this.signupSuccessful = null;
+    this.showOnboardingAbout = false;
+    this.showOnboardingDialog = false;
     this.bindListeners({
       handleLogin: AppActions.LOGIN,
       handleLoginSuccess: AppActions.LOGIN_SUCCESS,
@@ -16,7 +18,12 @@ class AppStore {
       handleSignup: AppActions.SIGNUP,
       handleSignupSuccess: AppActions.SIGNUP_SUCCESS,
       handleSignupFailed: AppActions.SIGNUP_FAILED,
-      handleStartSignup: AppActions.START_SIGNUP
+      handleStartSignup: AppActions.START_SIGNUP,
+      handleRetrieveNewUserInfo: AppActions.RETRIEVE_NEW_USER_INFO,
+      handleRetrieveNewUserInfoSuccess: AppActions.RETRIEVE_NEW_USER_INFO_SUCCESS,
+      handleRetrieveNewUserInfoFailed: AppActions.RETRIEVE_NEW_USER_INFO_FAILED,
+      handleShowOnboardingAbout: AppActions.SHOW_ONBOARDING_ABOUT,
+      handleShowOnboardingDialog: AppActions.SHOW_ONBOARDING_DIALOG
     })
   }
 
@@ -67,6 +74,25 @@ class AppStore {
 
   handleStartSignup() {
     this.signupSuccessful = null;
+  }
+
+  handleRetrieveNewUserInfo() {
+  }
+
+  handleRetrieveNewUserInfoSuccess(data) {
+    this.user = data;
+    LocalStore.write('user', this.user);
+  }
+  handleRetrieveNewUserInfoFailed(error) {
+    this.error = error;
+  }
+
+  handleShowOnboardingAbout() {
+    this.showOnboardingAbout = true;
+  }
+
+  handleShowOnboardingDialog() {
+    this.showOnboardingDialog = true;
   }
 }
 

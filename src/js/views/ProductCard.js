@@ -20,8 +20,9 @@ class ProductCard extends React.Component {
     BidStore.listen(this.onChange);
   }
 
-  ComponentWillUnMount() {
+  componentWillUnmount() {
     BidStore.unlisten(this.onChange);
+    BidActions.clearStore();
   }
 
   onChange(state) {

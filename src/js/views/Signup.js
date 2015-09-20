@@ -5,6 +5,8 @@ import AppActions from '../actions/AppActions';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {TextField, RaisedButton} from 'material-ui';
 import mui from 'material-ui';
+import Header from './Header';
+import {HeaderConstants} from '../constants'
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
@@ -16,11 +18,12 @@ class Signup extends React.Component {
     };
   }
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = AppStore.getState();
     this.onChange = this.onChange.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
+    this.handleGoBack = this.handleGoBack.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +49,10 @@ class Signup extends React.Component {
     }
   }
 
+  handleGoBack() {
+    this.context.history.pushState('/')
+  }
+
   handleSignUp(e) {
     e.preventDefault();
 
@@ -65,11 +72,13 @@ class Signup extends React.Component {
     let error = this.state.error ? ' ' : null;
     console.log(error)
     return (
+      <div className='signup'>
+      <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.ONLYBACK}/>
       <Grid>
         <div className="fl-auth lead">
         <Row>
             <Col xs={3} md={4}/>
-            <Col xs={6} md={4} style={{textAlign: 'center', paddingTop: '40px'}}>
+            <Col xs={6} md={4} style={{textAlign: 'center', paddingTop: '20px'}}>
               <h3>FreeLah</h3>
             </Col>
             <Col xs={3} md={4}/>
@@ -97,6 +106,7 @@ class Signup extends React.Component {
         </form>
         </div>
       </Grid>
+      </div>
     );
   }
 

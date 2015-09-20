@@ -1,12 +1,12 @@
 import React from 'react';
 import {ProductStore, AppStore} from '../stores';
-import {ProductActions} from '../actions';
+import {ProductActions, AppActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';
 import mui, {Card, CardText} from 'material-ui';
 import {PropTypes} from 'react-router';
-import {LeftNav, MenuItem} from 'material-ui'
+import {LeftNav, MenuItem, Dialog} from 'material-ui'
 let ThemeManager = new mui.Styles.ThemeManager();
 
 class Home extends React.Component {
@@ -21,10 +21,13 @@ class Home extends React.Component {
     super(props, context);
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
+    this.onAppStoreChange = this.onAppStoreChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
     this.toggleLeftNav = this.toggleLeftNav.bind(this);
-    this.hasUser = AppStore.getState().isLoggedIn;
-    this.user = AppStore.getState().user;
+    this.state.hasUser = AppStore.getState().isLoggedIn;
+    this.state.user = AppStore.getState().user;
+    this.state.showOnboardingAbout = AppStore.getState().showOnboardingAbout;
+    this.state.showOnboardingDialog = AppStore.getState().showOnboardingDialog;
   }
 
   componentWillMount() {
@@ -33,16 +36,35 @@ class Home extends React.Component {
   componentDidMount() {
     ProductStore.listen(this.onChange);
     ProductActions.getAllProducts();
+    AppStore.listen(this.onAppStoreChange);
+    if (this.state.user) {
+      AppActions.retrieveNewUserInfo(this.state.user, this.state.user.id);
+    } else if (!this.state.showOnboardingAbout) {
+      AppActions.showOnboardingAbout();
+      this.context.history.pushState(null, '/about');
+    } else if (!this.state.showOnboardingDialog) {
+      AppActions.showOnboardingDialog();
+      this.refs.onboarding.show();
+    }
   }
 
   componentWillUnmount() {
     ProductStore.unlisten(this.onChange);
+    AppStore.unlisten(this.onAppStoreChange);
   }
 
   onChange(state) {
     if (!!React.findDOMNode(this)) {
       this.setState(state);
     }
+  }
+
+  onAppStoreChange(state) {
+    console.log(state);
+    this.setState({
+      hasUser: state.isLoggedIn,
+      user: state.user
+    });
   }
 
   handlePost(e) {
@@ -55,7 +77,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const products = this.state.retrievedProducts;
+    let products = this.state.retrievedProducts;
     const pageMenuItems = [
       {
         type: MenuItem.Types.LINK,
@@ -70,7 +92,7 @@ class Home extends React.Component {
     ];
 
     var menuItems;
-    if (this.hasUser) {
+    if (this.state.hasUser) {
       menuItems = pageMenuItems.concat([{
         type: MenuItem.Types.LINK,
         text: 'Activity',
@@ -96,15 +118,15 @@ class Home extends React.Component {
     return (
       <div className='home'>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
-        <Header point={this.user ? this.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
-        { !this.hasUser
-          ?(<Card>
-            <CardText>FreeLah, give away no-longer-used belongings, receive credits and get more needed things! <a href='#/about'><u>More details here</u></a>.
-            </CardText>
-          </Card>)
-          :(<div></div>)
-        }
+        <Header point={this.state.user ? this.state.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
         <ProductSection products={products}/>
+        <Dialog ref='onboarding'
+          title="Welcome"
+          actions={[{text: 'OK'}]}
+          modal={false}
+        >
+        Feel free to browse the items here.<br/>Sign up or login to start posting and getting some free stuff!
+        </Dialog>
       </div>
     );
 

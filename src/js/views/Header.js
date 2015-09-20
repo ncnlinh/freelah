@@ -79,12 +79,20 @@ class Header extends React.Component {
           <AppBar title='FreeLah'
             iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
-              <FlatButton label='New product' style={styles.buttonRoot} labelStyle={styles.buttonText}/>
+              <FlatButton label='New product'/>
+            }
+          />
+        );
+      case (HeaderConstants.ONLYBACK):
+        return (
+          <AppBar title='FreeLah'
+            iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
+            iconElementRight={
+              <div></div>
             }
           />
         );
     };
-    
   }
 }
 

@@ -63,7 +63,7 @@ class ProductStore {
     this.errors = null;
   }
   handleGetAllProductsSuccess(products) {
-    this.retrievedProducts = products;
+    this.retrievedProducts = products.reverse();
   }
   handleGetAllProductsFailed(err) {
     this.errors = err

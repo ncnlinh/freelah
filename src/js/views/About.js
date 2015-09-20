@@ -102,8 +102,8 @@ class About extends React.Component {
                     <h3 style={style.headerSub}>Get free stuffs!</h3>
                   </div>
                   <hr className="intro-divider"/>
-                  <Link to={`/signup`}>
-                    <FlatButton label="Sign up now"/>
+                  <Link to={`/`}>
+                    <FlatButton label="Get started"/>
                   </Link>
                 </div>
               </Col>
@@ -177,8 +177,8 @@ class About extends React.Component {
                 <h2 style={style.bannerHeader}>Sign up now and start giving away!</h2>
               </Col>
               <Col lg={6}>
-                <Link style={style.bannerButton} to={`/signup`}>
-                  <FlatButton label="Sign up now"/>
+                <Link style={style.bannerButton} to={`/`}>
+                  <FlatButton label="Get started"/>
                 </Link>
               </Col>
             </Row>

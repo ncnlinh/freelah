@@ -19,6 +19,7 @@ class UserStore {
       handleGetAllUsers: UserActions.GET_ALL_USERS,
       handleGetAllUsersSuccess: UserActions.GET_ALL_USERS_SUCCESS,
       handleGetAllUsersFailed: UserActions.GET_ALL_USERS_FAILED,
+      
     })
   }
 
@@ -68,6 +69,7 @@ class UserStore {
   handleGetAllUsersFailed(err) {
     this.errors = err
   }
+
 }
 
 export default alt.createStore(UserStore, 'UserStore');

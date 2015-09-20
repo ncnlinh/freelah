@@ -22,6 +22,10 @@ class BidActions {
   bidFailed(err) {
     this.dispatch(err);
   }
+
+  clearStore() {
+    this.dispatch();
+  }
 }
 
 export default alt.createActions(BidActions);

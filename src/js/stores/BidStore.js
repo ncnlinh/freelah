@@ -9,6 +9,7 @@ class BidStore {
       handleBid: BidActions.BID,
       handleBidSuccess: BidActions.BID_SUCCESS,
       handleBidFailed: BidActions.BID_FAILED,
+      handleClearStore: BidActions.CLEAR_STORE
     })
   }
 
@@ -22,6 +23,12 @@ class BidStore {
   handleBidFailed(err) {
     this.error = err;
   }
+  
+  handleClearStore() {
+    this.isDone = null;
+    this.error = null;
+  }
+
 }
 
 export default alt.createStore(BidStore, 'BidStore');

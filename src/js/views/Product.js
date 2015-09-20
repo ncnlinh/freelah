@@ -43,7 +43,7 @@ class Product extends React.Component {
 
   }
   handleGoBack() {
-    this.context.history.pushState('/')
+    this.context.history.pushState(null, '/')
   }
 
   render() {

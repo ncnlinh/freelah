@@ -15,7 +15,7 @@ class Logout extends React.Component {
     this.context.history.pushState(null, '/');
   }
 
-  ComponentWillUnMount() {
+  componentWillUnmount() {
   }
 
   render() {
