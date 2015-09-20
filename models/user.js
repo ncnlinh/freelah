@@ -29,7 +29,7 @@ var User = helper.getDatabase().define('User', {
   },
   point: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 20
   },
   phoneNumber: {
     type: Sequelize.INTEGER,

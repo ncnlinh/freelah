@@ -11,7 +11,6 @@ class ProductCreatingActions {
     api.createProduct(user, {name, location, description, expiryDate, images})
       .then((res) => {
         console.log(res);
-        console.log(res);
         this.actions.createProductSuccess(JSON.parse(res.text));
       })
       .catch((err) => {

@@ -71,6 +71,7 @@ exports.createProduct = function(userId, data, callback, callError) {
   if (data.description == "") data.description = null;
   if (data.location == "") data.location = null;
   if (data.expiryDate == "") data.expiryDate = null;
+  data.status = "bidding";
   if (!data.buyerId) data.buyerId = null;
 
   if (data['images'] != null) {

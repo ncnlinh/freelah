@@ -20,7 +20,8 @@ class Header extends React.Component {
         fill: ThemeManager.component.appBar.textColor
       },
       buttonRoot: {
-        backgroundColor: ThemeManager.component.appBar.color
+        backgroundColor: ThemeManager.component.appBar.color,
+        paddingTop: '8px'
       },
       container: {},
       imageInput: {
@@ -41,17 +42,22 @@ class Header extends React.Component {
           <AppBar title='FreeLah'
             onLeftIconButtonTouchTap={this.props.leftItemTouchTap}
             iconElementRight={<div>
-              <IconButton iconClassName='fa fa-lg fa-search' iconStyle={styles.buttonText}/>
               {
                 this.hasUser ? 
                 (<FlatButton label='Post' style={styles.buttonRoot} labelStyle={styles.buttonText}>
                   <input style={styles.imageInput}
                   onClick={this.props.handlePost}/>
-                </FlatButton>)
-                :
+                </FlatButton>
+                ) :
                 (<Link to={`/login`}>
                   <FlatButton label='Login' style={styles.buttonRoot} labelStyle={styles.buttonText}/>
                 </Link>)
+              }
+              {
+                this.hasUser ? 
+                ( <FlatButton label={this.props.point+' credits'} style={styles.buttonRoot} labelStyle={styles.buttonText}>
+                </FlatButton>) :
+                (<div></div>)
               }
             </div>}
           />
@@ -61,9 +67,11 @@ class Header extends React.Component {
           <AppBar title='FreeLah'
             iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
-              <IconMenu iconButtonElement={(<IconButton iconClassName='fa fa-bars' iconStyle={styles.buttonText}/>)}>
-                <MenuItem primaryText='Report listing'/>
-              </IconMenu>}
+              this.hasUser ? 
+                ( <FlatButton label={this.props.point+' credits'} labelStyle={styles.buttonText}>
+                </FlatButton>) :
+                (<div></div>)
+            }
           />
         );
       case (HeaderConstants.NEWPRODUCT):
@@ -85,7 +93,8 @@ Header.propTypes = {
   handlePost: React.PropTypes.func,
   leftItemTouchTap: React.PropTypes.func,
   rightItemTouchTap: React.PropTypes.func,
-  hasUser: React.PropTypes.bool
+  hasUser: React.PropTypes.bool,
+  point: React.PropTypes.number
 }
 
 Header.defaultProps = {

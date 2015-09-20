@@ -1,5 +1,5 @@
 import React from 'react';
-import {ProductStore} from '../stores';
+import {ProductStore, AppStore} from '../stores';
 import {ProductActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import ProductCard from './ProductCard';
@@ -22,6 +22,7 @@ class Product extends React.Component {
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
     this.handleGoBack = this.handleGoBack.bind(this);
+    this.user = AppStore.getState().user;
   }
 
   componentDidMount() {
@@ -50,7 +51,7 @@ class Product extends React.Component {
     if (!!product) {
       return (
         <div className='product'>
-          <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.PRODUCT}/>
+          <Header point={this.user?this.user.point:0} leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.PRODUCT}/>
           <Paper style={{paddingRight: '10px', paddingBottom:'10px', display: 'flex'}}>
           <ProductCard
             mode='full'

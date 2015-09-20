@@ -38,6 +38,9 @@ class CountdownTimer extends React.Component {
 
     if (this.state.seconds == 0) {
       text = this.props.highestBid == 0 ? 'Status: expired' : 'Status: given';
+      if (this.props.status == 'bidding') {
+        text = 'First come first serve'
+      }
     }
 
     return (
@@ -47,7 +50,8 @@ class CountdownTimer extends React.Component {
 }
 CountdownTimer.propTypes = {
   seconds: React.PropTypes.number,
-  highestBid: React.PropTypes.number
+  highestBid: React.PropTypes.number,
+  status: React.PropTypes.string
 };
 
 CountdownTimer.contextTypes = {

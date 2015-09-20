@@ -24,6 +24,7 @@ class Home extends React.Component {
     this.handlePost = this.handlePost.bind(this);
     this.toggleLeftNav = this.toggleLeftNav.bind(this);
     this.hasUser = AppStore.getState().isLoggedIn;
+    this.user = AppStore.getState().user;
   }
 
   componentWillMount() {
@@ -95,7 +96,7 @@ class Home extends React.Component {
     return (
       <div className='home'>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
-        <Header leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
+        <Header point={this.user ? this.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
         { !this.hasUser
           ?(<Card>
             <CardText>FreeLah, give away no-longer-used belongings, receive credits and get more needed things! <a href='#/about'><u>More details here</u></a>.
