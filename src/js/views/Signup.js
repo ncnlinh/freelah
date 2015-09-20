@@ -33,7 +33,7 @@ class Signup extends React.Component {
     AppStore.listen(this.onChange);
   }
 
-  ComponentWillUnMount() {
+  componentWillUnmount() {
     AppStore.unlisten(this.onChange);
   }
 
