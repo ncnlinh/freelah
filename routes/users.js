@@ -151,11 +151,9 @@ router.get('/:id/activities', function(req, res) {
       } else {
         Activity.getAllActivitiesFromUser(req.params.id, 
           function(activities) {
-            console.log("heheh");
             res.json(activities);
           },
           function(error) {
-            console.log("xx");
             res.status(400).json(error);
           }
         );    
@@ -171,7 +169,8 @@ function setTimer(product) {
   if (product.expiryDate == 0) {
     return;
   }
-  setTimeOut(function() {
+  setTimeout(function() {
+    console.log("hahaaha");
     product.status = product.highestBid == 0 ? 'expired' : 'given';
     product.save();
 
@@ -195,8 +194,6 @@ function setTimer(product) {
       function(error) {
         console.log(error);
       });
-    
-    
   }, product.expiryDate * 3600000);
 }
 

@@ -8,10 +8,15 @@ var helper = require('../helper');
 router.post('/', function(req, res) {
   Product.getProductById(req.body.prodId,
     function(product) {
+      console.log(product);
       if (product == null) {
         res.status(400).json({message: 'Product not found!'});
         return;
+      } else if (product.status != 'bidding') {
+        res.status(400).json({message: 'This product is '+ product.status});
+        return;
       }
+
       User.getUserById(req.body.buyerId, 
         function(user) {
           if (user == null) {
