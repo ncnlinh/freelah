@@ -89,7 +89,7 @@ router.post('/:id/products', function(req, res) {
             if (product.expiryDate != 0) {
               setTimer(product);
             }
-            Activity.create('New product: ['+product.name+']', "hello", user.id, product.id);
+            Activity.create('New product: ['+product.name+']', "You have just created a new prodct.", user.id, product.id);
             res.json(product);
           },
           function(error) {
@@ -149,7 +149,6 @@ router.get('/:id/activities', function(req, res) {
       } else if (user.basicAuth != token) {
         res.status(401).json({message: 'Bad authorization!'});
       } else {
-        console.log("hahaha");
         Activity.getAllActivitiesFromUser(req.params.id, 
           function(activities) {
             console.log("heheh");
@@ -176,8 +175,28 @@ function setTimer(product) {
     product.status = product.highestBid == 0 ? 'expired' : 'given';
     product.save();
 
-    Activity.create('Congrats! You won the product ['+product.name+']!', product.buyerId, product.id);
-    Activity.create('Your ['+product.name+'] has been given!', "hello", product.userId, product.id);
+    User.getUserById(product.userId, 
+      function(user) {
+        Activity.create('Congrats! You won the product ['+product.name+']!', 
+          'Please contact ' + user.username + ' with phone number: ' + user.phoneNumber + ' and email: ' + user.email + ' for collecting.', 
+          product.buyerId, product.id);
+        User.getUserById(product.buyerId, 
+          function(buyer) {
+            user.point += product.highestBid;
+            user.save();
+            Activity.create('Your ['+product.name+'] has been given!', 
+              'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
+              product.userId, product.id);
+          },
+          function(error) {
+            console.log(error);
+          });
+      },
+      function(error) {
+        console.log(error);
+      });
+    
+    
   }, product.expiryDate * 3600000);
 }
 
