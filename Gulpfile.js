@@ -54,6 +54,10 @@ gulp.task('scripts', function(callback) {
 gulp.task('css', function() {
   return gulp.src('src/css/**/*')
   .pipe(sass().on('error', sass.logError))
+  .pipe(autoprefixer({
+    browsers: ['last 2 versions'],
+    cascade: false
+  }))
   .pipe(concat('app.css'))
   .pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
