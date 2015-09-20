@@ -8,7 +8,6 @@ config.yml
 /public/js/all.js
 /public/images/*
 /public/img/*
-/public/index.html
 /src/js/npm-debug.log
 npm-debug.log
 out.log
