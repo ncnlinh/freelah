@@ -79,7 +79,6 @@ class ProductCard extends React.Component {
       </RaisedButton>
     }
 
-    console.log(this.user);
     return (
       <Card style={style.card}>
         <CardMedia >
