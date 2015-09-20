@@ -9,7 +9,7 @@ class ProductActions {
         this.actions.createProductSuccess(JSON.parse(res.text));
       })
       .catch((err) => {
-        this.actions.createProductFailed(err.message);
+        this.actions.createProductFailed(err);
       });
   }
   createProductSuccess(product) {

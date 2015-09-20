@@ -71,6 +71,7 @@ exports.createProduct = function(userId, data, callback, callError) {
   if (data.description == "") data.description = null;
   if (data.location == "") data.location = null;
   if (data.expiryDate == "") data.expiryDate = null;
+  if (!data.buyerId) data.buyerId = null;
 
   if (data['images'] != null) {
     data['imgUrls'] = "";
@@ -82,15 +83,16 @@ exports.createProduct = function(userId, data, callback, callError) {
             callError;
           } else {
             data['imgUrls'] += ' images/' + response;
+
           }
         });
       }
     });
   }
-
-   Product.create(data)
-    .then(callback)
-    .catch(callError);
+  Product.create(data)
+  .then(callback)
+  .catch(callError);
+   
 }
 
 exports.getAllProducts = function(callback, callError) {

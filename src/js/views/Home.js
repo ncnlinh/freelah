@@ -63,12 +63,12 @@ class Home extends React.Component {
       {
         type: MenuItem.Types.LINK,
         text: 'Home',
-        payload: '/#/'
+        payload: '/'
       },
       {
         type: MenuItem.Types.LINK,
         text: 'About',
-        payload: '/#/about'
+        payload: '/about'
       }
     ];
 
@@ -77,28 +77,28 @@ class Home extends React.Component {
       menuItems = pageMenuItems.concat([{
         type: MenuItem.Types.LINK,
         text: 'Profile',
-        payload: '/#/me'
+        payload: '/me'
       },
       {
         type: MenuItem.Types.LINK,
         text: 'Activity',
-        payload: '/#/activity'
+        payload: '/activity'
       },
       {
         type: MenuItem.Types.LINK,
         text: 'Log out',
-        payload: '/#/logout'
+        payload: '/logout'
       }]);
     } else {
       menuItems = pageMenuItems.concat([{
         type: MenuItem.Types.LINK,
         text: 'Log in',
-        payload: '/#/login'
+        payload: '/login'
       },
       {
         type: MenuItem.Types.LINK,
         text: 'Sign up',
-        payload: '/#/signup'
+        payload: '/signup'
       }]);
     }
     return (
