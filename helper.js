@@ -33,33 +33,33 @@ exports.saveImage = function(name, data, callback) {
   require("fs").writeFile(filePath, data, 'base64', function(err) {
     console.log(err);
   });
-  callback(name + ".png", null);
+  // callback(name + ".png", null);
 
-  // console.log('gm');
-  // gm(filePath).size(function(err, value){
-  //   if (!err) {
-  //     if (!!value) {
-  //       var bigger = value.width > value.height ? value.width : value.height;
-  //       var response = editedFilePath;
-  //       if (bigger!== -1) {
-  //         gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).write(response, function(err) {
-  //           if (err) {
-  //             console.err("err=", err);
-  //             console.err("res=", response);
-  //           } else {
-  //             console.log("hi");
-  //             console.log("res=", response);
-  //           }
-  //           callback(name+"-edited" + ".png", err);
-  //         });
+  console.log('gm');
+  gm(filePath).size(function(err, value){
+    if (!err) {
+      if (!!value) {
+        var bigger = value.width > value.height ? value.width : value.height;
+        var response = editedFilePath;
+        if (bigger!== -1) {
+          gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).write(response, function(err) {
+            if (err) {
+              console.err("err=", err);
+              console.err("res=", response);
+            } else {
+              console.log("hi");
+              console.log("res=", response);
+            }
+            callback(name+"-edited" + ".png", err);
+          });
           
-  //       }
-  //     }
-  //   } else {
-  //     console.error(err);
-  //     callback(null, err);
-  //   }
-  // });
+        }
+      }
+    } else {
+      console.error(err);
+      callback(null, err);
+    }
+  });
 }
 
 exports.return 

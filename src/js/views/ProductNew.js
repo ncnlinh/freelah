@@ -5,7 +5,7 @@ import {HeaderConstants} from '../constants';
 import Header from './Header';
 import mui from 'material-ui';
 import {PropTypes} from 'react-router';
-import {MenuItem, TextField, RaisedButton} from 'material-ui'
+import {MenuItem, TextField, RaisedButton, LinearProgress} from 'material-ui'
 import {Grid, Row, Col} from 'react-bootstrap';
 
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -105,9 +105,10 @@ class ProductNew extends React.Component {
           </Row>
           <Row>
             <Col style={{'padding': '20px'}}>
-              <RaisedButton type="submit" bsStyle="success" onClick={this.handlePost} fullWidth>
+              <RaisedButton type="submit" bsStyle="success" onClick={this.handlePost} fullWidth disabled={!!this.state.creating}>
                 Submit
               </RaisedButton >
+              {this.state.creating ? (<LinearProgress mode="indeterminate"  />) : null}
             </Col>
           </Row>
           </form>
