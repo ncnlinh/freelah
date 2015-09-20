@@ -2,7 +2,8 @@ import React from 'react';
 import {Card, CardMedia, CardTitle, CardText} from 'material-ui';
 import moment from 'moment';
 import CountdownTimer from './CountdownTimer';
-import {ProductStore, AppStore} from '../stores';
+import {ProductStore, BidStore, AppStore} from '../stores';
+import BidActions from '../actions/BidActions';
 import {TextField, RaisedButton} from 'material-ui';
 import {Link, PropTypes} from 'react-router';
 
@@ -10,10 +11,31 @@ class ProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.user = AppStore.getState().user;
+    this.state = BidStore.getState();
+    this.handleBidding = this.handleBidding.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    
+    BidStore.listen(this.onChange);
+  }
+
+  ComponentWillUnMount() {
+    BidStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    this.setState(state);
+    if (this.state.isDone) {
+      //this.context.history.pushState(null, '/products/'+this.props.id+'#');
+    }
+  }
+
+  handleBidding(e) {
+    e.preventDefault();
+
+    let biddingPoint = this.refs.biddingPoint.refs.input.getDOMNode().value;
+    BidActions.bid(this.user.id, this.props.id, biddingPoint)
   }
 
   render() {
@@ -45,14 +67,14 @@ class ProductCard extends React.Component {
     }
 
     var button = null, input = null;
-    var error = null
+    var error = this.state.error;
     if (!this.user) {
       button = <Link to={`/login`}><RaisedButton type="submit" bsStyle="success" fullWidth>
         Log in to bid
       </RaisedButton></Link>
     } else if (this.props.status == 'bidding') {
       input = <TextField ref="biddingPoint" hintText="0" floatingLabelText="Bidding Point" required={true} errorText={error} fullWidth/>
-      button = <RaisedButton type="submit" bsStyle="success" fullWidth>
+      button = <RaisedButton type="submit" bsStyle="success" onClick={this.handleBidding} fullWidth>
         Bid Now
       </RaisedButton>
     }

@@ -66,7 +66,7 @@ app.use('/', routes);
 app.use('/api/auth', auth)
 app.use('/api/users', users);
 app.use('/api/products', products);
-app.use('/bid', bid);
+app.use('/api/bid', bid);
 
 app.get('*', function(req, res) {
   res.redirect('/');

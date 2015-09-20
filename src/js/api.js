@@ -56,4 +56,10 @@ FreeLahApi.login = (data) => {
     .promise();;
 }
 
+FreeLahApi.bid = (data) => {
+  return superagent.post(SERVER_URL + '/api/bid/')
+    .send(data)
+    .promise();;
+}
+
 export default FreeLahApi;
