@@ -1,30 +1,35 @@
 import React from 'react';
-import {PropTypes, Link} from 'react-router'
+import {PropTypes} from 'react-router'
 import {AppStore, ActivityStore} from '../stores';
-import AppActions from '../actions/AppActions';
 import ActivityActions from '../actions/ActivityActions';
-import {Grid, Row, Col} from 'react-bootstrap';
-import {TextField, RaisedButton} from 'material-ui';
-import mui from 'material-ui';
+import mui, {LeftNav, MenuItem, Card, CardTitle, CardText} from 'material-ui';
+import Header from './Header';
+import {HeaderConstants} from '../constants';
 
 let ThemeManager = new mui.Styles.ThemeManager();
-
 class Activity extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.user = AppStore.getState().user;
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+  constructor(props, context) {
+    super(props. context);
     this.state = ActivityStore.getState();
     this.onChange = this.onChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.toggleLeftNav = this.toggleLeftNav.bind(this);
+    this.state.user = AppStore.getState().user;
+    this.state.hasUser = AppStore.getState().isLoggedIn;
   }
 
   componentDidMount() {
     ActivityStore.listen(this.onChange);
-    ActivityActions.getActivity(this.user.id, this.user.basicAuth);
+    ActivityActions.getActivity(this.state.user.id, this.state.user.basicAuth);
   }
 
-  ComponentWillUnMount() {
+  componentWillUnmount() {
     ActivityStore.unlisten(this.onChange);
   }
 
@@ -33,12 +38,75 @@ class Activity extends React.Component {
   }
 
   handleUpdate(e) {
-    ActivityActions.getActivity(this.user.id, this.user.basicAuth);
+    ActivityActions.getActivity(this.state.user.id, this.state.user.basicAuth);
   }
 
+  toggleLeftNav(){
+    this.refs.leftNav.toggle();
+  }
+
+
   render() {
+    const pageMenuItems = [
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Home',
+        payload: '/'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'About',
+        payload: '/about'
+      }
+    ];
+
+    var menuItems;
+    if (this.state.hasUser) {
+      menuItems = pageMenuItems.concat([{
+        type: MenuItem.Types.LINK,
+        text: 'Activity',
+        payload: '/activity'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Log out',
+        payload: '/logout'
+      }]);
+    } else {
+      menuItems = pageMenuItems.concat([{
+        type: MenuItem.Types.LINK,
+        text: 'Log in',
+        payload: '/login'
+      },
+      {
+        type: MenuItem.Types.LINK,
+        text: 'Sign up',
+        payload: '/signup'
+      }]);
+    }
+    console.log(this.state);
+    let items = [];
+    if (this.state.activities) {
+      items= this.state.activities.map((activity, i) => {
+        return (
+          <Card key={i}>
+            <CardTitle
+            title={activity.title}
+
+            />
+            <CardText>
+            {activity.message}
+            </CardText>
+          </Card>
+          )
+      });
+    }
     return (
-      <div> {this.state}</div>
+      <div className='activity'>
+        <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
+        <Header point={this.state.user ? this.state.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.ACTIVITY} handlePost={this.handlePost} />
+        {items}
+      </div>
     );
   }
 

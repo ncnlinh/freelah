@@ -16,7 +16,7 @@ class ActivityStore {
   }
 
   handleGetActivitySuccess(res) {
-    this.activities = res;
+    this.activities = res.reverse();
     this.error = null
   }
 

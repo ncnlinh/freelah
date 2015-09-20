@@ -92,6 +92,15 @@ class Header extends React.Component {
             }
           />
         );
+      case (HeaderConstants.ACTIVITY):
+        return (
+          <AppBar title='FreeLah'
+            onLeftIconButtonTouchTap={this.props.leftItemTouchTap}
+            iconElementRight={
+              <div></div>
+            }
+          />
+        );
     };
   }
 }
