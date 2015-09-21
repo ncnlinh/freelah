@@ -71,7 +71,7 @@ class Signup extends React.Component {
 
   render() {
     console.log(this.state.error);
-    
+
     let errors = this.state.error ? this.state.error.errors : this.state.error;
     let map = {username:0, email:1, phoneNumber:2, password:3, confirmPassword:4}
     var error = [null, null, null, null, null]; 
@@ -99,11 +99,11 @@ class Signup extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleSignUp}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
-            <TextField ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
+            <TextField autocapitalize="off" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
+            <TextField autocapitalize="off" ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
             <TextField ref="phone" hintText="Phone Number" floatingLabelText="Phone Number" required={true} errorText={error[map['phoneNumber']]} fullWidth/>
-            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
-            <TextField ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
+            <TextField autocapitalize="off" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
+            <TextField autocapitalize="off" ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>
