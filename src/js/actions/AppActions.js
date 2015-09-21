@@ -25,9 +25,9 @@ class AppActions {
     this.dispatch();
   }
 
-  signup(username, email, phone, password) {
+  signup(username, email, phoneNumber, password) {
     this.dispatch();
-    api.createUser({username, email, phone, password})
+    api.createUser({username, email, phoneNumber, password})
       .then((res) => {
         console.log(res);
         this.actions.signupSuccess(JSON.parse(res.text));

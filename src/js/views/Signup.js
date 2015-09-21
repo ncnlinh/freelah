@@ -59,18 +59,31 @@ class Signup extends React.Component {
     let username = this.refs.username.refs.input.getDOMNode().value;
     let password = this.refs.password.refs.input.getDOMNode().value;
     let email = this.refs.email.refs.input.getDOMNode().value;
-    let phone = this.refs.phone.refs.input.getDOMNode().value;
+    let phoneNumber = this.refs.phone.refs.input.getDOMNode().value;
     let confirmPassword = this.refs.confirmPassword.refs.input.getDOMNode().value;
     if (password === confirmPassword) {
-      AppActions.signup(username, email, phone, password);  
+      AppActions.signup(username, email, phoneNumber, password);  
     } else {
       console.log("Sign Up failed!");
+      this.setState({error: {errors: [{path: 'confirmPassword', message: 'Password does not match'}]}});
     }
   }
 
   render() {
-    let error = this.state.error ? ' ' : null;
-    console.log(error)
+    console.log(this.state.error);
+    
+    let errors = this.state.error ? this.state.error.errors : this.state.error;
+    let map = {username:0, email:1, phoneNumber:2, password:3, confirmPassword:4}
+    var error = [null, null, null, null, null]; 
+
+    for (var i in errors) {
+      error[map[errors[i].path]] = errors[i].message.replace('null', 'empty').replace('phoneNumber', 'Phone number');
+    }
+
+    if (this.state.error && this.state.error.message.indexOf("is not a valid integer") > -1) {
+      error[map['phoneNumber']] = 'Phone number can only contain digits'
+    }
+
     return (
       <div className='signup'>
       <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.ONLYBACK}/>
@@ -86,11 +99,11 @@ class Signup extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleSignUp}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error} fullWidth/>
-            <TextField ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error} fullWidth/>
-            <TextField ref="phone" hintText="Phone Number" floatingLabelText="Phone Number" required={true} errorText={error} fullWidth/>
-            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error} minLength={5} fullWidth/>
-            <TextField ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error} minLength={5} fullWidth/>
+            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
+            <TextField ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
+            <TextField ref="phone" hintText="Phone Number" floatingLabelText="Phone Number" required={true} errorText={error[map['phoneNumber']]} fullWidth/>
+            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
+            <TextField ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>

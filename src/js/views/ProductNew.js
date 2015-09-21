@@ -74,8 +74,6 @@ class ProductNew extends React.Component {
 
   render() {
     let errors = this.state.errors ? this.state.errors.errors : this.state.errors;
-    var nameErr, locationErr, desErr, dateErr, imgErr;
-    nameErr = locationErr = desErr = dateErr = imgErr = null;
     let map = {name:0, location:1, description:2, expiryDate:3, imgUrls:4}
     var error = [null, null, null, null, null]; 
 

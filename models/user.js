@@ -33,6 +33,7 @@ var User = helper.getDatabase().define('User', {
   },
   phoneNumber: {
     type: Sequelize.INTEGER,
+    allowNull: false
   }
 }, {
   classMethods: {
@@ -51,7 +52,7 @@ exports.createUser = function(data, callback, callError) {
     data.basicAuth = helper.getBasicAuth(data.username, data.password);
     data.password = helper.hashPassword(data.password);
   }
-  if (data.usrename == "") data.username = null;
+  if (data.username == "") data.username = null;
   if (data.password == "") data.password = null;
   if (data.email == "") data.email = null;
   if (data.phoneNumber == "") data.phoneNumber = null;  
