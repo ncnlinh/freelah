@@ -78,7 +78,8 @@ class ProductNew extends React.Component {
     var error = [null, null, null, null, null]; 
 
     for (var i in errors) {
-      error[map[errors[i].path]] = errors[i].message.replace('null', 'empty').replace('imgUrls', 'image');
+      error[map[errors[i].path]] = errors[i].message
+        .replace('null', 'empty').replace('imgUrls', 'image').replace('expiryDate', 'Bidding period');
     }
     
     return (
