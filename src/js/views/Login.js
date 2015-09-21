@@ -63,8 +63,14 @@ class Login extends React.Component {
   }
 
   render() {
-    let error = this.state.error ? ' ' : null;
-    console.log(error)
+    var usernameErr = null, passwordErr = null;
+    console.log(this.state);
+    console.log("SADFASDF");
+    if (this.state.error && this.state.error.message == 'User does not exist!') {
+      usernameErr = 'User does not exist!';
+    } else if (this.state.error && this.state.error.message == 'Password is wrong!') {
+      passwordErr = 'Password is wrong!';
+    } 
     return (
       <div className='login'>
       <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.ONLYBACK}/>
@@ -80,8 +86,8 @@ class Login extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleLogin}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error} fullWidth/>
-            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error} minLength={5} fullWidth/>
+            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={usernameErr} fullWidth/>
+            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={passwordErr} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>
