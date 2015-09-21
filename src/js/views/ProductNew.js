@@ -98,7 +98,7 @@ class ProductNew extends React.Component {
               <TextField ref="image" value={this.state.imageFileName} hintText="Upload Image" floatingLabelText="Upload Image" required={true} errorText={error[map['imgUrls']]} fullWidth/>
 
               <input ref="imageSource" type="file" name="image" accept="image/*;capture=camera" 
-                  style={{ height:'100px', marginTop:'-35px', opacity:'0.0', position:'absolute'}} 
+                  style={{ height:'100px', marginTop:'-80px', opacity:'0.0', position:'absolute'}} 
                   onChange={this.handleFileChange}/>
             </Col>
           </Row>
