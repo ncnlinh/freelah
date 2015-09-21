@@ -84,16 +84,14 @@ exports.createProduct = function(userId, data, callback, callError) {
             callError;
           } else {
             data['imgUrls'] += ' images/' + response;
-            Product.create(data)
-            .then(callback)
-            .catch(callError);
           }
         });
       }
     });
   }
-  
-   
+  Product.create(data)
+    .then(callback)
+    .catch(callError); 
 }
 
 exports.getAllProducts = function(callback, callError) {
