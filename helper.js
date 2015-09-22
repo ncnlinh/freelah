@@ -42,7 +42,7 @@ exports.saveImage = function(name, data, callback) {
         var bigger = value.width > value.height ? value.width : value.height;
         var response = editedFilePath;
         if (bigger!== -1) {
-          gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).write(response, function(err) {
+          gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).resize(600,600).write(response, function(err) {
             if (err) {
               console.err("err=", err);
               console.err("res=", response);
