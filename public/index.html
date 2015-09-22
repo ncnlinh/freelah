@@ -5,7 +5,7 @@
     <title>Freelah</title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -13,8 +13,24 @@
 
     <!-- styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link href="/css/app.min.css" rel="stylesheet">
+
+    <!-- mobile web app specs -->
+    <meta name="application-name" content="Freelah" />
+    <!-- standalone mode -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- icon -->
+    <link rel="apple-touch-icon" href="mobile/launcher-icon-60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="mobile/launcher-icon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="mobile/launcher-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="mobile/launcher-icon-152.png">
+    <link rel="icon" sizes="192x192" href="mobile/launcher-icon-192.png"> 
+    <!-- splash screen 320 x 480-->
+    <link rel="apple-touch-startup-image" href="mobile/startup.png">
+    <!-- chrome manifest for androids -->
+    <link rel="manifest" href="manifest.json">
+
   </head>
   <body>
     <script type="text/javascript" src="/js/all.js">  
