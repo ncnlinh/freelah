@@ -81,17 +81,25 @@ exports.createProduct = function(userId, data, callback, callError) {
       if (image.length > 0) {
         helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image, function(response, err){
           if (response === null || err) {
-            callError;
+            Product.create(data)
+              .then(callback)
+              .catch(callError); 
           } else {
             data['imgUrls'] += ' images/' + response;
+              console.log(data['imgUrls']);
+              Product.create(data)
+                .then(callback)
+                .catch(callError); 
           }
         });
       }
     });
+  } else {
+    Product.create(data)
+      .then(callback)
+      .catch(callError); 
   }
-  Product.create(data)
-    .then(callback)
-    .catch(callError); 
+
 }
 
 exports.getAllProducts = function(callback, callError) {

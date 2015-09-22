@@ -52,7 +52,6 @@ exports.saveImage = function(name, data, callback) {
             }
             callback(name+"-edited" + ".png", err);
           });
-          
         }
       }
     } else {
