@@ -59,32 +59,29 @@ function sell(product) {
   product.save();
 
   User.getUserById(product.userId, 
-  function(user) {
+    function(user) {
     Activity.create('Congrats! You won the product ['+product.name+']!', 
       'Please contact ' + user.username + ' with phone number: ' + user.phoneNumber + ' and email: ' + user.email + ' for collecting.', 
       product.buyerId, product.id);
-    User.getUserById(product.buyerId, 
-      function(buyer) {
-        user.point += product.highestBid;
-        user.save();
-        Activity.create('Your ['+product.name+'] has been given!', 
-          'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
-          product.userId, product.id);
-      },
-      function(error) {
-        console.log(error);
-      });
-  },
-  function(error) {
-    console.log(error);
-  });
-
-
+      User.getUserById(product.buyerId, 
+        function(buyer) {
+          user.point = parseInt(user.point) + parseInt(product.highestBid);
+          user.save().then( function() {
+            Activity.create('Your ['+product.name+'] has been given!', 
+              'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
+              product.userId, product.id);
+          });
+        },
+        function(error) {
+          console.log(error);
+        });
+    },
+    function(error) {
+      console.log(error);
+    });
 }
 
 function returnPoint(userId, point, product) {
-  console.log(userId);
-  console.log(point);
   User.getUserById(userId, 
     function(user) {
       user.point += point;
