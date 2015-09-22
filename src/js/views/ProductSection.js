@@ -8,7 +8,6 @@ class ProductSection extends React.Component {
     super(props, context);
     this.handleScroll = this.handleScroll.bind(this);
     this.loadMore = this.loadMore.bind(this);
-    window.addEventListener('scroll', this.handleScroll);
     this.state = {
       products: [],
       page: 0,
@@ -16,6 +15,14 @@ class ProductSection extends React.Component {
       hasMore: true
     }
 
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll() {
