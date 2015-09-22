@@ -36,22 +36,24 @@ exports.saveImage = function(name, data, callback) {
     if (err) {
       console.error('can\'t write fs')
       console.error(err);
+    } else {
+      console.log('gm');
+      gm(filePath).resize(600,600).gravity("Center").extent(["600x600",null, null]).write(filePath, function(err) {
+        console.log('gm done');
+        if (err) {
+          console.error("err=", err);
+          callback(name+".png", err);
+        } else {
+          console.log("morphed");
+          callback(name+ ".png", null);
+        }
+      });
     }
   });
  
   // transform
-  console.log('gm');
-  gm(filePath).resize(600,600).gravity("Center").extent(["600x600",null, null]).write(filePath, function(err) {
-    console.log('gm done');
-    if (err) {
-      console.error("err=", err);
-      callback(name+".png", err);
-    } else {
-      console.log("morphed");
-      callback(name+ ".png", null);
-    }
-    
-  });
+  
+  
     
     
   
