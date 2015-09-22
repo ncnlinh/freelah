@@ -1,5 +1,5 @@
 import React from 'react';
-import {PropTypes} from 'react-router'
+import {PropTypes, Link} from 'react-router'
 import {AppStore, ActivityStore} from '../stores';
 import ActivityActions from '../actions/ActivityActions';
 import mui, {LeftNav, MenuItem, Card, CardTitle, CardText} from 'material-ui';
@@ -88,16 +88,18 @@ class Activity extends React.Component {
     let items = [];
     if (this.state.activities) {
       items= this.state.activities.map((activity, i) => {
+        console.log(activity);
         return (
-          <Card key={i}>
-            <CardTitle
-            title={activity.title}
-
-            />
-            <CardText>
-            {activity.message}
-            </CardText>
-          </Card>
+          <Link to={activity.productId==-1 ? '/products/new' : '/products/'+activity.productId}>
+            <Card key={i}>
+              <CardTitle
+              title={activity.title}
+              />
+              <CardText>
+              {activity.message}
+              </CardText>
+            </Card>
+          </Link>
           )
       });
     }

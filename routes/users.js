@@ -9,6 +9,9 @@ var Activity = require('../models/activity');
 router.post('/', function(req, res) {
   User.createUser(req.body,
     function(user) {
+      Activity.create('Welcome to FreeLah', 
+          'Thank you for using FreeLah, let\'s share your items and help each others :)', 
+          user.id, -1);
       res.json(user);
     },
     function(error) {

@@ -8,9 +8,9 @@ router.get('/', function(req, res) {
     function(products) {
       products.sort(function(a, b) {
         if (a.status=='bidding' && b.status!='bidding') {
-          return -1;
-        } else if (a.status!='bidding' && b.status=='bidding') {
           return 1;
+        } else if (a.status!='bidding' && b.status=='bidding') {
+          return 0;
         } else {
           return a.createdAt - b.createdAt;
         }
