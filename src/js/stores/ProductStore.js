@@ -1,5 +1,6 @@
 import alt from '../alt';
 import ProductActions from '../actions/ProductActions';
+import LocalStore from '../util/helper.js'
 
 class ProductStore {
   constructor() {
@@ -64,9 +65,15 @@ class ProductStore {
   }
   handleGetAllProductsSuccess(products) {
     this.retrievedProducts = products.reverse();
+    LocalStore.write('products', products);
   }
   handleGetAllProductsFailed(err) {
-    this.errors = err
+    console.log("hahahahahahahah");
+    if (!navigator.onLine) {
+      this.retrievedProducts = LocalStore.read('products');
+    } else {
+      this.errors = err;
+    }
   }
 }
 

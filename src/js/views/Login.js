@@ -3,7 +3,7 @@ import {PropTypes, Link} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {TextField, RaisedButton} from 'material-ui';
+import {TextField, RaisedButton, Dialog} from 'material-ui';
 import mui from 'material-ui';
 import Header from './Header';
 import {HeaderConstants} from '../constants'
@@ -57,15 +57,18 @@ class Login extends React.Component {
   handleLogin(e) {
     e.preventDefault();
 
-    let username = this.refs.username.refs.input.getDOMNode().value;
-    let password = this.refs.password.refs.input.getDOMNode().value;
-    AppActions.login(username, password);  
+    if (!navigator.onLine) {
+      this.refs.nointernet.show();
+    } else {
+      let username = this.refs.username.refs.input.getDOMNode().value;
+      let password = this.refs.password.refs.input.getDOMNode().value;
+      AppActions.login(username, password);  
+    }
   }
 
   render() {
     var usernameErr = null, passwordErr = null;
     console.log(this.state);
-    console.log("SADFASDF");
     if (this.state.error && this.state.error.message == 'User does not exist!') {
       usernameErr = 'User does not exist!';
     } else if (this.state.error && this.state.error.message == 'Password is wrong!') {
@@ -103,6 +106,13 @@ class Login extends React.Component {
         </form>
         </div>
       </Grid>
+      <Dialog ref='nointernet'
+        title="No internet connection"
+        actions={[{text: 'OK'}]}
+        modal={false}
+      >
+        Sorry this command need an internet connection. Please try again later.
+      </Dialog>
       </div>
     );
   }

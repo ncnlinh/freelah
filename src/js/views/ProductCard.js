@@ -95,7 +95,7 @@ class ProductCard extends React.Component {
           {this.props.mode === 'full' ? (<div style={style.cardTextFull}>Location: {this.props.location}</div>) : (<div style={style.cardTextSummary}>Location: {this.props.location}</div>)}
           {this.props.mode === 'full' ? (<div>Description: {this.props.description}</div>) : null}
           {this.props.mode === 'full' ? (<div style={style.cardTextFull}>{biddingText}</div>) : (<div style={style.cardTextSummary}>{biddingText}</div>)}
-          <CountdownTimer seconds={timeLeft} highestBid={this.props.highestBid} status={this.props.status}/>
+          <CountdownTimer expiryDate = {this.props.expiryDate} seconds={timeLeft} highestBid={this.props.highestBid} status={this.props.status}/>
           {this.props.mode === 'full' ? 
             {input,button}
             : (<div></div>)

@@ -3,7 +3,7 @@ import {PropTypes, Link} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {TextField, RaisedButton} from 'material-ui';
+import {TextField, RaisedButton, Dialog} from 'material-ui';
 import mui from 'material-ui';
 import Header from './Header';
 import {HeaderConstants} from '../constants'
@@ -56,16 +56,20 @@ class Signup extends React.Component {
   handleSignUp(e) {
     e.preventDefault();
 
-    let username = this.refs.username.refs.input.getDOMNode().value;
-    let password = this.refs.password.refs.input.getDOMNode().value;
-    let email = this.refs.email.refs.input.getDOMNode().value;
-    let phoneNumber = this.refs.phone.refs.input.getDOMNode().value;
-    let confirmPassword = this.refs.confirmPassword.refs.input.getDOMNode().value;
-    if (password === confirmPassword) {
-      AppActions.signup(username, email, phoneNumber, password);  
+    if (!navigator.onLine) {
+      this.refs.nointernet.show();
     } else {
-      console.log("Sign Up failed!");
-      this.setState({error: {errors: [{path: 'confirmPassword', message: 'Password does not match'}]}});
+      let username = this.refs.username.refs.input.getDOMNode().value;
+      let password = this.refs.password.refs.input.getDOMNode().value;
+      let email = this.refs.email.refs.input.getDOMNode().value;
+      let phoneNumber = this.refs.phone.refs.input.getDOMNode().value;
+      let confirmPassword = this.refs.confirmPassword.refs.input.getDOMNode().value;
+      if (password === confirmPassword) {
+        AppActions.signup(username, email, phoneNumber, password);  
+      } else {
+        console.log("Sign Up failed!");
+        this.setState({error: {errors: [{path: 'confirmPassword', message: 'Password does not match'}]}});
+      }
     }
   }
 
@@ -119,6 +123,13 @@ class Signup extends React.Component {
         </form>
         </div>
       </Grid>
+      <Dialog ref='nointernet'
+        title="No internet connection"
+        actions={[{text: 'OK'}]}
+        modal={false}
+      >
+        Sorry this command need an internet connection. Please try again later.
+      </Dialog>
       </div>
     );
   }

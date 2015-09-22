@@ -5,7 +5,7 @@ import {HeaderConstants} from '../constants';
 import Header from './Header';
 import mui from 'material-ui';
 import {PropTypes} from 'react-router';
-import {MenuItem, TextField, RaisedButton, LinearProgress} from 'material-ui'
+import {MenuItem, TextField, RaisedButton, LinearProgress, Dialog} from 'material-ui'
 import {Grid, Row, Col} from 'react-bootstrap';
 
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -48,14 +48,18 @@ class ProductNew extends React.Component {
   handlePost(e) {
     e.preventDefault();
 
-    let name = this.refs.productname.refs.input.getDOMNode().value;
-    let location = this.refs.location.refs.input.getDOMNode().value;
-    let discription = this.refs.description.refs.input.getDOMNode().value;
-    let expiryDate = this.refs.expiryDate.refs.input.getDOMNode().value;
-    let images = this.state.images;
+    if (!navigator.onLine) {
+      this.refs.nointernet.show();
+    } else {
+      let name = this.refs.productname.refs.input.getDOMNode().value;
+      let location = this.refs.location.refs.input.getDOMNode().value;
+      let discription = this.refs.description.refs.input.getDOMNode().value;
+      let expiryDate = this.refs.expiryDate.refs.input.getDOMNode().value;
+      let images = this.state.images;
 
-    console.log(images);
-    ProductCreatingActions.create(this.user, name, location, discription, expiryDate, images);
+      console.log(images);
+      ProductCreatingActions.create(this.user, name, location, discription, expiryDate, images);
+    }
   }
 
   handleFileChange(e) {
@@ -113,6 +117,13 @@ class ProductNew extends React.Component {
           </form>
           </div>
         </Grid>
+        <Dialog ref='nointernet'
+          title="No internet connection"
+          actions={[{text: 'OK'}]}
+          modal={false}
+        >
+          Sorry this command need an internet connection. Please try again later.
+      </Dialog>
       </div>
     );
 

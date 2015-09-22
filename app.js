@@ -48,18 +48,28 @@ app.use(cacheManifest({
   }, {
     file: __dirname + '/public/css',
     path: '/css/app.min.css'
+  }, {
+    file: __dirname + '/public/img',
+    path: '/img/banner-bg.jpg'
+  }, {
+    file: __dirname + '/public/img',
+    path: '/img/credit.jpg'
+  }, {
+    file: __dirname + '/public/img',
+    path: '/img/funny-item.jpg'
+  }, {
+    file: __dirname + '/public/img',
+    path: '/img/garage-sale.jpg'
+  }, {
+    file: __dirname + '/public/img',
+    path: '/img/intro-bg-2.jpg'
+  }, {
+    file: __dirname + '/public/img',
+    path: '/img/intro-bg.jpg'
   }],
   networks: ['*'],
   fallbacks: []
 }));
-
-// var cf = c.newCache(['/js/all.js', '/css/app.min.css',
-//   'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-//   'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js']);
-// app.all('/app.cache', function(req, res){ 
-//     res.writeHead(200, {'Content-Type': 'text/cache-manifest'});
-//     res.end(cf);
-// })
 
 // Routes
 app.use('/api/auth', auth)
