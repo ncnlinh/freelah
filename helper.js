@@ -28,37 +28,52 @@ exports.getBasicAuth = function(username, password) {
 }
 
 exports.saveImage = function(name, data, callback) {
+  var filePathJpeg = config['server']['image_dir'] + name + ".jpeg";
   var filePath = config['server']['image_dir'] + name + ".png";
   var editedFilePath = config['server']['image_dir'] + name + "-edited.png";
-  require("fs").writeFile(filePath, data, 'base64', function(err) {
+
+  require("fs").writeFile(filePathJpeg, data, 'base64', function(err) {
     console.log(err);
   });
-  // callback(name + ".png", null);
 
-  console.log('gm');
-  gm(filePath).size(function(err, value){
-    if (!err) {
-      if (!!value) {
-        var bigger = value.width > value.height ? value.width : value.height;
-        var response = editedFilePath;
-        if (bigger!== -1) {
-          gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).resize(600,600).write(response, function(err) {
-            if (err) {
-              console.err("err=", err);
-              console.err("res=", response);
-            } else {
-              console.log("hi");
-              console.log("res=", response);
-            }
-            callback(name+"-edited" + ".png", err);
-          });
-        }
-      }
-    } else {
-      console.error(err);
-      callback(null, err);
+  // convert JPEG/PNG to PNG
+  gm(filePath).write(filePath, function(err) {
+    if (err) {
+      require("fs").writeFile(filePath, data, 'base64', function(err) {
+        console.log(err);
+      });
+      require("fs").unlink(filePathJpeg);
     }
-  });
+    // read size of image
+    gm(filePath).size(function(err, value){
+      if (!err) {
+        if (!!value) {
+          var bigger = value.width > value.height ? value.width : value.height;
+          var response = editedFilePath;
+          if (bigger!== -1) {
+            // transfprm
+            gm(filePath).gravity("Center").extent([bigger+"x"+bigger,null, null]).resize(600,600).write(response, function(err) {
+              if (err) {
+                console.error("err=", err);
+                console.error("res=", response);
+              } else {
+                console.error("hi");
+                console.error("res=", response);
+              }
+              callback(name+"-edited" + ".png", err);
+            });
+          }
+        }
+      } else {
+        console.error(err);
+        callback(filePath, null);
+      }
+    });
+
+
+  })
+  
+  
 }
 
 exports.return 
