@@ -168,36 +168,41 @@ router.get('/:id/activities', function(req, res) {
   );
 });
 
-function setTimer(product) {
-  if (product.expiryDate == 0) {
+function setTimer(originproduct) {
+  if (originproduct.expiryDate == 0) {
     return;
   }
   setTimeout(function() {
-    console.log("hahaaha");
-    product.status = product.highestBid == 0 ? 'expired' : 'given';
-    product.save();
+    Product.getProductById(originproduct.id, function(product) {
+      product.status = product.highestBid == 0 ? 'expired' : 'given';
+      product.save();
 
-    User.getUserById(product.userId, 
-      function(user) {
-        Activity.create('Congrats! You won the product ['+product.name+']!', 
-          'Please contact ' + user.username + ' with phone number: ' + user.phoneNumber + ' and email: ' + user.email + ' for collecting.', 
-          product.buyerId, product.id);
-        User.getUserById(product.buyerId, 
-          function(buyer) {
-            user.point += product.highestBid;
-            user.save();
-            Activity.create('Your ['+product.name+'] has been given!', 
-              'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
-              product.userId, product.id);
+      if (product.status == 'given') {
+        User.getUserById(product.userId, 
+          function(user) {
+            Activity.create('Congrats! You won the product ['+product.name+']!', 
+              'Please contact ' + user.username + ' with phone number: ' + user.phoneNumber + ' and email: ' + user.email + ' for collecting.', 
+              product.buyerId, product.id);
+            User.getUserById(product.buyerId, 
+              function(buyer) {
+                user.point += product.highestBid;
+                user.save();
+                Activity.create('Your ['+product.name+'] has been given!', 
+                  'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
+                  product.userId, product.id);
+              },
+              function(error) {
+                console.log(error);
+              });
           },
           function(error) {
             console.log(error);
           });
-      },
-      function(error) {
-        console.log(error);
-      });
-  }, product.expiryDate * 3600000);
+      }
+    }, function(err) {
+      console.log(err);
+    });
+  }, originproduct.expiryDate * 3600000);
 }
 
 module.exports = router;
