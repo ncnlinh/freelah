@@ -38,11 +38,11 @@ exports.saveImage = function(name, data, callback) {
 
   // convert JPEG/PNG to PNG
   gm(filePath).write(filePath, function(err) {
+    // is already PNG
     if (err) {
       require("fs").writeFile(filePath, data, 'base64', function(err) {
         console.log(err);
       });
-      require("fs").unlink(filePathJpeg);
     }
     // read size of image
     gm(filePath).size(function(err, value){
@@ -66,7 +66,7 @@ exports.saveImage = function(name, data, callback) {
         }
       } else {
         console.error(err);
-        callback(filePath, null);
+        callback(name+".png", null);
       }
     });
 
