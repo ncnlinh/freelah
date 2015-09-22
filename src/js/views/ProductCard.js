@@ -3,7 +3,7 @@ import {Card, CardMedia, CardText} from 'material-ui';
 import CountdownTimer from './CountdownTimer';
 import {BidStore, AppStore} from '../stores';
 import {AppActions, ProductActions, BidActions} from '../actions/';
-import {TextField, RaisedButton} from 'material-ui';
+import {TextField, RaisedButton, Dialog} from 'material-ui';
 import {Link, PropTypes} from 'react-router';
 
 class ProductCard extends React.Component {
@@ -40,8 +40,12 @@ class ProductCard extends React.Component {
   handleBidding(e) {
     e.preventDefault();
 
-    let biddingPoint = this.refs.biddingPoint.refs.input.getDOMNode().value;
-    BidActions.bid(this.user.id, this.props.id, biddingPoint)
+    if (!navigator.onLine) {
+      this.refs.nointernet.show();
+    } else {
+      let biddingPoint = this.refs.biddingPoint.refs.input.getDOMNode().value;
+      BidActions.bid(this.user.id, this.props.id, biddingPoint)
+    }
   }
 
   render() {
@@ -86,6 +90,7 @@ class ProductCard extends React.Component {
     }
 
     return (
+      <div>
       <Card style={style.card}>
         <CardMedia >
           <img src={imgUrl}/>
@@ -102,6 +107,14 @@ class ProductCard extends React.Component {
           }
         </CardText>
       </Card>
+      <Dialog ref='nointernet'
+        title="No internet connection"
+        actions={[{text: 'OK'}]}
+        modal={false}
+      >
+        Sorry this command need an internet connection. Please try again later.
+      </Dialog>
+      </div>
     );
   }
 }

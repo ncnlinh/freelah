@@ -37,39 +37,65 @@ app.use(function(req, res, next) {
 
 // Cache
 
-var cacheManifest = require('connect-cache-manifest');
-app.use(cacheManifest({
-  manifestPath: '/app.cache',
-  cdn: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-    'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'],
-  files: [{
-    file: __dirname + '/public/js',
-    path: '/js/all.js'
-  }, {
-    file: __dirname + '/public/css',
-    path: '/css/app.min.css'
-  }, {
-    file: __dirname + '/public/img',
-    path: '/img/banner-bg.jpg'
-  }, {
-    file: __dirname + '/public/img',
-    path: '/img/credit.jpg'
-  }, {
-    file: __dirname + '/public/img',
-    path: '/img/funny-item.jpg'
-  }, {
-    file: __dirname + '/public/img',
-    path: '/img/garage-sale.jpg'
-  }, {
-    file: __dirname + '/public/img',
-    path: '/img/intro-bg-2.jpg'
-  }, {
-    file: __dirname + '/public/img',
-    path: '/img/intro-bg.jpg'
-  }],
-  networks: ['*'],
-  fallbacks: []
-}));
+// var cacheManifest = require('connect-cache-manifest');
+// app.use(cacheManifest({
+//   manifestPath: '/app.cache',
+//   cdn: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+//     'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'],
+//   files: [{
+//     file: __dirname + '/public/js',
+//     path: '/js/all.js'
+//   }, {
+//     file: __dirname + '/public/css',
+//     path: '/css/app.min.css'
+//   }, {
+//     dir: __dirname + '/public/img',
+//     prefix: '/img/'
+//   }, {
+//     dir: __dirname + '/public/images',
+//     prefix: '/images/'
+//   }],
+//   networks: ['*'],
+//   fallbacks: []
+// }));
+
+var Product = require('./models/product');
+
+app.get('/app.cache', function(req, res) {
+  res.setHeader('content-type','text/cache-manifest');
+  var cache = "CACHE MANIFEST\n\# "+ new Date() + "\n";
+  cache += 
+    "CACHE:\n\
+    /js/all.js\n\
+    /css/app.min.css\n\
+    /img/banner-bg.jpg\n\
+    /img/credit.jpg\n\
+    /img/funny-item.jpg\n\
+    /img/garage-sale.jpg\n\
+    /img/intro-bg-2.jpg\n\
+    /img/intro-bg.jpg\n\
+    /about\n\
+    /signup\n\
+    /login\n\
+    /logout\n\
+    /activity\n\
+    https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css\n\
+    https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js\n";
+
+  Product.getAllProducts(function (products) {
+    console.log(typeof products);
+    for (var i = 0; i < products.length; i++) {
+      cache += '    /' + products[i].imgUrls.replace(' ', '') + '\n';
+      cache += '    /products/' + products[i].id + '\n';
+    }
+
+    cache += '\nNETWORK:\n*\n\nFALLBACK:';
+    res.send(cache);
+  }, function(err) {
+    console.log(err);
+    res.send(err);
+  });
+})
 
 // Routes
 app.use('/api/auth', auth)

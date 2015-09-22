@@ -1,5 +1,6 @@
 import alt from '../alt';
 import ActivityActions from '../actions/ActivityActions';
+import LocalStore from '../util/helper.js'
 
 class ActivityStore {
   constructor() {
@@ -17,12 +18,17 @@ class ActivityStore {
 
   handleGetActivitySuccess(res) {
     this.activities = res.reverse();
+    LocalStore.write('activities', this.activities);
     this.error = null
   }
 
   handleGetActivityFailed(err) {
-    this.error = err;
-    this.activities = null
+    if (!navigator.onLine) {
+      this.activities = LocalStore.read('activities');
+    } else {
+      this.error = err;
+      this.activities = null
+    }
   }
 }
 

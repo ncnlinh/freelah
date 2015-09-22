@@ -34,15 +34,15 @@ class ProductActions {
       })
       .catch((err) => {
         console.log(err);
-        this.actions.getProductFailed(err.message);
+        this.actions.getProductFailed(err.message, productId);
       });
   }
 
   getProductSuccess(product) {
     this.dispatch(product);
   }
-  getProductFailed(err) {
-    this.dispatch(err);
+  getProductFailed(err, productId) {
+    this.dispatch({err, productId});
   }
 
   getAllProducts() {

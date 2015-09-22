@@ -43,8 +43,19 @@ class ProductStore {
     this.product = product;
     this.errors = null;
   }
-  handleGetProductFailed(err) {
-    this.errors = err;
+  handleGetProductFailed(object) {
+    if (!navigator.onLine) {
+      var obj = LocalStore.read('products');
+      if (obj != null) {
+        for (var i = 0; i < obj.length; i++) {
+          if (obj[i].id == object.productId) {
+            this.product = obj[i];
+            return;      
+          }
+        }
+      }
+    } 
+    this.errors = object.err;
   }
 
   handleUpdateProduct() {
@@ -68,7 +79,6 @@ class ProductStore {
     LocalStore.write('products', products);
   }
   handleGetAllProductsFailed(err) {
-    console.log("hahahahahahahah");
     if (!navigator.onLine) {
       this.retrievedProducts = LocalStore.read('products');
     } else {
