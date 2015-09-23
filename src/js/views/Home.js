@@ -4,9 +4,9 @@ import {ProductActions, AppActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';
-import mui, {Card, CardText} from 'material-ui';
+import mui, {LeftNav, MenuItem, Dialog, Snackbar} from 'material-ui';
 import {PropTypes} from 'react-router';
-import {LeftNav, MenuItem, Dialog} from 'material-ui'
+
 let ThemeManager = new mui.Styles.ThemeManager();
 
 class Home extends React.Component {
