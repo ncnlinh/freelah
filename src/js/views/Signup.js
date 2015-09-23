@@ -3,7 +3,7 @@ import {PropTypes, Link} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {TextField, RaisedButton, Dialog} from 'material-ui';
+import {TextField, RaisedButton, Dialog, LinearProgress} from 'material-ui';
 import mui from 'material-ui';
 import Header from './Header';
 import {HeaderConstants} from '../constants'
@@ -103,18 +103,19 @@ class Signup extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleSignUp}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField autoCapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
-            <TextField autoCapitalize="none" ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
+            <TextField autocapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
+            <TextField autocapitalize="none" type="email" ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
             <TextField ref="phone" hintText="Phone Number" floatingLabelText="Phone Number" required={true} errorText={error[map['phoneNumber']]} fullWidth/>
-            <TextField autoCapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
-            <TextField autoCapitalize="none" ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
+            <TextField autocapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
+            <TextField autocapitalize="none" ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>
           <Col style={{'padding': '20px'}}>
-            <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handleSignUp} fullWidth>
+            <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handleSignUp} fullWidth disabled={!!this.state.signingUp}>
               Sign up
             </RaisedButton >
+            {this.state.signingUp ? (<LinearProgress mode="indeterminate"  />) : null}
             <Link to={`/login`} style={{textAlign: 'center', fontSize:'14px'}}>
                 <p style={{paddingTop:'5px', color:'blue'}}>Already have an account?</p>
             </Link>

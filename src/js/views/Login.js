@@ -3,7 +3,7 @@ import {PropTypes, Link} from 'react-router'
 import {AppStore} from '../stores';
 import AppActions from '../actions/AppActions';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {TextField, RaisedButton, Dialog} from 'material-ui';
+import {TextField, RaisedButton, Dialog, LinearProgress} from 'material-ui';
 import mui from 'material-ui';
 import Header from './Header';
 import {HeaderConstants} from '../constants'
@@ -89,15 +89,17 @@ class Login extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleLogin}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={usernameErr} fullWidth/>
-            <TextField ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={passwordErr} minLength={5} fullWidth/>
+            <TextField autocapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={usernameErr} fullWidth/>
+            <TextField autocapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={passwordErr} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>
           <Col style={{'padding': '20px'}}>
-            <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handleLogin} fullWidth>
+          
+            <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handleLogin} fullWidth disabled={!!this.state.loggingIn}>
               Log in
             </RaisedButton >
+            {this.state.loggingIn ? (<LinearProgress mode="indeterminate"/>) : null}
             <Link to={`/signup`} style={{textAlign: 'center', fontSize:'14px'}}>
                 <p style={{paddingTop:'5px', color:'blue'}}>Don't have an account?</p>
             </Link>

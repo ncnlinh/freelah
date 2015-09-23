@@ -22,7 +22,6 @@ class Home extends React.Component {
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
     this.onAppStoreChange = this.onAppStoreChange.bind(this);
-    this.handlePost = this.handlePost.bind(this);
     this.toggleLeftNav = this.toggleLeftNav.bind(this);
     this.state.hasUser = AppStore.getState().isLoggedIn;
     this.state.user = AppStore.getState().user;
