@@ -84,7 +84,7 @@ class Signup extends React.Component {
       error[map[errors[i].path]] = errors[i].message.replace('null', 'empty').replace('phoneNumber', 'Phone number');
     }
 
-    if (this.state.error && this.state.error.message.indexOf("is not a valid integer") > -1) {
+    if (this.state.error && this.state.error.message && this.state.error.message.indexOf("is not a valid integer") > -1) {
       error[map['phoneNumber']] = 'Phone number can only contain digits'
     }
 
