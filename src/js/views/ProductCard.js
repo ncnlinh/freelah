@@ -139,7 +139,7 @@ ProductCard.propTypes = {
   imgUrls: React.PropTypes.string,
   status: React.PropTypes.oneOf(['available', 'bidding', 'expired', 'given']),
   location: React.PropTypes.string.isRequired,
-  expiryDate: React.PropTypes.object,
+  expiryDate: React.PropTypes.number,
   userId: React.PropTypes.number.isRequired,
   highestBid: React.PropTypes.number,
   createdAt: React.PropTypes.string,
