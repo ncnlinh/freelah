@@ -67,10 +67,6 @@ class Home extends React.Component {
     });
   }
 
-  handlePost(e) {
-    //ProductCreatingActions.uploadImage(e.target.value);
-    this.context.history.pushState(null, '/products/new');
-  }
 
   toggleLeftNav(){
     this.refs.leftNav.toggle();
@@ -118,7 +114,7 @@ class Home extends React.Component {
     return (
       <div className='home'>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
-        <Header point={this.state.user ? this.state.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
+        <Header point={this.state.user ? this.state.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} />
         <ProductSection products={products}/>
         <Dialog ref='onboarding'
           title="Welcome"

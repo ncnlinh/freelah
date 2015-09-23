@@ -95,7 +95,7 @@ class Login extends React.Component {
         </Row>
         <Row>
           <Col style={{'padding': '20px'}}>
-            <RaisedButton type="submit" bsStyle="success" onClick={this.handleLogin} fullWidth>
+            <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handleLogin} fullWidth>
               Log in
             </RaisedButton >
             <Link to={`/signup`} style={{textAlign: 'center', fontSize:'14px'}}>
