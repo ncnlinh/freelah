@@ -142,7 +142,7 @@ class ProductNew extends React.Component {
           </Row>
           <Row>
             <Col style={{'padding': '20px'}}>
-              <RaisedButton type="submit" bsStyle="success" onClick={this.handlePost} fullWidth disabled={!!this.state.creating}>
+              <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handlePost} fullWidth disabled={!!this.state.creating}>
                 Submit
               </RaisedButton >
               {this.state.creating ? (<LinearProgress mode="indeterminate"  />) : null}

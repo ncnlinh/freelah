@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCard';
-import {CircularProgress, Paper} from 'material-ui';
+import {CircularProgress, Paper, Snackbar} from 'material-ui';
 import {Link} from 'react-router';
 
 class ProductSection extends React.Component {
@@ -8,6 +8,7 @@ class ProductSection extends React.Component {
     super(props, context);
     this.handleScroll = this.handleScroll.bind(this);
     this.loadMore = this.loadMore.bind(this);
+    this.dismissSnackbar = this.dismissSnackbar.bind(this);
     this.state = {
       products: [],
       page: 0,
@@ -41,14 +42,18 @@ class ProductSection extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.props);
-    console.log(this.state);
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.hasMore && prevState.hasMore) {
+      this.refs.snackbar.show()
+    }
     if (this.state.page === 0 && !!this.props.products) this.loadMore();
   }
 
+  dismissSnackbar() {
+    this.refs.snackbar.hide()
+  }
+
   loadMore() {
-    console.log('loadMore');
    
     let hasMore = this.state.hasMore;
     let products = this.props.products;
@@ -68,7 +73,6 @@ class ProductSection extends React.Component {
           newProducts.push(product);
         };
       }
-      console.log(newProducts);
       this.setState({
         products: this.state.products.concat(newProducts),
         loadingFlag: false,
@@ -107,11 +111,22 @@ class ProductSection extends React.Component {
         );
       });
     }
+    let snackbar = (
+      <Snackbar
+        ref='snackbar'
+        message="No more items"
+        action="dismiss"
+        autoHideDuration={3000}
+        onActionTouchTap={this.dismissSnackbar}
+      />);
     return (
-      <Paper style={{display: 'flex', flexWrap: 'wrap', paddingRight: '10px', paddingBottom: '10px'}}>
-        {productList}
-         {this.state.loadingFlag ? (<div className='center'><CircularProgress mode='indeterminate'/></div>) : null}
-      </Paper>
+      <div className='productSection'>
+        <Paper style={{display: 'flex', flexWrap: 'wrap', paddingRight: '10px', paddingBottom: '10px'}}>
+          {productList}
+           {this.state.loadingFlag ? (<div className='center'><CircularProgress mode='indeterminate'/></div>) : null}
+        </Paper>
+        {snackbar}
+      </div>
     );
   }
 }

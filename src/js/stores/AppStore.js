@@ -5,6 +5,8 @@ import LocalStore from '../util/helper.js'
 class AppStore {
   constructor() {
     this.user = LocalStore.read('user');
+    this.loggingIn = false;
+    this.signingUp = false;
     this.isLoggedIn = this.user ? true : false;
     this.error = null;
     this.signupSuccessful = null;
@@ -35,10 +37,12 @@ class AppStore {
   }
 
   handleLogin() {
+    this.loggingIn = true;
 
   }
 
   handleLoginSuccess(user) {
+    this.loggingIn = false;
     this.isLoggedIn = true;
     this.user = user;
     this.error = null;
@@ -46,6 +50,7 @@ class AppStore {
   }
 
   handleLoginFailed(err) {
+    this.loggingIn = false;
     this.isLoggedIn = false;
     this.user = null;
     this.error = err;
@@ -53,10 +58,11 @@ class AppStore {
   }
 
   handleSignup() {
-
+    this.signingUp = true;
   }
 
   handleSignupSuccess(user) {
+    this.signingUp = false;
     this.signupSuccessful = true;
     this.isLoggedIn = true;
     this.user = user;
@@ -65,6 +71,7 @@ class AppStore {
   }
 
   handleSignupFailed(err) {
+    this.signingUp = false;
     this.signupSuccessful = false;
     this.isLoggedIn = false;
     this.user = null;

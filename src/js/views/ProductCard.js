@@ -95,7 +95,7 @@ class ProductCard extends React.Component {
       </RaisedButton></Link>
     } else if (this.props.status == 'bidding') {
       input = <TextField ref="biddingPoint" hintText="0" floatingLabelText="Bidding Point" required={true} errorText={error} fullWidth/>
-      button = <RaisedButton type="submit" bsStyle="success" onClick={this.handleBidding} fullWidth>
+      button = <RaisedButton type="submit" bsStyle="success" onTouchTap={this.handleBidding} fullWidth>
         Bid Now
       </RaisedButton>
     }

@@ -44,10 +44,9 @@ class Header extends React.Component {
             iconElementRight={<div>
               {
                 this.hasUser ? 
-                (<FlatButton label='Post' style={styles.buttonRoot} labelStyle={styles.buttonText}>
-                  <input style={styles.imageInput}
-                  onClick={this.props.handlePost}/>
-                </FlatButton>
+                (<Link to={`/products/new`}>
+                  <FlatButton label='Post' style={styles.buttonRoot} labelStyle={styles.buttonText}/>
+                 </Link>
                 ) :
                 (<Link to={`/login`}>
                   <FlatButton label='Login' style={styles.buttonRoot} labelStyle={styles.buttonText}/>

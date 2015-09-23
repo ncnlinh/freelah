@@ -4,9 +4,9 @@ import {ProductActions, AppActions} from '../actions';
 import {HeaderConstants} from '../constants';
 import Header from './Header';
 import ProductSection from './ProductSection';
-import mui, {Card, CardText} from 'material-ui';
+import mui, {LeftNav, MenuItem, Dialog, Snackbar} from 'material-ui';
 import {PropTypes} from 'react-router';
-import {LeftNav, MenuItem, Dialog} from 'material-ui'
+
 let ThemeManager = new mui.Styles.ThemeManager();
 
 class Home extends React.Component {
@@ -22,7 +22,6 @@ class Home extends React.Component {
     this.state = ProductStore.getState();
     this.onChange = this.onChange.bind(this);
     this.onAppStoreChange = this.onAppStoreChange.bind(this);
-    this.handlePost = this.handlePost.bind(this);
     this.toggleLeftNav = this.toggleLeftNav.bind(this);
     this.state.hasUser = AppStore.getState().isLoggedIn;
     this.state.user = AppStore.getState().user;
@@ -67,10 +66,6 @@ class Home extends React.Component {
     });
   }
 
-  handlePost(e) {
-    //ProductCreatingActions.uploadImage(e.target.value);
-    this.context.history.pushState(null, '/products/new');
-  }
 
   toggleLeftNav(){
     this.refs.leftNav.toggle();
@@ -118,7 +113,7 @@ class Home extends React.Component {
     return (
       <div className='home'>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems}/>
-        <Header point={this.state.user ? this.state.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} handlePost={this.handlePost} />
+        <Header point={this.state.user ? this.state.user.point : 0} leftItemTouchTap={this.toggleLeftNav} mode={HeaderConstants.HOME} />
         <ProductSection products={products}/>
         <Dialog ref='onboarding'
           title="Welcome"

@@ -3,6 +3,7 @@ import UserActions from '../actions/UserActions';
 
 class UserStore {
   constructor() {
+    this.retrieving = false;
     this.user = null;
     this.retrievedUsers = null;
     this.errors = null;
@@ -32,18 +33,23 @@ class UserStore {
     this.errors = null;
   }
   handleCreateUserFailed(err) {
+    this.user = null;
     this.errors = err;
   }
 
   handleGetUser() {
+    this.retrieving = true;
     this.user = null;
     this.errors = null;
   }
   handleGetUserSuccess(user) {
+    this.retrieving = false;
     this.user = user;
     this.errors = null;
   }
   handleGetUserFailed(err) {
+    this.retrieving = false;
+    this.user = null;
     this.errors = err;
   }
 
