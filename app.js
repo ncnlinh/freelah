@@ -61,7 +61,7 @@ app.use(function(req, res, next) {
 
 var Product = require('./models/product');
 
-app.get('/app.cache', function(req, res) {
+app.get('/*/app.cache', function(req, res) {
   res.setHeader('content-type','text/cache-manifest');
   var cache = "CACHE MANIFEST\n\# "+ new Date() + "\n";
   cache += 
