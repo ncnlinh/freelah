@@ -89,8 +89,8 @@ class Login extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleLogin}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField autocapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={usernameErr} fullWidth/>
-            <TextField autocapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={passwordErr} minLength={5} fullWidth/>
+            <TextField autoCapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={usernameErr} fullWidth/>
+            <TextField autoCapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={passwordErr} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>

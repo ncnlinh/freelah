@@ -103,11 +103,11 @@ class Signup extends React.Component {
         <form bsStyle="inline" onSubmit={this.handleSignUp}>
         <Row>
           <Col style={{paddingLeft: '20px', paddingRight:'20px'}}>
-            <TextField autocapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
-            <TextField autocapitalize="none" type="email" ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
+            <TextField autoCapitalize="none" ref="username" hintText="User Name" floatingLabelText="User Name" required={true} errorText={error[map['username']]} fullWidth/>
+            <TextField autoCapitalize="none" type="email" ref="email" hintText="Email" floatingLabelText="Email" required={true} errorText={error[map['email']]} fullWidth/>
             <TextField ref="phone" hintText="Phone Number" floatingLabelText="Phone Number" required={true} errorText={error[map['phoneNumber']]} fullWidth/>
-            <TextField autocapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
-            <TextField autocapitalize="none" ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
+            <TextField autoCapitalize="none" ref="password" hintText="Password" floatingLabelText="Password" type="password" required={true} errorText={error[map['password']]} minLength={5} fullWidth/>
+            <TextField autoCapitalize="none" ref="confirmPassword" hintText="Confirm Password" floatingLabelText="Confirm Password" type="password" required={true} errorText={error[map['confirmPassword']]} minLength={5} fullWidth/>
           </Col>
         </Row>
         <Row>
