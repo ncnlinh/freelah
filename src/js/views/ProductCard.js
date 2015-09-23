@@ -55,15 +55,26 @@ class ProductCard extends React.Component {
         marginTop:'10px',
         marginLeft:'10px',
       },
+      cardTitleSummary: {
+        width: '100%',
+        fontSize: '14px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+      },
       cardTextSummary: {
-        fontSize: '12px',
+        width: '100%',
+        fontSize: '13px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
       },
       cardTextFull: {
-        fontSize: '14px'
+        fontSize: '14px',
       }
     }
     var imgUrl = this.props.imgUrls ? '/' + this.props.imgUrls.replace(' ', '') : "http://lorempixel.com/600/337/cats/";
-    var biddingText = "Highest bid: " + this.props.highestBid;
+    var biddingText = "" + this.props.highestBid;
     if (this.user != null && this.props.buyerId == this.user.id) {
       biddingText += ' (your bidding)'
     }
@@ -95,11 +106,11 @@ class ProductCard extends React.Component {
         <CardMedia >
           <img src={imgUrl}/>
         </CardMedia>
-        <CardText style={{marginBottom:'-8px'}}>
-          {this.props.mode === 'full' ? (<div style={{fontSize: '20px'}}><strong>{this.props.name}</strong></div>): (<div style={{fontSize: '12px'}}><strong>{this.props.name}</strong></div>)}
-          {this.props.mode === 'full' ? (<div style={style.cardTextFull}>Location: {this.props.location}</div>) : (<div style={style.cardTextSummary}>Location: {this.props.location}</div>)}
-          {this.props.mode === 'full' ? (<div>Description: {this.props.description}</div>) : null}
-          {this.props.mode === 'full' ? (<div style={style.cardTextFull}>{biddingText}</div>) : (<div style={style.cardTextSummary}>{biddingText}</div>)}
+        <CardText style={{marginBottom:'-16px', padding:'8px'}}>
+          {this.props.mode === 'full' ? (<div style={{fontSize: '20px'}}><strong>{this.props.name}</strong></div>): (<div style={style.cardTitleSummary}><strong>{this.props.name}</strong></div>)}
+          {this.props.mode === 'full' ? (<div style={style.cardTextFull}><b>Location</b>: {this.props.location}</div>) : (<div style={style.cardTextSummary}>Location: {this.props.location}</div>)}
+          {this.props.mode === 'full' ? (<div style={style.cardTextFull}><b>Description:</b> {this.props.description}</div>) : null}
+          {this.props.mode === 'full' ? (<div style={style.cardTextFull}><b>Highest bid: </b> {biddingText} </div>) : (<div style={style.cardTextSummary}>Highest bid: {biddingText}</div>)}
           <CountdownTimer expiryDate = {this.props.expiryDate} seconds={timeLeft} highestBid={this.props.highestBid} status={this.props.status}/>
           {this.props.mode === 'full' ? 
             {input,button}

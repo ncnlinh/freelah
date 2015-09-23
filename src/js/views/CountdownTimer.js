@@ -45,7 +45,7 @@ class CountdownTimer extends React.Component {
     }
 
     return (
-      <p>{text}</p>
+      <p style={{fontSize:'13px'}}>{text}</p>
     );
   }
 }

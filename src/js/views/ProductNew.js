@@ -132,7 +132,7 @@ class ProductNew extends React.Component {
               <TextField ref="productname" hintText="Product Name" floatingLabelText="Product Name" required={true} errorText={error[map['name']]} fullWidth/>
               <TextField ref="location" hintText="Location" floatingLabelText="Location" required={true} errorText={error[map['location']]} fullWidth/>
               <TextField ref="description" hintText="Description" floatingLabelText="Description" required={true} errorText={error[map['description']]} fullWidth/>
-              <TextField ref="expiryDate" hintText="In hours. Enter 0 for 'First come first serve'" floatingLabelText="Bidding Time" required={true} errorText={error[map['expiryDate']]} fullWidth/>
+              <TextField ref="expiryDate" hintText="Enter 0 for 'First come first serve'" floatingLabelText="Bidding Time (in hours)" required={true} errorText={error[map['expiryDate']]} fullWidth/>
               <TextField ref="image" value={this.state.imageFileName} hintText="Upload Image" floatingLabelText="Upload Image" required={true} errorText={error[map['imgUrls']]} fullWidth/>
 
               <input ref="imageSource" type="file" name="image" accept="image/*;capture=camera" 
