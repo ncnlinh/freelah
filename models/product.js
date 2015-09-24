@@ -78,8 +78,11 @@ exports.createProduct = function(userId, data, callback, callError) {
     data['imgUrls'] = "";
     var arr = data['images'].split(' ');
     console.log('image process');
+    console.log(data['imgUrls']);
     arr.forEach(function(image) {
       if (image.length > 0) {
+        console.log('image each');
+        console.log(image);
         helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image, function(response, err){
           console.log('image done');
           console.log(response);

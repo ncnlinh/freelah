@@ -32,6 +32,7 @@ exports.saveImage = function(name, data, callback) {
   var filePath = config['server']['image_dir'] + name + ".png";
   var editedFilePath = config['server']['image_dir'] + name + "-edited.png";
 
+  console.log(1);
   require("fs").writeFile(filePath, data, 'base64', function(err) {
     if (err) {
       console.error('can\'t write fs')
@@ -52,12 +53,6 @@ exports.saveImage = function(name, data, callback) {
   });
  
   // transform
-  
-  
-    
-    
-  
-  
 }
 
 exports.return 
