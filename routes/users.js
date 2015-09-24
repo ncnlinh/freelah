@@ -91,13 +91,9 @@ router.post('/:id/products', function(req, res) {
         Product.createProduct(req.params.id, req.body, 
           function(product) {
             if (product.expiryDate != 0) {
-              console.log('start timer');
               setTimer(product);
-              console.log('end timer');
             }
-            console.log('create activity');
             Activity.create('New product: ['+product.name+']', "You have just created a new prodct.", user.id, product.id);
-            console.log('done activity');
             res.json(product);
           },
           function(error) {

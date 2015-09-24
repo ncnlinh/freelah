@@ -71,29 +71,22 @@ exports.createProduct = function(userId, data, callback, callError) {
   if (data.description == "") data.description = null;
   if (data.location == "") data.location = null;
   if (data.expiryDate == "") data.expiryDate = null;
+  if (data.images == "") data.images = null;
   data.status = "bidding";
   if (!data.buyerId) data.buyerId = null;
 
   if (data['images'] != null) {
     data['imgUrls'] = "";
     var arr = data['images'].split(' ');
-    console.log('image process');
-    console.log(data['imgUrls']);
     arr.forEach(function(image) {
       if (image.length > 0) {
-        console.log('image each');
-        console.log(image);
         helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image, function(response, err){
-          console.log('image done');
-          console.log(response);
-          console.log(err);
           if (response === null || err) {
             Product.create(data)
               .then(callback)
               .catch(callError); 
           } else {
             data['imgUrls'] += ' images/' + response;
-              console.log(data['imgUrls']);
               Product.create(data)
                 .then(callback)
                 .catch(callError); 
