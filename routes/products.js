@@ -15,6 +15,7 @@ router.get('/', function(req, res) {
           return a.createdAt - b.createdAt;
         }
       });
+      console.log(products);
       res.json(products);
     },function(error) {
       res.status(400).json(error);

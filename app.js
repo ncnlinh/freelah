@@ -36,32 +36,8 @@ app.use(function(req, res, next) {
 });
 
 // Cache
-
-// var cacheManifest = require('connect-cache-manifest');
-// app.use(cacheManifest({
-//   manifestPath: '/app.cache',
-//   cdn: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
-//     'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'],
-//   files: [{
-//     file: __dirname + '/public/js',
-//     path: '/js/all.js'
-//   }, {
-//     file: __dirname + '/public/css',
-//     path: '/css/app.min.css'
-//   }, {
-//     dir: __dirname + '/public/img',
-//     prefix: '/img/'
-//   }, {
-//     dir: __dirname + '/public/images',
-//     prefix: '/images/'
-//   }],
-//   networks: ['*'],
-//   fallbacks: []
-// }));
-
 var Product = require('./models/product');
-
-app.get('/*/app.cache', function(req, res) {
+app.get('/*app.cache', function(req, res) {
   res.setHeader('content-type','text/cache-manifest');
   var cache = "CACHE MANIFEST\n\# "+ new Date() + "\n";
   cache += 

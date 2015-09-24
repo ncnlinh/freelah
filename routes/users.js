@@ -76,6 +76,7 @@ router.put('/:id', function(req, res) {
 });
 
 router.post('/:id/products', function(req, res) {
+  console.log('start posting');
   var token = req.headers.authorization;
 
   User.getUserById(req.params.id, 
@@ -90,9 +91,13 @@ router.post('/:id/products', function(req, res) {
         Product.createProduct(req.params.id, req.body, 
           function(product) {
             if (product.expiryDate != 0) {
+              console.log('start timer');
               setTimer(product);
+              console.log('end timer');
             }
+            console.log('create activity');
             Activity.create('New product: ['+product.name+']', "You have just created a new prodct.", user.id, product.id);
+            console.log('done activity');
             res.json(product);
           },
           function(error) {
@@ -173,32 +178,35 @@ function setTimer(originproduct) {
     return;
   }
   setTimeout(function() {
+    console.log('Timeout start here:');
     Product.getProductById(originproduct.id, function(product) {
       product.status = product.highestBid == 0 ? 'expired' : 'given';
-      product.save();
-
-      if (product.status == 'given') {
-        User.getUserById(product.userId, 
-          function(user) {
-            Activity.create('Congrats! You won the product ['+product.name+']!', 
-              'Please contact ' + user.username + ' with phone number: ' + user.phoneNumber + ' and email: ' + user.email + ' for collecting.', 
-              product.buyerId, product.id);
-            User.getUserById(product.buyerId, 
-              function(buyer) {
-                user.point += product.highestBid;
-                user.save();
-                Activity.create('Your ['+product.name+'] has been given!', 
-                  'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
-                  product.userId, product.id);
-              },
-              function(error) {
-                console.log(error);
-              });
-          },
-          function(error) {
-            console.log(error);
-          });
-      }
+      product.save().then( function() {
+        console.log(product.status);  
+        if (product.status == 'given') {
+          User.getUserById(product.userId, 
+            function(user) {
+              Activity.create('Congrats! You won the product ['+product.name+']!', 
+                'Please contact ' + user.username + ' with phone number: ' + user.phoneNumber + ' and email: ' + user.email + ' for collecting.', 
+                product.buyerId, product.id);
+              User.getUserById(product.buyerId, 
+                function(buyer) {
+                  user.point += product.highestBid;
+                  user.save();
+                  Activity.create('Your ['+product.name+'] has been given!', 
+                    'You got '+product.highestBid+' credits. '+ buyer.username + ' with contact you soon with phone number: ' + buyer.phoneNumber + ' and email: ' + buyer.email + '.', 
+                    product.userId, product.id);
+                },
+                function(error) {
+                  console.log(error);
+                });
+            },
+            function(error) {
+              console.log(error);
+            }
+          );
+        }
+      });
     }, function(err) {
       console.log(err);
     });

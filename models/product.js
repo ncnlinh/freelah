@@ -77,9 +77,13 @@ exports.createProduct = function(userId, data, callback, callError) {
   if (data['images'] != null) {
     data['imgUrls'] = "";
     var arr = data['images'].split(' ');
+    console.log('image process');
     arr.forEach(function(image) {
       if (image.length > 0) {
         helper.saveImage('product-' + userId + '-' + Math.round(Math.random() * 10000000), image, function(response, err){
+          console.log('image done');
+          console.log(response);
+          console.log(err);
           if (response === null || err) {
             Product.create(data)
               .then(callback)
