@@ -95,7 +95,7 @@ class About extends React.Component {
             <Row>
               <Col lg={12}>
                 <div className="intro-message">
-                  <h1 style={style.header}>Freelah</h1>
+                  <h1 style={style.header}>FreeLah!</h1>
                   <div>
                     <h3 style={style.headerSub}>Give away your old items.</h3>
                     <h3 style={style.headerSub}>Earn credits.</h3>

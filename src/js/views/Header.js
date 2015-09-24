@@ -39,7 +39,7 @@ class Header extends React.Component {
     switch (this.props.mode) {
       case (HeaderConstants.HOME):
         return (
-          <AppBar title='FreeLah'
+          <AppBar title='FreeLah!'
             onLeftIconButtonTouchTap={this.props.leftItemTouchTap}
             iconElementRight={<div>
               {
@@ -63,7 +63,7 @@ class Header extends React.Component {
         );
       case (HeaderConstants.PRODUCT):
         return (
-          <AppBar title='FreeLah'
+          <AppBar title='FreeLah!'
             iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
               this.hasUser ? 
@@ -75,7 +75,7 @@ class Header extends React.Component {
         );
       case (HeaderConstants.NEWPRODUCT):
         return (
-          <AppBar title='FreeLah'
+          <AppBar title='FreeLah!'
             iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
               <FlatButton label='New product'/>
@@ -84,7 +84,7 @@ class Header extends React.Component {
         );
       case (HeaderConstants.ONLYBACK):
         return (
-          <AppBar title='FreeLah'
+          <AppBar title='FreeLah!'
             iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
               <div></div>
@@ -93,7 +93,7 @@ class Header extends React.Component {
         );
       case (HeaderConstants.ACTIVITY):
         return (
-          <AppBar title='FreeLah'
+          <AppBar title='FreeLah!'
             onLeftIconButtonTouchTap={this.props.leftItemTouchTap}
             iconElementRight={
               <div></div>
