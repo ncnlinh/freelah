@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, IconButton, FlatButton, IconMenu, MenuItem} from 'material-ui';
+import {AppBar, IconButton, FlatButton} from 'material-ui';
 import {HeaderConstants} from '../constants';
 import {AppStore} from '../stores';
 import mui from 'material-ui';
@@ -54,8 +54,9 @@ class Header extends React.Component {
               }
               {
                 this.hasUser ? 
-                ( <FlatButton label={this.props.point+' credits'} style={styles.buttonRoot} labelStyle={styles.buttonText}>
-                </FlatButton>) :
+                (<Link to={`/activity`}>
+                  <FlatButton label={this.props.point+' credits'} style={styles.buttonRoot} labelStyle={styles.buttonText}/>
+                </Link>) :
                 (<div></div>)
               }
             </div>}
@@ -67,8 +68,7 @@ class Header extends React.Component {
             iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-arrow-left'/>}
             iconElementRight={
               this.hasUser ? 
-                ( <FlatButton label={this.props.point+' credits'} labelStyle={styles.buttonText}>
-                </FlatButton>) :
+                ( <FlatButton label={this.props.point+' credits'} labelStyle={styles.buttonText}/>) :
                 (<div></div>)
             }
           />
