@@ -131,7 +131,6 @@ class ProductCard extends React.Component {
 }
 
 ProductCard.propTypes = {
-  onClick: React.PropTypes.func,
   id: React.PropTypes.number,
   mode: React.PropTypes.oneOf(['overview', 'full']),
   name: React.PropTypes.string.isRequired,

@@ -40,7 +40,7 @@ class Header extends React.Component {
       case (HeaderConstants.HOME):
         return (
           <AppBar title='FreeLah!'
-            onLeftIconButtonTouchTap={this.props.leftItemTouchTap}
+            iconElementLeft={<IconButton onTouchTap={this.props.leftItemTouchTap} iconClassName='fa fa-bars'/>}
             iconElementRight={<div>
               {
                 this.hasUser ? 
