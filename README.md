@@ -1,3 +1,10 @@
+####FreeLah team info
+Nguyen Viet Dung - A0112068N (Role: back-end developer)
+Nguyen Cao Nhat Linh - (Role: front-end developer)
+Tan Sei Yee - (Role: Designer)
+
+APP URL: http://ec2-54-255-214-102.ap-southeast-1.compute.amazonaws.com
+
 ####Setup Instructions:
 
 This is built on nodejs and the express web framework.
