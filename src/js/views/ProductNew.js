@@ -121,6 +121,10 @@ class ProductNew extends React.Component {
         .replace('null', 'empty').replace('imgUrls', 'image').replace('expiryDate', 'Bidding period');
     }
     
+    if (this.state.errors && this.state.errors.message && this.state.errors.message.indexOf("is not a valid integer") > -1) {
+      error[map['expiryDate']] = 'Bidding time should be an interger';
+    }
+
     return (
       <div className='newproduct'>
         <Header leftItemTouchTap={this.handleGoBack} mode={HeaderConstants.NEWPRODUCT} />
