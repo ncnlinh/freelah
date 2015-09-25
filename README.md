@@ -1,7 +1,9 @@
+#FreeLah
+
 ####FreeLah team info
 - Nguyen Viet Dung - A0112068N (Role: back-end developer)
-- Nguyen Cao Nhat Linh - (Role: front-end developer)
-- Tan Sei Yee - (Role: Designer)
+- Nguyen Cao Nhat Linh - A0112156U (Role: front-end developer)
+- Tan Sei Yee - A0111697B (Role: Designer, Requirement/tester)
 
 - APP URL: http://ec2-54-255-214-102.ap-southeast-1.compute.amazonaws.com
 
@@ -21,7 +23,7 @@ This is built on nodejs and the express web framework.
  - In a new tab on the terminal, `nodemon app.js`
  - Navigate to `localhost:3000` or whatever port you have defined in your config.
 
-To install a new node module (these are like Python libs):
+To install a new node module (these are like Python libs/Ruby gems):
 
 - `npm install module_name --save`  (This installs it in node_modules and also adds it into package.json - which is like requirements.txt). **Do not use `sudo`**
 
@@ -35,8 +37,8 @@ To install a new node module (these are like Python libs):
 ####Development Info:
 
  - Add any routes in `app.js` (after line 28 as of time of writing this)
- - WRITE ALL LOGIC IN A FILE INSIDE `routes`. Do not write any business logic in app.js
- - html is written in jade, a templating language. Put it inside views.
+ - WRITE ALL LOGIC IN A FILE INSIDE `src/js/app.js` and make corresponding components. Do not write any business logic in routes or app.js. They are only for apis
+ - html is written in `public`
  - Styles/JS go inside `src/css` or `src/js`
  - Hide all new features in a feature flag, so that we can turn it off if it breaks production
 
