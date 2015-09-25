@@ -50,7 +50,7 @@ class ProductSection extends React.Component {
   }
 
   dismissSnackbar() {
-    this.refs.snackbar.hide()
+    this.refs.snackbar.dismiss()
   }
 
   loadMore() {
