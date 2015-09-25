@@ -24,3 +24,9 @@
 
 ##### PUT /api/users/$userId/products/$productId
 - update product $productId of user $userId. attach data in body with json format.
+
+##### GET /api/users/$userId/activities
+- get all activities belong to user with $userId
+
+#### POST /bid
+-  make a bid, include data inside body
