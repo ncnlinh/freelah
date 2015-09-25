@@ -55,6 +55,7 @@ app.get('/*app.cache', function(req, res) {
     /login\n\
     /logout\n\
     /activity\n\
+    /billy.ttf\n\
     https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css\n\
     https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js\n";
 
