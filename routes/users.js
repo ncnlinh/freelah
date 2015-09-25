@@ -93,7 +93,7 @@ router.post('/:id/products', function(req, res) {
             if (product.expiryDate != 0) {
               setTimer(product);
             }
-            Activity.create('New product: ['+product.name+']', "You have just created a new prodct.", user.id, product.id);
+            Activity.create('New product: ['+product.name+']', "You have just created a new product.", user.id, product.id);
             res.json(product);
           },
           function(error) {
