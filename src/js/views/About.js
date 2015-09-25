@@ -2,6 +2,7 @@ import React from 'react';
 import mui, {Card, FlatButton} from 'material-ui';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {PropTypes, Link} from 'react-router';
+import {AppStore} from '../stores'
 let ThemeManager = new mui.Styles.ThemeManager();
 
 class About extends React.Component {
@@ -14,15 +15,23 @@ class About extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    this.state = {};
+    this.state.user = AppStore.getState().user;
   }
 
   componentWillMount() {
+    AppStore.listen(this.onChange);
   }
 
   componentDidMount() {
   }
 
   componentWillUnmount() {
+    AppStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    this.setState(state);
   }
 
   render() {
@@ -95,7 +104,7 @@ class About extends React.Component {
             <Row>
               <Col lg={12}>
                 <div className="intro-message">
-                  <h1 style={style.header}>Freelah</h1>
+                  <h1 style={style.header}>FreeLah!</h1>
                   <div>
                     <h3 style={style.headerSub}>Give away your old items.</h3>
                     <h3 style={style.headerSub}>Earn credits.</h3>
@@ -103,7 +112,12 @@ class About extends React.Component {
                   </div>
                   <hr className="intro-divider"/>
                   <Link to={`/`}>
-                    <FlatButton label="Get started"/>
+                  {
+                    this.state.user?
+                    (<FlatButton label="Continue to app"/>)
+                    :
+                    (<FlatButton label="Get started"/>)
+                  }
                   </Link>
                 </div>
               </Col>
@@ -178,7 +192,12 @@ class About extends React.Component {
               </Col>
               <Col lg={6}>
                 <Link style={style.bannerButton} to={`/`}>
-                  <FlatButton label="Get started"/>
+                  {
+                    this.state.user?
+                    (<FlatButton label="Continue to app"/>)
+                    :
+                    (<FlatButton label="Get started"/>)
+                  }
                 </Link>
               </Col>
             </Row>

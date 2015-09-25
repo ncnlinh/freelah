@@ -57,7 +57,7 @@ class Product extends React.Component {
 
   }
   handleGoBack() {
-    this.context.history.pushState(null, '/')
+    this.context.history.goBack();
   }
 
   render() {

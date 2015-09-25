@@ -2,7 +2,7 @@
 <html manifest="app.cache">
   <head>
     <meta charset="utf-8">
-    <title>Freelah</title>
+    <title>FreeLah!</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
@@ -16,9 +16,10 @@
     <link href="/css/app.min.css" rel="stylesheet">
 
     <!-- mobile web app specs -->
-    <meta name="application-name" content="Freelah" />
+    <meta name="application-name" content="FreeLah!" />
     <!-- standalone mode -->
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes">
     <!-- icon -->
     <link rel="apple-touch-icon" href="mobile/launcher-icon-60.png">
@@ -26,8 +27,46 @@
     <link rel="apple-touch-icon" sizes="120x120" href="mobile/launcher-icon-120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="mobile/launcher-icon-152.png">
     <link rel="icon" sizes="192x192" href="mobile/launcher-icon-192.png"> 
-    <!-- splash screen 320 x 480-->
-    <link rel="apple-touch-startup-image" href="mobile/startup.png">
+    <!-- iOS splash screens -->
+    <!-- iPhone -->
+    <link href="mobile/apple-touch-startup-image-320x460.png"
+          media="(device-width: 320px) and (device-height: 480px)
+             and (-webkit-device-pixel-ratio: 1)"
+          rel="apple-touch-startup-image">
+    <!-- iPhone (Retina) -->
+    <link href="mobile/apple-touch-startup-image-640x920.png"
+          media="(device-width: 320px) and (device-height: 480px)
+             and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
+    <!-- iPhone 5 -->
+    <link href="mobile/apple-touch-startup-image-640x1096.png"
+          media="(device-width: 320px) and (device-height: 568px)
+             and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
+    <!-- iPad (portrait) -->
+    <link href="mobile/apple-touch-startup-image-768x1004.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+             and (orientation: portrait)
+             and (-webkit-device-pixel-ratio: 1)"
+          rel="apple-touch-startup-image">
+    <!-- iPad (landscape) -->
+    <link href="mobile/apple-touch-startup-image-748x1024.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+             and (orientation: landscape)
+             and (-webkit-device-pixel-ratio: 1)"
+          rel="apple-touch-startup-image">
+    <!-- iPad (Retina, portrait) -->
+    <link href="mobile/apple-touch-startup-image-1536x2008.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+             and (orientation: portrait)
+             and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
+    <!-- iPad (Retina, landscape) -->
+    <link href="mobile/apple-touch-startup-image-1496x2048.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+             and (orientation: landscape)
+             and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
     <!-- chrome manifest for androids -->
     <link rel="manifest" href="manifest.json">
 

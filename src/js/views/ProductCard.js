@@ -123,7 +123,7 @@ class ProductCard extends React.Component {
         actions={[{text: 'OK'}]}
         modal={false}
       >
-        Sorry this command need an internet connection. Please try again later.
+        Sorry this command needs an internet connection. Please try again later.
       </Dialog>
       </div>
     );
